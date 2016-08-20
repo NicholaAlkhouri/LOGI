@@ -1,0 +1,123 @@
+﻿<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-glasshour-01"></i><span class="big-number">@(CultureHelper.GetCurrentCulture().Contains("ar") ? FrontHelpers.ChangeToArabic("4") : "4")</span><span class="title"> @LOGI.App_LocalResources.Basics.WhenToBenefit</span>
+    </div>
+</div>
+<div style="position:relative;">
+    <div class="container">
+        <div style="padding-top:10px;">
+            <div class="pull-left basics-small-text ">
+                <a href="/Basics/Index/4?page=8" class="basics-green-text"><span class="icon-development-01 logi-icon basics-green-text"></span> @LOGI.App_LocalResources.Basics.Previous </a>
+            </div>
+            <div class="pull-right basics-small-text">
+                <a href="/Basics/Index/4?page=10" class="basics-green-text">@LOGI.App_LocalResources.Basics.Next <span class="icon-decommissioning-01 logi-icon basics-green-text"></span></a>
+
+            </div>
+        </div>
+        <div class="p4_wrapper p9_wrapper">
+            <div class="basics-decom hidden-lg hidden-md hidden-sm">
+                <span class="basics-meduim-text basics-green-text">@LOGI.App_LocalResources.Basics.Production</span><br />
+                <small>@Html.Raw(LOGI.App_LocalResources.Basics.TenToThirty)</small><br />
+                <div class="float-line"></div>
+                <div class="line-top"></div>
+            </div>
+            <div class="basics-small-text">@Html.Raw(LOGI.App_LocalResources.Basics.OilOrGas)</div>
+            <div class="basics-big-text basics-green-text">@Html.Raw(@LOGI.App_LocalResources.Basics.Commercially)</div>
+
+            <div id="basics-animation9"></div>
+            <div class="basics-small-text">
+                <a href="/Basics/Index/4?page=10" class="text-primary">@LOGI.App_LocalResources.Basics.AndThen</a>
+            </div>
+
+            <div class="vtimeline">
+                <div class="vtimeline__line"></div>
+                <ul>
+                    <li class="inactive">
+                        <a>
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Prerequisties<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.DurationUnkownPolitical)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-prerequisite-01 logi-icon hidden-md hidden-lg"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.DurationUnkownPolitical"
+                                  data-title="@LOGI.App_LocalResources.Basics.Prerequisties"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-prerequisite-01 logi-icon hidden-sm hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="inactive">
+                        <a>
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Licensing<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.OneYear)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-liscensing-01 logi-icon hidden-md hidden-lg"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.OneYear"
+                                  data-title="@LOGI.App_LocalResources.Basics.Licensing"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-liscensing-01 logi-icon hidden-sm hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="inactive">
+                        <a>
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Exploration<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.FourYears)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-exploration-01 logi-icon hidden-md hidden-lg"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.FourYears"
+                                  data-title="@LOGI.App_LocalResources.Basics.Exploration"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-exploration-01 logi-icon hidden-sm hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="inactive">
+                        <a>
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Appraisal<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.OneToTwo)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-appraisal-01 logi-icon hidden-md hidden-lg"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.OneToTwo"
+                                  data-title="@LOGI.App_LocalResources.Basics.Appraisal"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-appraisal-01 logi-icon hidden-sm hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li class="inactive">
+                        <a>
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Development<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.OneToThree)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-development-01 logi-icon hidden-md hidden-lg"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.OneToThree"
+                                  data-title="@LOGI.App_LocalResources.Basics.Development"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-development-01 logi-icon hidden-sm hidden-xs"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Production<br /></div>
+                        <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.TenToThirty)</small>
+                        <span data-container="body"
+                              class="basic-popover3 icon-production-01 logi-icon hidden-md hidden-lg"
+                              data-toggle="popover"
+                              data-placement="right"
+                              data-content="@LOGI.App_LocalResources.Basics.TenToThirty"
+                              data-title="@LOGI.App_LocalResources.Basics.Production"
+                              tabindex="0" role="button"></span>
+                        <span class="icon-production-01 logi-icon hidden-sm hidden-xs"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</div>

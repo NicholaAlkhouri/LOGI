@@ -1,0 +1,65 @@
+@using LOGI.Models
+<table style="width: 100%;    border: 1px solid #00a88f;">
+    <tr>
+        <td style="background:#00a88f;padding: 10px;text-align:center">
+            <img src="http://logi-lebanon.org/Content/images/logo-logi-white@2x.png" width="250" style="width:250px" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width:100%; padding:10px;" cellpadding="5">
+                <tr>
+                    <td>
+                        <strong>@(((Expert)ViewBag.expert).FullName)</strong> want to join LOGI team as an expert, and provided the following info:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong> Email: </strong>@(((Expert)ViewBag.expert).Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong> Phone:</strong>@(((Expert)ViewBag.expert).Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Expertise:</strong> @(((Expert)ViewBag.expert).Expertise)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong> Education:</strong>@(((Expert)ViewBag.expert).Education)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong> Political affiliation:</strong>@(((Expert)ViewBag.expert).PoliticalAffiliation)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Why do you want to join LOGI? </strong><br />
+                        @(((Expert)ViewBag.expert).WhyToJoin)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>How do you envisage your contribution to LOGI? </strong><br />
+                        @(((Expert)ViewBag.expert).Message)
+                    </td>
+                </tr>
+                @if (((Expert)ViewBag.expert).ResumeURL != null && ((Expert)ViewBag.expert).ResumeURL != "")
+                { 
+                <tr>
+                    <td>
+                        <strong>Resume: </strong><a href="http://logi-lebanon.org@(((Expert)ViewBag.expert).ResumeURL)">Download</a>
+                       
+                    </td>
+                </tr>
+                }
+            </table>
+        </td>
+    </tr>
+</table>

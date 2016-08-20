@@ -1,0 +1,50 @@
+﻿//992px
+//1200px
+
+
+.responsive(@minWidth;@maxWidth; @rules) {
+    @media only screen and (max-width: @maxWidth ) and ( min-width: @minWidth) {
+        @rules();
+    }
+}
+
+.xsmall(@rules){
+     .responsive(0px,767px, {
+        @rules();
+    });
+}
+
+.small(@rules){
+     .responsive(768px,991px, {
+        @rules();
+    });
+}
+
+.small-down(@rules){
+     .responsive(0px,991px, {
+        @rules();
+    });
+}
+
+.medium(@rules){
+     .responsive(992px,1199px, {
+        @rules();
+    });
+}
+.medium-down(@rules){
+     .responsive(0px,1199px, {
+        @rules();
+    });
+}
+
+.large(@rules){
+     .responsive(1200px,5000px, {
+        @rules();
+    });
+}
+
+.large-down(@rules){
+     .responsive(0px,5000px, {
+        @rules();
+    });
+}

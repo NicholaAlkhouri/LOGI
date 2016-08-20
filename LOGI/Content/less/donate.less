@@ -1,0 +1,134 @@
+﻿@import "variables";
+@import "responsive.less";
+
+.donate {
+    &__container {
+        background-image: url('/Content/images/donate-background.jpg');
+        background-size: cover;
+        height: 530px;
+        .xsmall( {
+            height: auto;
+            padding-bottom:20px;
+            background-size: initial;
+        });
+        .home-section-title {
+            color: #fff;
+            border-color: #fff;
+
+            .title {
+                color: #fff;
+            }
+
+            i {
+                color: #fff;
+                font-size: 21px;
+            }
+        }
+    }
+
+    &_help {
+        padding-bottom: 10px;
+    }
+
+    &__big-title {
+        font-size: 30px;
+        margin: 20px 0;
+        .xsmall( {
+            margin: 10px 0;
+            font-size: 21px;
+        });
+    }
+
+    &__list-item {
+        margin-bottom: 15px;
+
+        .icon-navigation-icon {
+            color: @primary-color;
+            float: left;
+            margin-top: 2px;
+        }
+    }
+
+    &__list-text {
+        margin-left: 15px;
+        display: block;
+    }
+
+    &__download {
+        text-align: center;
+    }
+
+    &__policy {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        .xsmall( {
+            margin-bottom: 20px;
+        });
+        a {
+            color: @primary-color;
+        }
+
+        .download-btn {
+            color: #00a88f;
+            border-color: #00a88f;
+            margin-top: 15px;
+        }
+    }
+
+    .icon-gift-icon-01 {
+        font-size: 28px;
+    }
+
+    &__form-wrapper {
+        max-width: 655px;
+        margin: auto;
+        width: 100%;
+        text-align: center;
+        margin-top: 80px;
+        color: #fff;
+        .xsmall( {
+            margin-top:40px;
+        });
+    }
+
+    &__form-big {
+        font-size: 30px;
+        .xsmall( {
+            font-size:24px;
+        });
+    }
+
+    &__form-small {
+        font-size: 21px;
+         .xsmall( {
+            font-size:16px;
+        });
+    }
+
+    &__form {
+        width: 100%;
+        max-width: 280px;
+        margin: auto;
+        margin-top: 75px;
+        .xsmall( {
+            margin-top: 35px;
+        });
+        select {
+            width: 74px;
+            color: #444;
+        }
+
+        input[type=submit] {
+            background-color: @primary-color;
+            border-color: @primary-color;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        input[type=number] {
+            width: 190px !important;
+            margin-right: 10px;
+            color:#444;
+        }
+    }
+}

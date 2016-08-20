@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ALotNeed" xml:space="preserve">
+    <value>a lot needs to be done</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="AndOh" xml:space="preserve">
+    <value>and oh by the way, it might take 4 to 6 years!</value>
+  </data>
+  <data name="AndThen" xml:space="preserve">
+    <value>And Then?</value>
+  </data>
+  <data name="Appraisal" xml:space="preserve">
+    <value>Appraisal</value>
+  </data>
+  <data name="BasicsDes" xml:space="preserve">
+    <value>about Oil and Gas in Lebanon</value>
+  </data>
+  <data name="BasicsTitle" xml:space="preserve">
+    <value>Basics</value>
+  </data>
+  <data name="Because" xml:space="preserve">
+    <value>because</value>
+  </data>
+  <data name="Commercially" xml:space="preserve">
+    <value>Commercially &lt;br/&gt; extracted</value>
+  </data>
+  <data name="Construction" xml:space="preserve">
+    <value>Construction of the well</value>
+  </data>
+  <data name="Decommissioning" xml:space="preserve">
+    <value>Decommissioning</value>
+  </data>
+  <data name="Degrees" xml:space="preserve">
+    <value>decrees</value>
+  </data>
+  <data name="Development" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="DevelopmentDrilling" xml:space="preserve">
+    <value>Development drilling</value>
+  </data>
+  <data name="DrillingExploration" xml:space="preserve">
+    <value>WHEN DRILLING &amp; EXPLORATION STARTS</value>
+  </data>
+  <data name="DurationUnkownPolitical" xml:space="preserve">
+    <value>Duration unknown - dependent on political will</value>
+  </data>
+  <data name="Estaplish" xml:space="preserve">
+    <value>ESTABLISHING</value>
+  </data>
+  <data name="Exploration" xml:space="preserve">
+    <value>Exploration</value>
+  </data>
+  <data name="FourYears" xml:space="preserve">
+    <value>4 to 6 years</value>
+  </data>
+  <data name="FromOurOilAnd" xml:space="preserve">
+    <value>from our Oil and gas wealth?</value>
+  </data>
+  <data name="GovernmentAction" xml:space="preserve">
+    <value>Government action is needed</value>
+  </data>
+  <data name="Hopefully" xml:space="preserve">
+    <value>Hopefully,&lt;br/&gt;OIL or GAS is discovered.</value>
+  </data>
+  <data name="InCouncilof" xml:space="preserve">
+    <value>by Council of Ministers</value>
+  </data>
+  <data name="InProven" xml:space="preserve">
+    <value>in proven oil and gas production areas</value>
+  </data>
+  <data name="InternationalComp" xml:space="preserve">
+    <value>INTERNATIONAL COMPANIES BID &lt;br/&gt;AND ARE SELECTED!</value>
+  </data>
+  <data name="Licensing" xml:space="preserve">
+    <value>Licensing</value>
+  </data>
+  <data name="MoreThan" xml:space="preserve">
+    <value>more than</value>
+  </data>
+  <data name="NeedsPar" xml:space="preserve">
+    <value>needs to be passed by Parliament</value>
+  </data>
+  <data name="NeedToBePassed" xml:space="preserve">
+    <value>need to be passed</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>next</value>
+  </data>
+  <data name="NotSoFar" xml:space="preserve">
+    <value>NOT SO FAST!</value>
+  </data>
+  <data name="OffshoreInstallation" xml:space="preserve">
+    <value>offshore installations&lt;br/&gt;are decommissioned and dismantled</value>
+  </data>
+  <data name="OfOilAndGas" xml:space="preserve">
+    <value>of its oil or gas could take 1 - 2 years</value>
+  </data>
+  <data name="OfTheReserv" xml:space="preserve">
+    <value>of the discovered reservoir and</value>
+  </data>
+  <data name="OilOrGas" xml:space="preserve">
+    <value>OIL or GAS</value>
+  </data>
+  <data name="OnceOilAndGas" xml:space="preserve">
+    <value>Once oil and gas reservoirs are depleted&lt;br/&gt;and installations reach the end of their economic lives,</value>
+  </data>
+  <data name="OneToThree" xml:space="preserve">
+    <value>1 to 3 years</value>
+  </data>
+  <data name="OneToTwo" xml:space="preserve">
+    <value>1 to 2 years</value>
+  </data>
+  <data name="OneYear" xml:space="preserve">
+    <value>one year</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Basics</value>
+  </data>
+  <data name="PleaseNote" xml:space="preserve">
+    <value>*Please note that these company logos are displayed for illustrative purposes.</value>
+  </data>
+  <data name="Prerequisties" xml:space="preserve">
+    <value>Prerequisites</value>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="Question1" xml:space="preserve">
+    <value>Does Lebanon have Oil and Gas?</value>
+  </data>
+  <data name="Question2" xml:space="preserve">
+    <value>How Much?</value>
+  </data>
+  <data name="Question3" xml:space="preserve">
+    <value>What has Lebanon done so far?</value>
+  </data>
+  <data name="Question4" xml:space="preserve">
+    <value>When are we going to benefit?</value>
+  </data>
+  <data name="Question5" xml:space="preserve">
+    <value>Who makes the decisions?</value>
+  </data>
+  <data name="Question6" xml:space="preserve">
+    <value>What are our neighbors doing?</value>
+  </data>
+  <data name="RightsAreGiven" xml:space="preserve">
+    <value>Rights are given to &lt;br/&gt; winning oil companies &lt;br/&gt;to explore &amp; extract hydrocarbons &lt;br/&gt;in selected areas</value>
+  </data>
+  <data name="SevenYears" xml:space="preserve">
+    <value>7 years</value>
+  </data>
+  <data name="TaxLaw" xml:space="preserve">
+    <value>Petroleum tax law</value>
+  </data>
+  <data name="TenToThirty" xml:space="preserve">
+    <value>10 to 30 years</value>
+  </data>
+  <data name="TheCharactaristics" xml:space="preserve">
+    <value>the characteristics</value>
+  </data>
+  <data name="TheDecrease" xml:space="preserve">
+    <value>The decrees are issued by the Council of Ministers and are related to the blocks delineation, the model contract, and tender protocol.</value>
+  </data>
+  <data name="TheJourney" xml:space="preserve">
+    <value>The journey will not start before</value>
+  </data>
+  <data name="TheProperties" xml:space="preserve">
+    <value>the properties</value>
+  </data>
+  <data name="TheQuestion" xml:space="preserve">
+    <value>THE QUESTION WE ALL CRAVE AN ANSWER FOR</value>
+  </data>
+  <data name="TheseLaws" xml:space="preserve">
+    <value>these laws are passed</value>
+  </data>
+  <data name="ToKickStart" xml:space="preserve">
+    <value>to kickstart oil and gas exploration</value>
+  </data>
+  <data name="UntilExtracted" xml:space="preserve">
+    <value>until first oil or gas
+commercially extracted</value>
+  </data>
+  <data name="VideoDesc" xml:space="preserve">
+    <value>An Animated Overview of Lebanese Oil and Gas</value>
+  </data>
+  <data name="WhenAreWe" xml:space="preserve">
+    <value>WHEN ARE &lt;br/&gt; WE GOING TO &lt;br/&gt; BENEFIT?</value>
+  </data>
+  <data name="WhenToBenefit" xml:space="preserve">
+    <value>WHEN ARE WE GOING TO BENEFIT?</value>
+  </data>
+  <data name="WhyWait" xml:space="preserve">
+    <value>but why wait this long?</value>
+  </data>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="PREREQUISITES" xml:space="preserve">
+    <value>PREREQUISITES</value>
+  </data>
+  <data name="See" xml:space="preserve">
+    <value>see</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate approx. years</value>
+  </data>
+  <data name="InConclusion" xml:space="preserve">
+    <value>In conclusion, it will take at least 7 years to start producing oil and gas, assuming the required decrees are passed today.</value>
+  </data>
+  <data name="ReadAgain" xml:space="preserve">
+    <value>read again</value>
+  </data>
+  <data name="ShareThisPage" xml:space="preserve">
+    <value>Like this Page? Share it!</value>
+  </data>
+</root>

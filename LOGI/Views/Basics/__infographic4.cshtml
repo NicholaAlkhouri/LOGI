@@ -1,0 +1,88 @@
+﻿<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-glasshour-01"></i><span class="big-number">@(CultureHelper.GetCurrentCulture().Contains("ar") ? FrontHelpers.ChangeToArabic("4") : "4")</span><span class="title"> @LOGI.App_LocalResources.Basics.WhenToBenefit</span>
+    </div>
+</div>
+<div style="position:relative;">
+
+
+    <div class="container">
+        <div style="padding-top:10px;">
+            <div class="pull-left basics-small-text ">
+                <a href="/Basics/Index/4?page=3" class="basics-green-text"><span class="fa fa-angle-left basics-green-text"></span> @LOGI.App_LocalResources.Basics.Previous </a>
+            </div>
+            <div class="pull-right basics-small-text">
+                <a href="/Basics/Index/4?page=5" class="basics-green-text">@LOGI.App_LocalResources.Basics.Next <span class="icon-liscensing-01 logi-icon basics-green-text"></span></a>
+
+            </div>
+        </div>
+        <div class="p4_wrapper">
+            <div class="basics-decom hidden-lg hidden-md hidden-sm">
+                <span class="basics-meduim-text basics-green-text">@LOGI.App_LocalResources.Basics.Prerequisties</span><br />
+                <small>@Html.Raw(LOGI.App_LocalResources.Basics.DurationUnkownPolitical)</small><br />
+                <div class="float-line"></div>
+                <div class="line-top"></div>
+            </div>
+
+            <div class="basics-big-text basics-green-text">@Html.Raw(LOGI.App_LocalResources.Basics.GovernmentAction)</div>
+            <div class="basics-small-text">@LOGI.App_LocalResources.Basics.ToKickStart</div>
+
+            <div class="basics-meduim-text basics-big-top">
+                <span class="icon-decrees-01"></span><br />
+                2 <a data-container="body"
+                     class="basic-popover2 text-primary"
+                     data-toggle="popover"
+                     data-placement="top"
+                     data-content=" " tabindex="0" role="button">@LOGI.App_LocalResources.Basics.Degrees</a> @LOGI.App_LocalResources.Basics.NeedToBePassed
+                </div>
+                <div class="basics-small-text">
+                    @Html.Raw(LOGI.App_LocalResources.Basics.InCouncilof)
+                </div>
+                <div class="basics-meduim-text  basics-medium-top">
+                    <span class="icon-tax-laws-01"></span><br />
+                    @LOGI.App_LocalResources.Basics.TaxLaw
+                </div>
+                <div class="basics-small-text basics-big-bottom">
+                    @Html.Raw(LOGI.App_LocalResources.Basics.NeedsPar)
+                </div>
+                <div class="basics-small-text">
+                    @LOGI.App_LocalResources.Basics.Next:
+                    <a href="/Basics/Index/4?page=5" class="text-primary" style="text-transform: uppercase;">@LOGI.App_LocalResources.Basics.Licensing</a>
+                </div>
+                <div class="vtimeline">
+                    <div class="vtimeline__line"></div>
+                    <ul>
+                        <li class="active">
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Prerequisties<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.DurationUnkownPolitical)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-prerequisite-01 logi-icon hidden-md hidden-lg"
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.DurationUnkownPolitical"
+                                  data-title="@LOGI.App_LocalResources.Basics.Prerequisties"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-prerequisite-01 logi-icon hidden-xs hidden-sm"></span>
+
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+

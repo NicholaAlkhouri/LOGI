@@ -1,0 +1,40 @@
+﻿@using LOGI.Models
+<table style="width: 100%;    border: 1px solid #00a88f;">
+    <tr>
+        <td style="background:#00a88f;padding: 10px;text-align:center">
+            <img src="http://logi-lebanon.org/Content/images/logo-logi-white@2x.png" width="250" style="width:250px" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width:100%; padding:10px;" cellpadding="5">
+                <tr>
+                    <td>
+                        <strong>@(((ContactMessage)ViewBag.Data).FullName)</strong> send you the following message through LOGI contact us page:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong> Email: </strong> @(((ContactMessage)ViewBag.Data).Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong> Phone:</strong> @(((ContactMessage)ViewBag.Data).Phone)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Country of Residence:</strong> @(((ContactMessage)ViewBag.Data).Country)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Message: </strong><br />
+                        @(((ContactMessage)ViewBag.Data).Message)
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

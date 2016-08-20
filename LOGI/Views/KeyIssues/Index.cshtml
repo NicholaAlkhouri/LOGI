@@ -1,0 +1,134 @@
+﻿@using LOGI.Models.ViewModels
+@using LOGI.Models
+@model KeyIssuesViewModel
+@{
+    ViewBag.Title = LOGI.App_LocalResources.KeyIssues.PageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+    var counter = 1;
+}
+
+<div class="search">
+    @using (Html.BeginForm("Search", "KeyIssues", new { Area = "" }, FormMethod.Get, new { id = "searcForm", }))
+    {
+        <input type="text" placeholder="@LOGI.App_LocalResources.KeyIssues.SearchPlaceholder" class="search__search-field" name="keyword" />
+        <input type="submit" value="@LOGI.App_LocalResources.KeyIssues.Search" class="search__search-btn" />
+        <span class="icon-search-icon"></span>
+    }
+    @Html.ActionLink(LOGI.App_LocalResources.KeyIssues.AdvancedSearch, "AdvancedSearch", "KeyIssues", null, new { @class = "search__advanced" })
+    <div class="search__topics">
+        @LOGI.App_LocalResources.KeyIssues.Topics:
+        @foreach (Topic topic in Model.Topics)
+        {
+            @Html.ActionLink(isArabic ? (topic.NameAr == null ? " " : topic.NameAr) : (topic.Name), "Search", "KeyIssues", new { topicId = topic.ID }, new { @class = "search__topic" })
+            { counter++; }
+            if (counter == 7)
+            {
+                break;
+            }
+        }
+
+        @if (Model.Topics.Count > 6)
+        {
+            <div class="search__more">
+                <span class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">@LOGI.App_LocalResources.KeyIssues.More</span>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    @for (int i = 6; i < Model.Topics.Count; i++)
+                    {
+                        <li><a href="@Url.Action("Search", "KeyIssues", new { topicId = Model.Topics[i].ID })">@(isArabic?Model.Topics[i].NameAr:Model.Topics[i].Name)</a></li>
+                    }
+                </ul>
+            </div>
+        }
+
+
+    </div>
+
+
+</div>
+
+@Html.Action("_KeyIssueSlider", "KeyIssues", new {language = isArabic?"ar":"en" })
+
+
+    <div class="container keyissues__features">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 keyissues__feature keyissues__features__left">
+                @if (Model.FeatureVideo != null)
+                {
+                    <div class="keyissues__features--bordered">
+                        <span class="icon-icon-videos"></span>
+                        <span class="keyissues__features__header">@LOGI.App_LocalResources.KeyIssues.Videos</span>
+                    </div>
+                    <div class="img-wrapper">
+                        <a href="@Url.Action("KeyIssue", "KeyIssues", new { id =Model.FeatureVideo.FriendlyURL })">
+                            <img src="@Model.FeatureVideo.ImageURL" />
+                            <img class="play-btn" src="/Content/images/play-button@2x.png " />
+                        </a>
+                    </div>
+                    <div class="keyissues__feature__title">
+                        <a href="@Url.Action("KeyIssue", "KeyIssues", new { id =Model.FeatureVideo.FriendlyURL })">@Model.FeatureVideo.Title</a>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-12 col-sm-6 keyissues__feature keyissues__features__right">
+                @if (Model.FeatureArticle != null)
+                {
+                    <div class="keyissues__features--bordered">
+                        <span class="icon-icon-featured"></span>
+                        <span class="keyissues__features__header">@LOGI.App_LocalResources.KeyIssues.Featured</span>
+                    </div>
+                    <div class="img-wrapper">
+                        <a href="@Url.Action("KeyIssue", "KeyIssues", new { id = Model.FeatureArticle.FriendlyURL })">
+                            <img src="@Model.FeatureArticle.ImageURL" />
+                        </a>
+                    </div>
+                    <div class="keyissues__feature__title">
+                        <a href="@Url.Action("KeyIssue", "KeyIssues", new { id = Model.FeatureArticle.FriendlyURL })">@Model.FeatureArticle.Title</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+@if(Model.TweetArticle != null)
+{
+    <div class="container">
+        <div class="keyissues__quote-wrapper">
+            @Html.Partial("_TweetableQuote", Model.TweetArticle)
+        </div>
+    </div>
+}
+@section scripts
+{
+    <script src="~/Scripts/custom-scroller/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script>
+       
+            $(window).load(function () {
+                $(".slider-wrapper").mCustomScrollbar(
+                    {
+                        axis: "x",
+                        autoExpandScrollbar: true,
+                        theme: "dark",
+                        scrollbarPosition: "outside",
+                        mouseWheel: { enable: false },
+                        callbacks: {
+                            onTotalScroll: function () {
+                                $(".slider-next").hide();
+                            },
+                            onScrollStart: function () {
+                                $(".slider-next").show(); $(".slider-prev").show();
+                            },
+                            onTotalScrollBack: function () {
+                                $(".slider-prev").hide();
+                            }
+                        }
+                    });
+            });
+
+        function srollNext() {
+            $(".slider-wrapper").mCustomScrollbar('scrollTo', '-=260');
+        }
+        function srollPrev() {
+            $(".slider-wrapper").mCustomScrollbar('scrollTo', '+=260');
+        }
+    </script>
+}

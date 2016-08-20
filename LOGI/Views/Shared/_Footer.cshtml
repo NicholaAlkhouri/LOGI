@@ -1,0 +1,57 @@
+﻿<div class="footer">
+    <div class="footer-script">
+        <div class="container">
+           @Html.Raw(LOGI.App_LocalResources.Footer.Statement)
+        </div>
+    </div>
+    <div class="container footer-nav">
+        <div class="row">
+            <div class="col-sm-3 col-xs-6">
+                <ul>
+                    <li><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.AboutUs, "about", "home")</strong></li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Vision, "about", "home", null, null, "vision", null, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Mission, "about", "home", null, null, "mission", null, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Members, "about", "home", null, null, "team", null, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Financials, "about", "home", null, null, "financials", null, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.OfficialDocuments, "about", "home", null, null, "officialDocuments", null, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Partners, "about", "home", null, null, "partners", null, null)</li>
+                </ul>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <ul>
+                    <li><a><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.Basics, "Index", "Basics", new { id = 0 },null)</strong></a></li>
+                    <li><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.KeyIssues, "Index", "KeyIssues")</strong></li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Infrastructure, "Search", "KeyIssues", new { topicId = 3 }, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.JobCreation, "Search", "KeyIssues", new { topicId = 5 }, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Environment, "Search", "KeyIssues", new { topicId = 1 }, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Revenue, "Search", "KeyIssues", new { topicId = 6 }, null)</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.Security, "Search", "KeyIssues", new { topicId = 1 }, null)</li>
+                </ul>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <ul>
+                    <li><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.InTheNews, "Index", "News", new { topicId = 1 }, null)</strong></li>
+                    <li><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.JoinLogi, "Index", "JoinLOGI")</strong></li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.JoinStaff, "Index", "JoinLOGI")</li>
+                    <li>@Html.ActionLink(LOGI.App_LocalResources.Footer.JoinExperts, "Expert", "JoinLOGI")</li>
+
+                </ul>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <ul>
+                   
+                    <li><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.Donate, "Index", "Donate")</strong></li>
+                    <li><strong>@Html.ActionLink(LOGI.App_LocalResources.Footer.ContactUs, "Index", "Contactus")</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-socials">
+        <a class="fa fa-facebook-f social-link" target="_blank" href="https://www.facebook.com/logilebanon/"></a>
+        <a class="fa fa fa-twitter social-link" target="_blank" href="https://twitter.com/LOGI_Lebanon"></a>
+        <a class="fa fa-linkedin social-link" target="_blank" href="https://www.linkedin.com/company/lebanese-oil-&-gas-initiative/"></a>
+    </div>
+    <div class="footer-powered-by">
+        Designed and developed by <a target="_blank" href="http://247studios.me">247studios</a>
+    </div>
+</div>

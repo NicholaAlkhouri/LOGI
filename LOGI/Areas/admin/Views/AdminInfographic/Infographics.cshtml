@@ -1,0 +1,92 @@
+﻿@model LOGI.Areas.admin.Models.ViewModels.AdminInfographicCatList
+@{
+    ViewBag.Title = "List Of Infographics";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    <link href="@Url.Content("~/Content/plugins/dataTables.bootstrap.css")" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Infographics <a href="@Url.Action("NewInfographic", "AdminInfographic")" class="btn btn-outline btn-primary btn-xs">Add New Infographic</a></h1>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-infographics">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Name</th>
+                                <th>Name Arabic</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Filtering
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="Images" class="control-label">Category</label>
+                        @Html.EditorFor(m => m.InfographicCategoryID)
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Filter" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+@section scripts {
+    <script src="@Url.Content("~/Scripts/plugins/dataTables/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/dataTables/dataTables.bootstrap.js")"></script>
+    <script>
+        $(document).ready(function () {
+            var cat_table = $('#dataTables-infographics').DataTable({
+                serverSide: true,
+                "ajax":
+                {
+                    url: "/Admin/AdminInfographic/_InfographicList",
+                    type: 'POST',
+                    'data': {
+                        CategoryID : @(Model.InfographicCategoryID)
+                        }
+                },
+                "columns": [
+                             { "data": "Order" },
+                             { "data": "Name" },
+                             { "data": "NameAr" },
+                               {
+                                   "data": "ID",
+                                   "render": function (data, type, full, meta) {
+                                       return '<a href="@(Url.Action("EditInfographic", "AdminInfographic"))/' + data + '" class="btn btn-outline btn-primary btn-sm">Edit</a>';
+                                   },
+                                   "sortable": false
+                               }
+                ],
+                "lengthMenu": [[10, 20, 50], [10, 25, 50]]
+
+            });
+
+
+        });
+
+
+    </script>
+}

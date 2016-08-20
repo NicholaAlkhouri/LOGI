@@ -1,0 +1,127 @@
+﻿.donate__container {
+  background-image: url('/Content/images/donate-background.jpg');
+  background-size: cover;
+  height: 530px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__container {
+    height: auto;
+    padding-bottom: 20px;
+    background-size: initial;
+  }
+}
+.donate__container .home-section-title {
+  color: #fff;
+  border-color: #fff;
+}
+.donate__container .home-section-title .title {
+  color: #fff;
+}
+.donate__container .home-section-title i {
+  color: #fff;
+  font-size: 21px;
+}
+.donate_help {
+  padding-bottom: 10px;
+}
+.donate__big-title {
+  font-size: 30px;
+  margin: 20px 0;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__big-title {
+    margin: 10px 0;
+    font-size: 21px;
+  }
+}
+.donate__list-item {
+  margin-bottom: 15px;
+}
+.donate__list-item .icon-navigation-icon {
+  color: #00a88f;
+  float: left;
+  margin-top: 2px;
+}
+.donate__list-text {
+  margin-left: 15px;
+  display: block;
+}
+.donate__download {
+  text-align: center;
+}
+.donate__policy {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__policy {
+    margin-bottom: 20px;
+  }
+}
+.donate__policy a {
+  color: #00a88f;
+}
+.donate__policy .download-btn {
+  color: #00a88f;
+  border-color: #00a88f;
+  margin-top: 15px;
+}
+.donate .icon-gift-icon-01 {
+  font-size: 28px;
+}
+.donate__form-wrapper {
+  max-width: 655px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  margin-top: 80px;
+  color: #fff;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__form-wrapper {
+    margin-top: 40px;
+  }
+}
+.donate__form-big {
+  font-size: 30px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__form-big {
+    font-size: 24px;
+  }
+}
+.donate__form-small {
+  font-size: 21px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__form-small {
+    font-size: 16px;
+  }
+}
+.donate__form {
+  width: 100%;
+  max-width: 280px;
+  margin: auto;
+  margin-top: 75px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .donate__form {
+    margin-top: 35px;
+  }
+}
+.donate__form select {
+  width: 74px;
+  color: #444;
+}
+.donate__form input[type=submit] {
+  background-color: #00a88f;
+  border-color: #00a88f;
+  margin-top: 10px;
+  width: 100%;
+}
+.donate__form input[type=number] {
+  width: 190px !important;
+  margin-right: 10px;
+  color: #444;
+}
+/*# sourceMappingURL=donate.css.map */

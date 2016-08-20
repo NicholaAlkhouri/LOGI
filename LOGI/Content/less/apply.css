@@ -1,0 +1,150 @@
+﻿.apply__container {
+  background-image: url('/Content/images/intern-vacancy-cover.jpg');
+  background-size: cover;
+  height: 500px;
+  position: relative;
+  margin-bottom: 35px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__container {
+    height: 200px;
+    background-size: 180%;
+    margin-bottom: 10px;
+  }
+}
+.apply__container .container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: #fff;
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__container .container {
+    margin-bottom: 0;
+  }
+}
+.apply .apply__container-expert {
+  margin-bottom: 0;
+  background-image: url('/Content/images/expert-new.jpg') !important;
+}
+.apply .join__expert-conditions {
+  text-align: left;
+  color: #444444;
+}
+.apply .join__expert-download-desc {
+  color: #444444;
+  font-size: 24px;
+  font-family: 'Roboto Slab', serif;
+}
+.apply__title {
+  font-size: 60px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__title {
+    font-size: 30px;
+  }
+}
+.apply__info {
+  font-family: 'Roboto', sans-serif;
+  font-size: 21px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__info {
+    font-size: 14px;
+  }
+}
+.apply__overlay {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  height: 192px;
+}
+.apply__vacancy-section {
+  margin-bottom: 30px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__vacancy-section {
+    margin-bottom: 20px;
+  }
+}
+.apply__vacancy-section-title {
+  font-size: 21px;
+  text-transform: uppercase;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__vacancy-section-title {
+    font-size: 18px;
+  }
+}
+.apply__vacancy-section-text {
+  font-size: 15px;
+  text-transform: none;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__vacancy-section-text {
+    font-size: 14px;
+  }
+}
+.apply__field-title {
+  padding-left: 10px;
+  margin-top: 15px;
+}
+.apply #Message {
+  height: 130px;
+  resize: none;
+}
+.apply__btn {
+  border-color: #00a88f !important;
+  background-color: #fff !important;
+  color: #00a88f !important;
+  width: 100%;
+}
+.apply__upload-wrapper {
+  margin-top: 20px;
+}
+.apply__submit-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.apply__form-title {
+  font-size: 18px;
+}
+.apply__success-overlay {
+  background-color: #e6e6e6;
+  padding: 150px 30px;
+  text-align: center;
+  font-size: 24px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .apply__success-overlay {
+    margin-bottom: 10px;
+    padding: 30px 30px;
+  }
+}
+.apply__success-overlay span {
+  font-size: 18px;
+}
+.apply__success-overlay img {
+  width: 73px;
+  margin-top: 20px;
+}
+.apply-exper-form {
+  max-width: 900px;
+  margin-top: 35px;
+}
+.apply-exper-form textarea {
+  height: 130px;
+  resize: none;
+}
+.apply-exper-form .logi-btn {
+  background-color: #fff;
+  padding: 14px 100px;
+}
+.apply-exper-form .apply__success-overlay {
+  background-color: #fff;
+  padding: 100px 30px;
+}
+/*# sourceMappingURL=apply.css.map */

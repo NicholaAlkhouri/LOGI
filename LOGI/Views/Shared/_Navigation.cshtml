@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink(" ", "Index", "Home",null, new  {@class = "navbar-brand icon-logi-logo"})
+            
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="search-wrapper">
+                    <div class="top-search-form">
+                        <i class="icon-menu"></i>
+                        <div class="wrapper">
+                            @using (Html.BeginForm("Search", "KeyIssues", new { Area = "" }, FormMethod.Get, new { id = "topSearcForm", style = "display:inline" }))
+                            {
+                                <input type="text" name="keyword" placeholder="@LOGI.App_LocalResources.Navigation.Search" autocomplete="off" />
+                                <input type="submit" style="display:none;" />
+                            }
+                            <i class="icon-search-icon"></i>
+                        </div>
+                    </div>
+                    <a class="search-magnify"><i class="icon-search-icon"></i></a>
+                </li>
+                <li>
+                    @using (Html.BeginForm("SetCulture", "Home", new { Area = "" }, FormMethod.Post, new { id = "culture-form", style = "display:block" }))
+                    {
+                        if (@CultureHelper.GetCurrentCulture().Contains("ar"))
+                        {
+
+                            <input type="hidden" name="culture" value="en-US" />
+    <a href="javascript:document.getElementById('culture-form').submit()" class="en-font">@LOGI.App_LocalResources.Navigation.Language</a>
+
+                        }
+                        else
+                        {
+
+                            <input type="hidden" name="culture" value="ar-LB" />
+    <a href="javascript:document.getElementById('culture-form').submit()" class="ar-font">@LOGI.App_LocalResources.Navigation.Language</a>
+
+                        }
+                    }
+                </li>
+            </ul>
+            <ul class="nav navbar-nav main-nav">
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.AboutLogi, "about", "home")</li>
+                <li><a class="separator">|</a></li>
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.Basics, "Index", "Basics", new { id = 0 }, null)</li>
+                <li><a class="separator">|</a></li>
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.KeyIssues, "Index", "KeyIssues")</li>
+                <li><a class="separator">|</a></li>
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.InTheNews, "Index", "News")</li>
+                <li><a class="separator">|</a></li>
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.JoinLogi, "Index", "JoinLOGI")</li>
+                <li><a class="separator">|</a></li>
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.Donate, "Index", "Donate")</li>
+                <li><a class="separator">|</a></li>
+                <li>@Html.ActionLink(LOGI.App_LocalResources.Navigation.Contact, "Index", "Contactus")</li>
+                <li><a class="separator">|</a></li>
+            </ul>
+            
+        </div>
+    </div>
+</div>

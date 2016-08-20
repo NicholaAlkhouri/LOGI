@@ -1,0 +1,25 @@
+﻿<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-glasshour-01"></i><span class="big-number">@(CultureHelper.GetCurrentCulture().Contains("ar") ? FrontHelpers.ChangeToArabic("4") : "4")</span><span class="title"> @LOGI.App_LocalResources.Basics.WhenToBenefit</span>
+    </div>
+</div>
+
+<div class="container">
+    <div style="padding-top:10px;">
+        <div class="pull-left basics-small-text ">
+        </div>
+        <div class="pull-right basics-small-text">
+            <a href="/Basics/Index/4?page=2" class="basics-green-text">@LOGI.App_LocalResources.Basics.Next <span class="fa fa-angle-right basics-green-text"></span></a>
+            
+        </div>
+    </div>
+    <div class="p1_wrapper">
+        <div class="basics-small-text">@LOGI.App_LocalResources.Basics.TheQuestion</div>
+        <div class="basics-big-text basics-green-text">@Html.Raw(LOGI.App_LocalResources.Basics.WhenAreWe)</div>
+        <div class="basics-small-text">@LOGI.App_LocalResources.Basics.FromOurOilAnd</div>
+        <a class="logi-btn" href="#" style=" color: #00a88f; border-color: #00a88f;margin-top:10px;" id="basics-btn1" onclick="goToSection2()">@LOGI.App_LocalResources.Basics.Calculate</a>
+        <div id="basics-animation1" style="display:none;"></div>
+    </div>
+</div>
+
+

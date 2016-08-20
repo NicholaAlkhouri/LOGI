@@ -1,0 +1,90 @@
+﻿<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-glasshour-01"></i><span class="big-number">@(CultureHelper.GetCurrentCulture().Contains("ar") ? FrontHelpers.ChangeToArabic("4") : "4")</span><span class="title"> @LOGI.App_LocalResources.Basics.WhenToBenefit</span>
+    </div>
+</div>
+
+<div class="container">
+    <div style="padding-top:10px;">
+        <div class="pull-left basics-small-text ">
+            <a href="/Basics/Index/4?page=2" class="basics-green-text"><span class="fa fa-angle-left basics-green-text"></span> @LOGI.App_LocalResources.Basics.Previous </a>
+        </div>
+        <div class="pull-right basics-small-text">
+            <a href="/Basics/Index/4?page=4" class="basics-green-text">@LOGI.App_LocalResources.Basics.Next <span class="icon-prerequisite-01 logi-icon basics-green-text"></span></a>
+
+        </div>
+    </div>
+    <div class="p3_wrapper">
+        <div class="basics-small-text">@LOGI.App_LocalResources.Basics.Because</div>
+        <div class="basics-big-text basics-green-text">@Html.Raw(LOGI.App_LocalResources.Basics.ALotNeed)</div>
+        <div class="htimeline htimeline--space-before">
+            <div class="htimeline__line"></div>
+            <ul>
+                <li>
+                    <a data-container="body"
+                       class="basic-popover1"
+                       data-toggle="popover"
+                       data-placement="top"
+                       data-content=" " tabindex="0" role="button">
+                        @LOGI.App_LocalResources.Basics.Licensing<br />
+                        <small>@Html.Raw(LOGI.App_LocalResources.Basics.OneYear)</small><br />
+                        <span class="icon-liscensing-01"></span>
+
+                    </a>
+
+                </li>
+                <li>
+                    <a data-container="body"
+                       class="basic-popover1"
+                       data-toggle="popover"
+                       data-placement="top"
+                       data-content=" " tabindex="0" role="button">
+                        @LOGI.App_LocalResources.Basics.Exploration<br />
+                        <small>
+                            @Html.Raw(LOGI.App_LocalResources.Basics.FourYears)</small><br />
+                        <span class="icon-exploration-01"></span>
+</a>
+                </li>
+                <li>
+                    <a data-container="body"
+                       class="basic-popover1"
+                       data-toggle="popover"
+                       data-placement="top"
+                       data-content=" " tabindex="0" role="button">
+                        @LOGI.App_LocalResources.Basics.Appraisal<br />
+                        <small>@Html.Raw(LOGI.App_LocalResources.Basics.OneToTwo)</small><br /><span class="icon-appraisal-01"></span>
+</a>
+                </li>
+                <li>
+                    <a data-container="body"
+                       class="basic-popover1"
+                       data-toggle="popover"
+                       data-placement="top"
+                       data-content=" " tabindex="0" role="button">
+                        @LOGI.App_LocalResources.Basics.Development<br />
+                        <small> @Html.Raw(LOGI.App_LocalResources.Basics.OneToThree)</small><br /><span class="icon-development-01"></span>
+</a>
+                </li>
+                <li class="active">
+                    <a data-container="body"
+                       class="basic-popover1"
+                       data-toggle="popover"
+                       data-placement="top"
+                       data-content=" " tabindex="0" role="button">
+                        @LOGI.App_LocalResources.Basics.Production<br />
+                        <small>
+                            @Html.Raw(LOGI.App_LocalResources.Basics.TenToThirty)</small><br />
+                        <span class="icon-production-01"></span>
+</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="basics-small-text">
+            @LOGI.App_LocalResources.Basics.See:
+            <a href="/Basics/Index/4?page=4" class="text-primary" style="text-transform: uppercase;">@LOGI.App_LocalResources.Basics.Prerequisties</a>
+        </div>
+    </div>
+</div>
+
+

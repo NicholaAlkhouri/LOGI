@@ -1,0 +1,171 @@
+﻿@using LOGI.Models.ViewModels;
+@model SearchViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = LOGI.App_LocalResources.KeyIssues.SearchPageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+<div class="container search-result">
+    <div class="home-section-title ">
+        <i class="icon-search-icon"></i>
+        @if (Model.keyword != null && Model.keyword != "")
+        { 
+            <span class="title">@LOGI.App_LocalResources.KeyIssues.ResultFor </span>
+            <span> "@Model.keyword"</span>
+        }
+        else
+        {
+            <span class="title">@LOGI.App_LocalResources.KeyIssues.SearchResult </span>
+        }
+        <a class="search-result__refine-search" href="@Url.Action("AdvancedSearch", "KeyIssues", new
+                                                {
+                                                    keyword = Model.keyword,
+                                                    sourceId = Model.sourceId,
+                                                    authorId = Model.authorId,
+                                                    topicId = Model.topicId,
+                                                    orderby = Model.orderby,
+                                                    typeId = Model.typeId,
+                                                    countryId = Model.countryId,
+                                                    language = Model.language,
+                                                    fromDate = Model.fromDate,
+                                                    toDate = Model.toDate,
+                                                    isVideo = Model.isVideo,
+                                                    isText = Model.isText,
+                                                    isPDF = Model.isPDF
+                                                })">@LOGI.App_LocalResources.KeyIssues.RefineSearch<span class="fa fa-angle-right"></span></a>
+        <div class="search-result__sort-by">
+            @LOGI.App_LocalResources.KeyIssues.SortBy:
+            <span class="search-result__sort-by-value dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                @(Model.orderby==null?"date":Model.orderby) <i class="fa fa-angle-down"></i>
+            </span>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="@Url.Action("Search", "KeyIssues", new
+                        {
+                            keyword = Model.keyword,
+                            sourceId = Model.sourceId,
+                            authorId = Model.authorId,
+                            topicId = Model.topicId,
+                            orderby = "relevance",
+                            typeId = Model.typeId,
+                            countryId = Model.countryId,
+                            language = Model.language,
+                            fromDate = Model.fromDate,
+                            toDate = Model.toDate,
+                            isVideo = Model.isVideo,
+                            isText = Model.isText,
+                            isPDF = Model.isPDF
+                        })">@LOGI.App_LocalResources.KeyIssues.Relevance</a></li>
+                <li><a href="@Url.Action("Search", "KeyIssues", new
+                        {
+                            keyword = Model.keyword,
+                            sourceId = Model.sourceId,
+                            authorId = Model.authorId,
+                            topicId = Model.topicId,
+                            orderby = "date",
+                            typeId = Model.typeId,
+                            countryId = Model.countryId,
+                            language = Model.language,
+                            fromDate = Model.fromDate,
+                            toDate = Model.toDate,
+                            isVideo = Model.isVideo,
+                            isText = Model.isText,
+                            isPDF = Model.isPDF
+                        })">@LOGI.App_LocalResources.KeyIssues.Date</a></li>
+                <li><a href="@Url.Action("Search", "KeyIssues", new
+                        {
+                            page = Model.Page,
+                            keyword = Model.keyword,
+                            sourceId = Model.sourceId,
+                            authorId = Model.authorId,
+                            topicId = Model.topicId,
+                            orderby = "popular",
+                            typeId = Model.typeId,
+                            countryId = Model.countryId,
+                            language = Model.language,
+                            fromDate = Model.fromDate,
+                            toDate = Model.toDate,
+                            isVideo = Model.isVideo,
+                            isText = Model.isText,
+                            isPDF = Model.isPDF
+                        })">@LOGI.App_LocalResources.KeyIssues.Popular</a></li>
+            </ul>
+        </div>
+        <div class="search-result__displaying">@LOGI.App_LocalResources.KeyIssues.Displaying @(Model.DisplayFrom + "-" + Model.DisplayTo) @LOGI.App_LocalResources.KeyIssues.Of @Model.TotalCount</div>
+    </div>
+
+   
+
+    <div class="search-result__list-wrapper">
+        
+        @foreach (SearchItemViewModel keyissue in Model.KeyIssues)
+        {
+            <div class="search-result__item">
+                <div class="search-result__item-img">
+                    <img src="@keyissue.ImageURL" />
+                </div>
+                <div class="search-result__item-details">
+                    <div>@Html.ActionLink(@keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, new { @class = "search-result__item-title" })</div>
+                    <div class="search-result__item-more-info">
+                        @LOGI.App_LocalResources.KeyIssues.By
+                        @if (keyissue.Author != null)
+                        {
+                            @Html.ActionLink(keyissue.Author, "Search", "KeyIssues", new { authorId = keyissue.AuthorId }, new { @class = "search-result__item-author" })
+                        }
+                        @if (keyissue.Source != null)
+                        {
+                            if (keyissue.Author != null)
+                            {
+                                <text>,</text>
+                            }
+                            @Html.ActionLink(keyissue.Source, "Search", "KeyIssues", new { sourceId = keyissue.SourceID }, new { @class = "search-result__item-author" })
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="search-result__pagination">
+            @if (Model.ShowPrev)
+            {
+                <a href="@Url.Action("Search", "KeyIssues", new
+                {
+                    page = Model.Page - 1,
+                    keyword = Model.keyword,
+                    sourceId = Model.sourceId,
+                    authorId = Model.authorId,
+                    topicId = Model.topicId,
+                    orderby = Model.orderby,
+                    typeId = Model.typeId,
+                    countryId = Model.countryId,
+                    language = Model.language,
+                    fromDate = Model.fromDate,
+                    toDate = Model.toDate,
+                    isVideo = Model.isVideo,
+                    isText = Model.isText,
+                    isPDF = Model.isPDF
+                })"><span class="fa fa-angle-left"></span>@LOGI.App_LocalResources.KeyIssues.Previous</a>
+            }
+            @if (Model.ShowNext)
+            {
+                <a href="@Url.Action("Search", "KeyIssues", new
+                    {
+                        page = Model.Page +1,
+                        keyword = Model.keyword,
+                        sourceId = Model.sourceId,
+                        authorId = Model.authorId,
+                        topicId = Model.topicId,
+                        orderby = Model.orderby,
+                        typeId = Model.typeId,
+                        countryId = Model.countryId,
+                        language = Model.language,
+                        fromDate = Model.fromDate,
+                        toDate = Model.toDate,
+                        isVideo = Model.isVideo,
+                        isText = Model.isText,
+                        isPDF = Model.isPDF
+                    })">@LOGI.App_LocalResources.KeyIssues.Next<span class="fa fa-angle-right"></span></a>
+            }
+
+        </div>
+    </div>
+</div>
+

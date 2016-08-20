@@ -1,0 +1,128 @@
+﻿@using LOGI.Areas.Admin.Models
+@{
+    if (ViewBag.MainNav == null)
+    { ViewBag.MainNav = Navigator.Main.NONE; }
+
+    if (ViewBag.SubNav == null)
+    { ViewBag.SubNav = Navigator.Main.NONE; }
+}
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand">LOGI Admin Panel</a>
+    </div>
+    <!-- /.navbar-header -->
+
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                @*<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    </li>
+                    <li class="divider"></li>*@
+                <li>
+                    @using (Html.BeginForm("LogOff", "Account", new { Area = "" }, FormMethod.Post, new { id = "logoutForm", }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                    }
+
+                </li>
+            </ul>
+            <!-- /.dropdown-user -->
+        </li>
+        <!-- /.dropdown -->
+    </ul>
+    <!-- /.navbar-top-links -->
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.ABOUT ? "class=active" : "")>
+                    <a href="#"><i class="fa fa-info fa-fw"></i>About LOGI<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.TEAM ? "class=active" : "") href="@Url.Action("List","AdminTeam")"><i class="fa fa-users fa-fw"></i>Team</a>
+                        </li>
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.FINANCIAL ? "class=active" : "") href="@Url.Action("List", "AdminFinancial")"><i class="fa fa-dollar fa-fw"></i>FINANCIAL</a>
+                        </li>
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.OFFICIALDOC ? "class=active" : "") href="@Url.Action("Index", "AdminAbout")"><i class="fa fa-files-o fa-fw"></i>Documentation</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.AUTHOR ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminAuthor")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.AUTHOR ? "class=active" : "")><i class="fa fa-pencil fa-w"></i> Authors<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.TOPIC ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminTopic")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.TOPIC ? "class=active" : "")><i class="fa fa-list fa-w"></i> Topics<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.SOURCE ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminSource")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.SOURCE ? "class=active" : "")><i class="fa fa-clipboard fa-w"></i> Sources<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.KEYISSUES ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminKeyIssue")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.KEYISSUES ? "class=active" : "")><i class="fa fa-key fa-w"></i> Key Issues<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.NEWS ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminNews")"><i class="fa fa-newspaper-o fa-w"></i> In The News<span class="fa arrow"></span></a>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.CONTACTS ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminContacts")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.CONTACTS ? "class=active" : "")><i class="fa fa-envelope-o fa-w"></i> Contact Messages<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.SUBSCRIBE ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminSubscribers")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.SUBSCRIBE ? "class=active" : "")><i class="fa fa-envelope-o fa-w"></i> Newsletter Subscribers<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.DONATE ? "class=active" : "")>
+                    <a href="@Url.Action("Index", "AdminDonate")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.DONATE ? "class=active" : "")><i class="fa fa-money fa-w"></i> Donate Page<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.JOINLOGI ? "class=active" : "")>
+                    <a href="#"><i class="fa fa-users fa-fw"></i>Join LOGI<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.VACANCIES ? "class=active" : "") href="@Url.Action("List","AdminVacancy")"><i class="fa fa-users fa-fw"></i>Vacancies</a>
+                        </li>
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.EXPERTS ? "class=active" : "") href="@Url.Action("List", "AdminExpert")"><i class="fa fa fa-user-secret fa-fw"></i>Experts</a>
+                        </li>
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.SELECTIONPOLICY ? "class=active" : "") href="@Url.Action("SelectionPolicy", "AdminExpert")"><i class="fa fa fa-user-secret fa-fw"></i>Selection Policy</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.TIMELINE ? "class=active" : "")>
+                    <a href="@Url.Action("List", "AdminTimeline")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.TIMELINE ? "class=active" : "")><i class="fa fa-calendar fa-w"></i> Timeline<span class="fa arrow"></span></a>
+                </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.INPHOGRAPHIC ? "class=active" : "")>
+                    <a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i> Infographics<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.INFOCATEGORY ? "class=active" : "") href="@Url.Action("Categories", "AdminInfographic")"><i class="fa fa-list-ul"></i> Categories</a>
+                        </li>
+                        <li>
+                            <a @((Navigator.Sub)ViewBag.SubNav == Navigator.Sub.INFOGRAPHIC ? "class=active" : "") href="@Url.Action("Infographics", "AdminInfographic")"><i class="fa fa-picture-o"></i> Infographics</a>
+                        </li>
+                       
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>

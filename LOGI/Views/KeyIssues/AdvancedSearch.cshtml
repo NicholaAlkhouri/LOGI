@@ -1,0 +1,191 @@
+﻿@using LOGI.Models.ViewModels
+@model SearchViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = LOGI.App_LocalResources.KeyIssues.AdvancedSearchTitle;
+    var author = "";
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+    foreach (SelectListItem item in (SelectList)ViewData["AuthorID_Data"])
+    {
+        if (item.Value == Model.authorId.ToString())
+        { author = item.Text; }
+    }
+
+}
+@section styles
+{
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+}
+<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-search-icon"></i>
+        <span class="title">@LOGI.App_LocalResources.KeyIssues.AdvancedSearchTitle</span>
+        <span>@LOGI.App_LocalResources.KeyIssues.AdvancedSearchSLogan</span>
+    </div>
+</div>
+@using (Html.BeginForm("Search", "KeyIssues", new { Area = "" }, FormMethod.Get, new { id = "searcForm", }))
+{
+    <div class="container">
+        <div class="advance-search">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Keywords
+                    </div>
+                    <div class="advance-search__input">
+                        @Html.TextBoxFor(m => m.keyword, new { @class = "logi-input", placeholder = LOGI.App_LocalResources.KeyIssues.KeywordsPlaceholder })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Media
+                    </div>
+                    <div class="advance-search__input">
+                        @Html.DropDownList("sourceId", (SelectList)ViewData["SourceID_Data"], LOGI.App_LocalResources.KeyIssues.All, new { @class = "logi-input" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Topics
+                    </div>
+                    <div class="advance-search__input">
+                        @Html.DropDownList("topicId", (SelectList)ViewData["TopicID_Data"], LOGI.App_LocalResources.KeyIssues.All, new { @class = "logi-input" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Country
+                    </div>
+                    <div class="advance-search__input">
+                        @Html.DropDownList("countryId", (SelectList)ViewData["CountryID_Data"], LOGI.App_LocalResources.KeyIssues.All, new { @class = "logi-input" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Author
+                    </div>
+                    <div class="advance-search__input">
+                        <input type="text" class="logi-input" id="author" autocomplete="off" value="@author" placeholder="@LOGI.App_LocalResources.KeyIssues.AuthorPlaceholder" />
+                        @Html.HiddenFor(m => m.authorId)
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Language
+                    </div>
+                    <div class="advance-search__input">
+                        <select name="language">
+                            <option value="" @((Model.language == null || Model.language == "" ) ? "selected" : "")>@(isArabic ? "الكل" : "All")</option>
+                            <option value="en" @(Model.language == "en" ? "selected" : "")>@(isArabic?"الانكليزية":"English")</option>
+                            <option value="ar" @(Model.language == "ar" ? "selected" : "")>@(isArabic ? "العربية" : "Arabic")</option>
+                            <option value="fr" @(Model.language == "fr" ? "selected" : "")>@(isArabic ? "الفرنسية" : "French")</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="advance-search__title">
+                        @LOGI.App_LocalResources.KeyIssues.Type
+                    </div>
+                    <div class="advance-search__input">
+                        @Html.DropDownList("typeId", (SelectList)ViewData["TypeID_Data"], LOGI.App_LocalResources.KeyIssues.All, new { @class = "logi-input" })
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 col-sm-6 plz date-1">
+                        <div class="advance-search__title">
+                            @LOGI.App_LocalResources.KeyIssues.FromDate
+                        </div>
+                        <div class="advance-search__input">
+                            <input type="hidden" class="logi-input" value="@(Model.fromDate == null ? "" : Model.fromDate.Value.ToString("dd/MM/yyyy"))" id="fromDate_hidden" name="fromDate" />
+                            <input type="text" class="logi-input" value="@(Model.fromDate == null ? "" : Model.fromDate.Value.ToString("dd/MM/yyyy"))" id="fromDate" />
+                            <span class="glyphicon-calendar glyphicon"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 prz date-2">
+                        <div class="advance-search__title">
+                            @LOGI.App_LocalResources.KeyIssues.ToDate
+                        </div>
+                        <div class="advance-search__input">
+                            <input type="hidden" class="logi-input" value="@(Model.toDate == null ? "" : Model.toDate.Value.ToString("dd/MM/yyyy"))" id="toDate_hidden" name="toDate" />
+                            <input type="text" class="logi-input" value="@(Model.toDate == null ? "" : Model.toDate.Value.ToString("dd/MM/yyyy"))" id="toDate" />
+                            <span class="glyphicon-calendar glyphicon"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center col-xs-12 advance-search__checkboxes">
+                    <span style="margin-right:10px;">@Html.CheckBoxFor(m => m.isText) <label for="isText">@LOGI.App_LocalResources.KeyIssues.Text</label></span>
+                    <span style="margin-right:10px;">
+                        @Html.CheckBoxFor(m => m.isPDF) <label for="isPDF">PDF</label>
+                    </span>
+                    <span style="margin-right:10px;"> @Html.CheckBoxFor(m => m.isVideo) <label for="isVideo">@LOGI.App_LocalResources.KeyIssues.Videos</label> </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center col-xs-12">
+                    <input type="submit" class="logi-btn advance-search__search-btn" value="@LOGI.App_LocalResources.KeyIssues.Search" />
+                </div>
+            </div>
+
+            </div>
+    </div>
+}
+
+@section scripts
+{
+    <script src="~/Scripts/bootstrap3-typeahead.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    
+<script src="~/Scripts/locale/ar.js"></script>
+    <script>
+    $("#author").typeahead({
+        source: [
+            @foreach(SelectListItem item in (SelectList)ViewData["AuthorID_Data"])
+                {
+                    <text>{ id: @item.Value, name: "@item.Text" },</text>
+                }
+        ],
+        autoSelect: false
+    });
+
+    $("#author").change(function() {
+        var current = $("#author").typeahead("getActive");
+        if (current) {
+            // Some item from your model is active!
+            if (current.name == $("#author").val()) {
+                $("#authorId").val(current.id);
+                // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+            } else {
+                $("#authorId").val("");
+            }
+        } else {
+            // Nothing is active so it is a new value (or maybe empty value)
+            $("#authorId").val("");
+        }
+    });
+
+    $(document).ready(function () {
+            $('#fromDate').datetimepicker({ format: 'DD/MM/YYYY', locale: '@(isArabic ? "ar-sa" : "en")'});
+            $('#fromDate').on("dp.change",function(e){
+                $("#fromDate_hidden").val(e.date.format("DD/MMM/YYYY"));
+                //e.date.format("DD/MMM/YYYY");
+                console.log(e.date.format("DD/MMM/YYYY"));
+            })
+            $('#toDate').datetimepicker({ format: 'DD/MM/YYYY', locale:  '@(isArabic ? "ar-sa" : "en")'});
+            $('#toDate').on("dp.change",function(e){
+                $("#toDate_hidden").val(e.date.format("DD/MMM/YYYY"));
+                //e.date.format("DD/MMM/YYYY");
+                console.log(e.date.format("DD/MMM/YYYY"));
+            })
+        });
+    </script>
+}

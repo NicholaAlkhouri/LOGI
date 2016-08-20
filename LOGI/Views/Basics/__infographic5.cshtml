@@ -1,0 +1,83 @@
+﻿<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-glasshour-01"></i><span class="big-number">@(CultureHelper.GetCurrentCulture().Contains("ar") ? FrontHelpers.ChangeToArabic("4") : "4")</span><span class="title"> @LOGI.App_LocalResources.Basics.WhenToBenefit</span>
+    </div>
+</div>
+<div style="position:relative;">
+    <div class="container">
+        <div style="padding-top:10px;">
+            <div class="pull-left basics-small-text ">
+                <a href="/Basics/Index/4?page=4" class="basics-green-text"><span class="icon-prerequisite-01 logi-icon basics-green-text"></span> @LOGI.App_LocalResources.Basics.Previous </a>
+            </div>
+            <div class="pull-right basics-small-text">
+                <a href="/Basics/Index/4?page=6" class="basics-green-text">@LOGI.App_LocalResources.Basics.Next <span class="icon-exploration-01 logi-icon basics-green-text"></span></a>
+
+            </div>
+        </div>
+        <div class="p4_wrapper p5_wrapper">
+            <div class="basics-decom hidden-lg hidden-md hidden-sm">
+                <span class="basics-meduim-text basics-green-text">@LOGI.App_LocalResources.Basics.Licensing</span><br />
+                <small>@Html.Raw(LOGI.App_LocalResources.Basics.OneYear)</small><br />
+                <div class="float-line"></div>
+                <div class="line-top"></div>
+            </div>
+
+            <div class="basics-small-text">@Html.Raw(LOGI.App_LocalResources.Basics.InternationalComp)</div>
+            <div class="basics-big-text">@Html.Raw(@LOGI.App_LocalResources.Basics.RightsAreGiven)</div>
+
+            <div id="basics-animation5"></div>
+            <div class="basics-small-text">
+                @LOGI.App_LocalResources.Basics.Next:
+                <a href="/Basics/Index/4?page=6" class="text-primary" style="text-transform: uppercase;">@LOGI.App_LocalResources.Basics.Exploration</a>
+            </div>
+            <div class="basics-small-text" style="margin-top:20px">
+                <small>@LOGI.App_LocalResources.Basics.PleaseNote</small>
+            </div>
+            <div class="vtimeline">
+                <div class="vtimeline__line"></div>
+                <ul>
+                    <li class="inactive">
+                        <a>
+                            <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Prerequisties<br /></div>
+                            <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.DurationUnkownPolitical)</small>
+                            <span data-container="body"
+                                  class="basic-popover3 icon-prerequisite-01 logi-icon hidden-md hidden-lg "
+                                  data-toggle="popover"
+                                  data-placement="right"
+                                  data-content="@LOGI.App_LocalResources.Basics.DurationUnkownPolitical"
+                                  data-title="@LOGI.App_LocalResources.Basics.Prerequisties"
+                                  tabindex="0" role="button"></span>
+                            <span class="icon-prerequisite-01 logi-icon hidden-xs hidden-sm"></span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <div class="vtimeline__caption hidden-sm hidden-xs"> @LOGI.App_LocalResources.Basics.Licensing<br /></div>
+                        <small class="hidden-sm hidden-xs">@Html.Raw(LOGI.App_LocalResources.Basics.OneYear)</small>
+                        <span data-container="body"
+                              class="basic-popover3 icon-liscensing-01 logi-icon hidden-md hidden-lg"
+                              data-toggle="popover"
+                              data-placement="right"
+                              data-content="@LOGI.App_LocalResources.Basics.OneYear"
+                              data-title="@LOGI.App_LocalResources.Basics.Licensing"
+                              tabindex="0" role="button"></span>
+                        <span class="icon-liscensing-01 logi-icon hidden-xs hidden-sm"></span>
+                    </li>
+                    <li>
+
+                    </li>
+                    <li>
+
+                    </li>
+                    <li>
+
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</div>

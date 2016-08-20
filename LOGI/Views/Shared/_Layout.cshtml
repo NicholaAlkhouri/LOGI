@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_base.cshtml";
+}
+@section MetaData
+{
+    @RenderSection("MetaData", required: false)
+}
+@section styles
+{
+    @RenderSection("styles", required: false)
+}
+@Html.Partial("_Navigation")
+<div class="body-content">
+    @RenderBody()
+</div>
+@Html.Partial("_Footer")
+@section scripts
+{
+    @RenderSection("scripts", required: false)
+}
+
+

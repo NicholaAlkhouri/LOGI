@@ -1,0 +1,41 @@
+﻿@using LOGI.Models.ViewModels
+@model InfographicSetViewModel
+@{
+    string infographic_url = "";
+}
+@foreach (InfographicCategoryViewModel cat in Model.Categories.Where(c => c.Infographics.Count() > 0))
+{
+    <div class="container">
+        <div class="home-section-title ">
+            <i class="icon-basics-icon-01"></i><span class="title"> @cat.Name</span><span> @cat.Description</span>
+        </div>
+    </div>
+    <div class="timeline-in__basics-wrapper">
+        @foreach (InfographicViewModel info in cat.Infographics.OrderBy(i => i.Order))
+        {
+            <div class="timeline-in__basics-question">
+                @if (info.ID == 3)
+                {
+                    infographic_url = "/Timeline";
+                }else if (info.ID == 4)
+                {
+                    infographic_url = "/Basics/Index/4";
+                }
+                else
+                {
+                    infographic_url = Url.Action("Infographic", "Basics", new { id = info.FriendlyURL });
+                }
+                <a href="@infographic_url">
+                    <div class="timeline-in__basics-question--inner @(ViewBag.SelectedInfographic == info.ID ? "timeline-in__basics-question--active" : "")">
+                        @if (info.Order != null && info.Order > 0)
+                        {
+                            <span>@info.Order .</span>
+                        }
+                        <span>@info.Name</span>
+                    </div>
+                </a>
+                
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,438 @@
+﻿@using LOGI.Models.ViewModels
+@using LOGI.Models
+@model AboutViewModel
+@{
+    ViewBag.Title = LOGI.App_LocalResources.About.PageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+<div class="aboutus">
+    <div class="container--gray">
+        <div class="container vision-wrapper" id="vision">
+            <div class="home-section-title ">
+                <i class="icon-vision"></i><span class="title">@Html.Raw(LOGI.App_LocalResources.About.Vision)</span>
+            </div>
+
+            <div class="l-section">
+                <div class="quote sub-font">
+                    <span class="icon-open-quotations"></span>
+                    <span class="body">@Html.Raw(LOGI.App_LocalResources.About.Quote)</span>
+                    <span class="normal-text">@Html.Raw(LOGI.App_LocalResources.About.Purpose)</span>
+                    <span class="icon-closed-quotations"></span>
+                </div>
+                @Html.Raw(LOGI.App_LocalResources.About.DescriptionDiv)
+            </div>
+            <div class="r-section">
+                <img src="/Content/images/white_paper.png" class="whitepaper-img">
+                <div>@Html.Raw(LOGI.App_LocalResources.About.LearnMore)</div>
+                <a class="logi-btn download-btn" href="@Model.WhitePaper">@Html.Raw(LOGI.App_LocalResources.About.DownloadPaper)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mission-wrapper" id="mission">
+        <div class="home-section-title ">
+            <i class="icon-mission"></i><span class="title">@Html.Raw(LOGI.App_LocalResources.About.Mission)</span>
+        </div>
+        <div class="big-caption sub-font">@Html.Raw(LOGI.App_LocalResources.About.MessionDescription)</div>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <div class="section">
+                    <div><i class="icon-enable-experts"></i></div>
+                    <div class="title">@Html.Raw(LOGI.App_LocalResources.About.Enable)</div>
+                    <div>@Html.Raw(LOGI.App_LocalResources.About.EnableDesc)</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="section">
+                    <div><i class="icon-educate"></i></div>
+                    <div class="title">@Html.Raw(LOGI.App_LocalResources.About.Educate)</div>
+                    <div>@Html.Raw(LOGI.App_LocalResources.About.EducateDesc)</div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="section">
+                    <div><i class="icon-influence"></i></div>
+                    <div class="title">@Html.Raw(LOGI.App_LocalResources.About.Influence)</div>
+                    <div>@Html.Raw(LOGI.App_LocalResources.About.InfluenceDesc)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="video-wrapper">
+        <div class="embed-responsive embed-responsive-16by9" style="width:100%">
+            <div id="player"></div>
+        </div>
+    </div>
+
+    <div class="container--big " id="team">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-logi-team"></i><span class="title">@LOGI.App_LocalResources.About.Members</span>
+            </div>
+        </div>
+        <div class="big-caption sub-font">@Html.Raw(LOGI.App_LocalResources.About.MeetCos)</div>
+        <div class="team-wrapper">
+            @foreach (TeamMember member in Model.TeamMembers.Where(t => t.Type == "cofounder").ToList())
+            {
+                <div class="team-member team-member--big">
+                    <div class="team-member__image">
+                        <img src="@member.ImageURL" />
+                    </div>
+                    <div class="team-member__name">@(isArabic ? member.FullNameAr : member.FullName)</div>
+                    <div class="team-member__socials">
+                        @if (member.Email != null && member.Email != "")
+                        {
+                            <a class="icon-mail-01 social-link" href="mailto:@member.Email" target="_blank"></a>
+                        }
+                        @if (member.Twitter != null && member.Twitter != "")
+                        {
+                            <a class="fa fa-twitter social-link" href="@member.Twitter" target="_blank"></a>
+                        }
+                        @if (member.Linkedin != null && member.Linkedin != "")
+                        {
+                            <a class="fa fa-linkedin social-link" href="@member.Linkedin" target="_blank"></a>
+                        }
+                    </div>
+                    <div class="team-member__description">
+                        @if (member.Expertise != null && member.Expertise != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.Expertise </strong> @(isArabic ? member.ExpertiseAr : member.Expertise)<br />
+                        }
+                        @if (member.CurrentRole != null && member.CurrentRole != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.CurrentRole </strong> @(isArabic ? member.CurrentRoleAr : member.CurrentRole) <br />
+                        }
+                        @if (member.Career != null && member.Career != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.Career </strong><br /> @(isArabic ? member.CareerAr : member.Career) <br />
+                        }
+                        @if (member.Education != null && member.Education != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.Education</strong><br /> @(isArabic ? member.EducationAr : member.Education)<br />
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="container bullet-separator">
+            <div class="bullet icon-navigation-icon"></div>
+        </div>
+        <div class="big-caption sub-font">@Html.Raw(LOGI.App_LocalResources.About.MeetAdvisory)</div>
+        <div class="team-wrapper">
+            @foreach (TeamMember member in Model.TeamMembers.Where(t => t.Type == "advisory").ToList())
+            {
+                <div class="team-member team-member--big">
+                    <div class="team-member__image">
+                        <img src="@member.ImageURL" />
+                    </div>
+                    <div class="team-member__name">@(isArabic ? member.FullNameAr : member.FullName)</div>
+                    <div class="team-member__socials">
+                        @if (member.Email != null && member.Email != "")
+                        {
+                            <a class="icon-mail-01 social-link" href="mailto:@member.Email" target="_blank"></a>
+                        }
+                        @if (member.Twitter != null && member.Twitter != "")
+                        {
+                            <a class="fa fa-twitter social-link" href="@member.Twitter" target="_blank"></a>
+                        }
+                        @if (member.Linkedin != null && member.Linkedin != "")
+                        {
+                            <a class="fa fa-linkedin social-link" href="@member.Linkedin" target="_blank"></a>
+                        }
+                    </div>
+                    <div class="team-member__description">
+                        @if (member.Expertise != null && member.Expertise != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.Expertise </strong> @(isArabic ? member.ExpertiseAr : member.Expertise) <br />
+                        }
+                        @if (member.CurrentRole != null && member.CurrentRole != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.CurrentRole </strong> @(isArabic ? member.CurrentRoleAr : member.CurrentRole) <br />
+                        }
+                        @if (member.Career != null && member.Career != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.Career </strong><br /> @(isArabic ? member.CareerAr : member.Career) <br />
+                        }
+                        @if (member.Education != null && member.Education != "")
+                        {
+                            <strong>@LOGI.App_LocalResources.About.Education </strong><br /> @(isArabic ? member.EducationAr : member.Education)<br />
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+        @if (Model.TeamMembers.Where(t => t.Type == "team").Count() > 0)
+        {
+            <div class="container bullet-separator">
+                <div class="bullet icon-navigation-icon"></div>
+            </div>
+            <div class="big-caption sub-font">@Html.Raw(LOGI.App_LocalResources.About.MeetTeam)</div>
+            <div class="team-wrapper">
+                @foreach (TeamMember member in Model.TeamMembers.Where(t => t.Type == "team").ToList())
+                {
+                    <div class="team-member team-member--small">
+                        <div class="team-member__image">
+
+                            <img src="@((member.ImageURL!=null && member.ImageURL != "")?member.ImageURL : "~/Content/images/team/male@2x.png")" />
+                        </div>
+                        <div class="team-member__info">
+                            <div class="team-member__name">@(isArabic ? member.FullNameAr : member.FullName)</div>
+                            <div class="team-member__description">
+                                @(isArabic ? member.CurrentRoleAr : member.CurrentRole)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="container--gold financial-wrapper" id="financials">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-financials"></i><span class="title">@Html.Raw(LOGI.App_LocalResources.About.Financial)</span>
+            </div>
+            <div class="big-caption sub-font">@LOGI.App_LocalResources.About.Transparency</div>
+            @if (Model.AllFinancialReports.Where(a => a.Year == DateTime.Now.Year.ToString()).Count() > 0)
+            {
+                <div class="description--half">
+                    @LOGI.App_LocalResources.About.TransparencyDesc
+                </div>
+                <div class="download-report-wrapper">
+                    <a class="logi-btn" href="@Model.AllFinancialReports.Where(a => a.Year == DateTime.Now.Year.ToString()).FirstOrDefault().FileURL">@LOGI.App_LocalResources.About.DownloadReport1 @DateTime.Now.Year.ToString() @LOGI.App_LocalResources.About.DownloadReport2</a>
+                </div>
+            }
+            else
+            {
+                <div class="description">
+                    @LOGI.App_LocalResources.About.TransparencyDesc
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="donute-chart-wrapper">
+            <div class="title--gold">@Model.CurrentFinancialReport.Year @LOGI.App_LocalResources.About.Funding</div>
+            <div class="chart-wrapper">
+                <div id="flot-funding" class="donute-chart"></div>
+                <div class="total total-funding" data-val="$@string.Format("{0:n1}",Model.CurrentFinancialReport.Funding)">$@string.Format("{0:n1}", Model.CurrentFinancialReport.Funding)</div>
+            </div>
+            <div class="caption caption-funding"></div>
+        </div>
+        <div class="donute-chart-wrapper">
+            <div class="title--green">@Model.CurrentFinancialReport.Year @LOGI.App_LocalResources.About.Expenses</div>
+            <div class="chart-wrapper">
+                <div id="flot-expenses" class="donute-chart"></div>
+                <div class="total total-expenses" data-val="$@string.Format("{0:n1}",Model.CurrentFinancialReport.Expences)">$@string.Format("{0:n1}", Model.CurrentFinancialReport.Expences)</div>
+            </div>
+            <div class="caption caption-expenses"></div>
+        </div>
+        <div class="download-wr">
+            @LOGI.App_LocalResources.About.PrevReports <br />
+            <select class="select-report">
+                @foreach (FinancialReport fr in Model.AllFinancialReports)
+                {
+                    <option value="@fr.FileURL">@fr.Year</option>
+                }
+            </select>
+
+            <input onclick="downloadFinancialReport()" class="download-pdf" value="@LOGI.App_LocalResources.About.DownloadPdfReport" />
+        </div>
+
+    </div>
+
+    <div class="container--gray official-wrapper" id="officialDocuments">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-official-documentation"></i><span class="title">@Html.Raw(LOGI.App_LocalResources.About.OfficialDocs)</span>
+            </div>
+        </div>
+        <div class="container offical-doc">
+            <div class="section">
+                <div><i class="icon-registration-documents-01"></i></div>
+                <div class="caption">@LOGI.App_LocalResources.About.RegistrationDocs</div>
+                <a class="logi-btn" target="_blank" href="@Model.RegistrationPDF">@LOGI.App_LocalResources.About.Download</a>
+            </div>
+            @if (Model.ByLawsPDF != null && Model.ByLawsPDF != "")
+            {
+                <div class="section">
+                    <div><i class="icon-by-laws"></i></div>
+                    <div class="caption">@LOGI.App_LocalResources.About.ByLAWS</div>
+                    <a class="logi-btn" target="_blank" href="@Model.ByLawsPDF">@LOGI.App_LocalResources.About.Download</a>
+                </div>
+            }
+            @if (Model.GiftAcceptance != null && Model.GiftAcceptance != "")
+            {
+                <div class="section">
+                    <div><i class="icon-gift-icon-01"></i></div>
+                    <div class="caption">@LOGI.App_LocalResources.About.GiftAcceptance</div>
+                    <a class="logi-btn" target="_blank" href="@Model.GiftAcceptance">@LOGI.App_LocalResources.About.Download</a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container" id="partners">
+        <div class="home-section-title ">
+            <i class="icon-logi-partners"></i><span class="title">@Html.Raw(LOGI.App_LocalResources.About.Partners)</span>
+        </div>
+        <div class="partners-wrapper">
+            <div class="partners-description">
+                @LOGI.App_LocalResources.About.FirstLebanese
+            </div>
+            <div class="section">
+                <a href="http://www.publishwhatyoupay.org/" target="_blank">
+                    <img src="~/Content/images/publish-what-you-pay@2x.png" data-toggle="tooltip" data-placement="top" title="@LOGI.App_LocalResources.About.PublisWhatYouPay" />
+                </a>
+            </div>
+            <div class="section">
+                <a href="http://www.accessinitiative.org/" target="_blank">
+                    <img src="~/Content/images/the-access@2x.png" data-toggle="tooltip" data-placement="top" title="@LOGI.App_LocalResources.About.TheAccessIntiative" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    <script src="~/Scripts/JQueryFlot/excanvas.min.js"></script>
+    <script src="~/Scripts/JQueryFlot/jquery.flot.min.js"></script>
+    <script src="~/Scripts/JQueryFlot/jquery.flot.pie.min.js"></script>
+    <script src="~/Scripts/JQueryFlot/jquery.flot.time.min.js"></script>
+    <script src="~/Scripts/JQueryFlot/jquery.flot.symbol.min.js"></script>
+    <script>
+        var dataSet = [
+            @foreach(FinancialReportEntry entry in Model.CurrentFinancialReport.FinancialReportEntries.Where(e=> e.Type=="funding").ToList())
+            {
+                <text>
+                        { label: "@(isArabic ? entry.TitleAr : entry.Title)", data: @entry.Value, dataText: "$@string.Format("{0:n1}", entry.Value)", color: "@entry.Color", group: "funding" },
+                </text>
+            }
+        ];
+
+        var dataSet2 = [
+             @foreach (FinancialReportEntry entry in Model.CurrentFinancialReport.FinancialReportEntries.Where(e => e.Type == "expences").ToList())
+            {
+                    <text>
+                        { label: "@(isArabic ? entry.TitleAr : entry.Title)", data: @entry.Value, dataText: "$@string.Format("{0:n1}", entry.Value)", color: "@entry.Color", group: "expenses" },
+                    </text>
+            }
+
+        ];
+
+        var options = {
+            series: {
+                pie: {
+                    show: true,
+                    innerRadius: 0.6,
+                    label: {
+                        show: false,
+                    }
+                }
+            },
+            grid: {
+                hoverable: true
+            },
+            legend: {
+                show: false
+            }
+        };
+        $(document).ready(function () {
+            renderFunding();
+
+            renderExpenses();
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        });
+
+        $.fn.showMemo = function () {
+            $(this).bind("plothover", function (event, pos, item) {
+
+                if (!item) {
+                    $(".total-funding").html($(".total-funding").attr("data-val"));
+                    $(".caption-funding").html("");
+                    $(".total-expenses").html($(".total-expenses").attr("data-val"));
+                    $(".caption-expenses").html("");
+                    return;
+                }
+                console.log(item.series.group);
+                if (item.series.group == "funding") {
+                    $(".caption-funding").html(item.series.label);
+                    $(".total-funding").html(item.series.dataText);
+                } else if (item.series.group == "expenses") {
+                    $(".caption-expenses").html(item.series.label);
+                    $(".total-expenses").html(item.series.dataText);
+                }
+            });
+        }
+
+        $("#flot-funding").on("mouseout", function () {
+            renderFunding();
+        });
+        $("#flot-expenses").on("mouseout", function () {
+            renderExpenses();
+        });
+
+
+        function renderFunding() {
+            $.plot($("#flot-funding"), dataSet, options);
+            $("#flot-funding").showMemo();
+        }
+        function renderExpenses() {
+            $.plot($("#flot-expenses"), dataSet2, options);
+            $("#flot-expenses").showMemo();
+        }
+
+        function downloadFinancialReport()
+        {
+            window.open($('.select-report').val());
+        }
+    </script>
+
+    <script>
+        // 2. This code loads the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 3. This function creates an <iframe> (and YouTube player)
+        //    after the API code downloads.
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                playerVars: { 'rel': 0, 'showinfo':0 },
+                videoId: 'PJdQ2ntPb2Y',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 4. The API will call this function when the video player is ready.
+        function onPlayerReady(event) {
+            // event.target.playVideo();
+        }
+
+        // 5. The API calls this function when the player's state changes.
+        //    The function indicates that when playing a video (state=1),
+        //    the player should play for six seconds and then stop.
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                //hide title
+                $('.basics__title').hide();
+            }
+        }
+        function stopVideo() {
+            player.stopVideo();
+        }
+    </script>
+}

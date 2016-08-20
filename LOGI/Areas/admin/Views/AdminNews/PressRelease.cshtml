@@ -1,0 +1,55 @@
+﻿@model LOGI.Models.SectionVariable
+
+@{
+    ViewBag.Title = "In The News |Press Release";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Press Release
+        </h1>
+    </div>
+</div>
+@using (Html.BeginForm("PressRelease", "AdminNews", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "setFormSubmitting()" }))
+{
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @if (Model != null && Model.Value != null && Model.Value != "")
+                        {
+                            <a href="@Model.Value" target="_blank">download pdf</a>
+                            <br />
+                            <span>or </span><label for="Images" class="control-label">Upload New File:</label>
+                        }
+                        else
+                        {
+                            <label for="Images" class="control-label">Upload File:</label>
+                        }
+
+                        <input type="file" id="PDF" name="PDF">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Publish
+                </div>
+                <div class="panel-body">
+                    <input type="submit" class="btn btn-primary" value="Save Changes" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+

@@ -1,0 +1,186 @@
+﻿@import "variables.less";
+@import "responsive.less";
+
+.apply {
+    &__container {
+        background-image: url('/Content/images/intern-vacancy-cover.jpg');
+        background-size: cover;
+        height: 500px;
+        position: relative;
+        margin-bottom: 35px;
+
+        .xsmall( {
+            height: 200px;
+            background-size: 180%;
+            margin-bottom: 10px;
+        }
+
+        );
+
+        .container {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: #fff;
+            margin-bottom: 20px;
+
+            .xsmall( {
+                margin-bottom: 0;
+            }
+
+            );
+        }
+    }
+
+    .apply__container-expert {
+        margin-bottom: 0;
+
+             background-image: url('/Content/images/expert-new.jpg') !important;
+    }
+
+    .join__expert-conditions {
+        text-align: left;
+        color: @text-color;
+    }
+
+    .join__expert-download-desc {
+        color: @text-color;
+        font-size: 24px;
+        font-family: @sub-font;
+    }
+
+    &__title {
+        font-size: 60px;
+
+        .xsmall( {
+            font-size: 30px;
+        }
+
+        );
+    }
+
+    &__info {
+        font-family: 'Roboto',sans-serif;
+        font-size: 21px;
+
+        .xsmall( {
+            font-size: 14px;
+        }
+
+        );
+    }
+
+    &__overlay {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 192px;
+    }
+
+    &__vacancy-section {
+        margin-bottom: 30px;
+
+        .xsmall( {
+            margin-bottom: 20px;
+        }
+
+        );
+    }
+
+    &__vacancy-section-title {
+        font-size: 21px;
+        text-transform: uppercase;
+
+        .xsmall( {
+            font-size: 18px;
+        }
+
+        );
+    }
+
+    &__vacancy-section-text {
+        font-size: @text-font-size;
+        text-transform: none;
+
+        .xsmall( {
+            font-size: 14px;
+        }
+
+        );
+    }
+
+    &__field-title {
+        padding-left: 10px;
+        margin-top: 15px;
+    }
+
+    #Message {
+        height: 130px;
+        resize: none;
+    }
+
+    &__btn {
+        border-color: @primary-color !important;
+        background-color: #fff !important;
+        color: @primary-color !important;
+        width: 100%;
+    }
+
+    &__upload-wrapper {
+        margin-top: 20px;
+    }
+
+    &__submit-wrapper {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    &__form-title {
+        font-size: 18px;
+    }
+
+    &__success-overlay {
+        background-color: #e6e6e6;
+        padding: 150px 30px;
+        text-align: center;
+        font-size: 24px;
+
+        .xsmall( {
+            margin-bottom: 10px;
+            padding: 30px 30px;
+        }
+
+        );
+
+        span {
+            font-size: 18px;
+        }
+
+        img {
+            width: 73px;
+            margin-top: 20px;
+        }
+    }
+
+    &-exper-form {
+        max-width: 900px;
+        margin-top: 35px;
+
+        textarea {
+            height: 130px;
+            resize: none;
+        }
+
+        .logi-btn {
+            background-color: #fff;
+            padding: 14px 100px;
+        }
+        .apply__success-overlay
+        {
+            background-color: #fff;
+            padding: 100px 30px;
+        }
+    }
+}

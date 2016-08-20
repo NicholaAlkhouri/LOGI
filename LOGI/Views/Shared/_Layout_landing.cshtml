@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_base.cshtml";
+}
+<div class="body-content landing-content">
+    @RenderBody()
+</div>
+@section styles
+{
+    @RenderSection("styles", required: false)
+}
+@section scripts
+{
+    <script src="~/Scripts/swiffy/runtime.js"></script>
+    <script src="~/Scripts/stellar/stellar.min.js"></script>
+    <script src="~/Scripts/fullPage/fullPage.min.js"></script>
+    <script src="~/Scripts/custom-scroller/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/jquery.mousewheel.min.js"></script>
+    <script src="~/Scripts/jquery.smoothdivscroll-1.3-min.js"></script>
+    @RenderSection("scripts", required: false)
+}

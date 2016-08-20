@@ -1,0 +1,168 @@
+﻿@model LOGI.Models.Timeline
+
+@{
+    ViewBag.Title = "Edit Timeline Item";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Edit Timeline Item @using (Html.BeginForm("Delete", "AdminTimeline", FormMethod.Post, new { id = "deleteForm", onsubmit = "setFormSubmitting()" }))
+            {
+                <input type="submit" onclick="return confirm('are you sure you want to delete this item?')" class="btn btn-danger" value="Delete" />
+                @Html.HiddenFor(m => m.ID)
+            }
+        </h1>
+
+    </div>
+</div>
+@using (Html.BeginForm("Edit", "AdminTimeline", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "setFormSubmitting()" }))
+{
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Timeline Information English
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @if (Model.ImageURL != null && Model.ImageURL != "")
+                        {
+                            <img src="@Model.ImageURL" style="max-width:100%;"/><br />
+                        }
+                        <label for="Images" class="control-label">Change Image:</label>
+                        <input type="file" id="Images" name="Images">
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.order)
+                        @Html.TextBoxFor(m => m.order, new { @class = "form-control", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title)
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Period)
+                        @Html.TextBoxFor(m => m.Period, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Timeline Information Arabic
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TitleAr)
+                        @Html.TextBoxFor(m => m.TitleAr, new { @class = "form-control", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PeriodAr)
+                        @Html.TextBoxFor(m => m.PeriodAr, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DescriptionAr)
+                        @Html.TextAreaFor(m => m.DescriptionAr, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Publish
+                </div>
+                <div class="panel-body">
+
+                    <input type="submit" class="btn btn-primary" value="Save Changes" />
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Type
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <select name="Type" id="Type" class="form-control">
+                            <option value="ED" @(Model.Type == "ED" ? "selected" : "")>Exploratory Drilling</option>
+                            <option value="MBD" @(Model.Type == "MBD" ? "selected" : "")>Maritime Boundary Dispute</option>
+                            <option value="RD" @(Model.Type == "RD" ? "selected" : "")>Regional Discoveries</option>
+                            <option value="LE" @(Model.Type == "LE" ? "selected" : "")>Legislation</option>
+                            <option value="LI" @(Model.Type == "LI" ? "selected" : "")>Licensing</option>
+                            <option value="GS" @(Model.Type == "GS" ? "selected" : "")>Geophysical Surveying</option>
+                            <option value="BA" @(Model.Type == "BA" ? "selected" : "")>Bilateral agreements</option>
+                            <option value="EN" @(Model.Type == "EN" ? "selected" : "")>Environmental</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Countries
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @*  @Html.ListBox("KCountries", (MultiSelectList)ViewData["CountryID_Data"], new { @class = "form-control" })*@
+                        @foreach (var item in (MultiSelectList)ViewData["CountryID_Data"])
+                        {
+                            <input type="checkbox" name="TCountries" value="@item.Value"
+                                   id="country_@item.Value" @(item.Selected ? "checked=\"checked\"" : String.Empty) />
+                            <label for="country_@item.Value" style="font-weight:normal">@item.Text</label><br />
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+
+@section scripts {
+    <!--Rich Text Editor -->
+   <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+
+
+        var formSubmitting = true;
+        var setFormSubmitting = function () { formSubmitting = true; };
+
+        window.onload = function () {
+            window.addEventListener("beforeunload", function (e) {
+                var confirmationMessage = 'It looks like you have been editing something. ';
+                confirmationMessage += 'If you leave before saving, your changes will be lost.';
+
+                if (formSubmitting) {
+                    return undefined;
+                }
+
+                (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+            });
+
+            $("input").change(function () {
+                formSubmitting = false;
+            });
+        };
+        CKEDITOR.replace('Description');
+        CKEDITOR.replace('DescriptionAr');
+    </script>
+
+}

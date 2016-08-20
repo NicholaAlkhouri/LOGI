@@ -1,0 +1,294 @@
+﻿@model LOGI.Models.KeyIssue
+
+@{
+    ViewBag.Title = "New Key Issue";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/Admin/jquery.tagit.css" rel="stylesheet" />
+    <link href="~/Content/Admin/tagit.ui-zendesk.css" rel="stylesheet" />
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Add New Key Issue</h1>
+    </div>
+</div>
+@using (Html.BeginForm("New", "AdminKeyIssue", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "setFormSubmitting()" }))
+{
+    if (Model.OriginalId != null)
+    {
+        @Html.HiddenFor(m => m.OriginalId)
+    }
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Key Issue Information
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="Images" class="control-label">Image:</label>
+                        <input type="file" id="Images" name="Images">
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title)
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Title)
+                    </div>
+                    <div class="form-group">
+                        <label for="Images" class="control-label">PDF File:</label>
+                        <input type="file" id="Files" name="Files">
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.Description)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FriendlyURL)
+                        @Html.TextBoxFor(m => m.FriendlyURL, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.FriendlyURL)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FeatureVideoLink)
+                        @Html.TextBoxFor(m => m.FeatureVideoLink, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FeatureVideoLink)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MetaTitle)
+                        @Html.TextBoxFor(m => m.MetaTitle, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.MetaTitle)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MetaDescription)
+                        @Html.TextBoxFor(m => m.MetaDescription, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(m => m.MetaDescription)
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Publish
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                @Html.EditorFor(m => m.IsOnline, new { @class = "form-control" })
+                                @Html.DisplayNameFor(m => m.IsOnline)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @Html.EditorFor(m => m.IsFeatured, new { @class = "form-control" })
+                                @Html.DisplayNameFor(m => m.IsFeatured)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @Html.EditorFor(m => m.InScroller, new { @class = "form-control" })
+                                @Html.DisplayNameFor(m => m.InScroller)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @Html.EditorFor(m => m.IsHomeVideoFeatured, new { @class = "form-control" })
+                                @Html.DisplayNameFor(m => m.IsHomeVideoFeatured)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PublishDate)
+                        <div class='input-group date' id='datetimepicker1'>
+                            @Html.TextBoxFor(m => m.PublishDate, new { @class = "form-control", required = "required" })
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Save Changes" />
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Language
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @if (ViewBag.TranslatedVersion != null || ViewBag.OriginalVersion != null)
+                        {
+                            @Html.HiddenFor(a => a.Language)
+                            <select class="form-control" disabled>
+                                <option value="en" @(Model.Language == "en" ? "selected" : "")>English</option>
+                                <option value="ar" @(Model.Language == "ar" ? "selected" : "")>Arabic</option>
+                                <option value="fr" @(Model.Language == "fr" ? "selected" : "")>French</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select name="Language" id="Language" class="form-control">
+                                <option value="en" @(Model.Language == "en" ? "selected" : "")>English</option>
+                                <option value="ar" @(Model.Language == "ar" ? "selected" : "")>Arabic</option>
+                                <option value="fr" @(Model.Language == "fr" ? "selected" : "")>French</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Author
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.EditorFor(m => m.AuthorID)
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Source
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.EditorFor(m => m.SourceID)
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Topic
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.EditorFor(m => m.TopicID)
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Type
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.EditorFor(m => m.TypeID)
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Countries
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                      @*  @Html.ListBox("KCountries", (MultiSelectList)ViewData["CountryID_Data"], new { @class = "form-control" })*@
+                        @foreach (var item in (MultiSelectList)ViewData["CountryID_Data"])
+                        {
+                            <input type="checkbox" name="KCountries" value="@item.Value"
+                                   id="country_@item.Value" @(item.Selected ? "checked=\"checked\"" : String.Empty) />
+                            <label for="country_@item.Value" style="font-weight:normal">@item.Text</label><br/>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    English Tags
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <ul id="englishTags">
+                            @if (Model.Tags != null)
+                            {
+                                foreach (LOGI.Models.Tag tag in Model.Tags.Where(t => t.Language == "en"))
+                                {
+                                    <li>@tag.Name</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Arabic Tags
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <ul id="arabicTags">
+                            @if (Model.Tags != null)
+                            {
+                                foreach (LOGI.Models.Tag tag in Model.Tags.Where(t => t.Language == "ar"))
+                                {
+                                    <li>@tag.Name</li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+
+@section scripts {
+    <!--Rich Text Editor -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/tag-it.min.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+
+
+        var formSubmitting = false;
+        var setFormSubmitting = function () { formSubmitting = true; };
+
+        window.onload = function () {
+            window.addEventListener("beforeunload", function (e) {
+                var confirmationMessage = 'It looks like you have been editing something. ';
+                confirmationMessage += 'If you leave before saving, your changes will be lost.';
+
+                if (formSubmitting) {
+                    return undefined;
+                }
+
+                (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+            });
+
+
+        };
+        $(document).ready(function () {
+            $('#datetimepicker1').datetimepicker();
+
+            $('#arabicTags').tagit({
+                fieldName: "ArabicTags",
+                allowSpaces: true
+            });
+            $('#englishTags').tagit({
+                fieldName: "EnglishTags",
+                allowSpaces: true
+            });
+        });
+
+        CKEDITOR.replace('Description');
+    </script>
+}

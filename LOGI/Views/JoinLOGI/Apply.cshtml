@@ -1,0 +1,176 @@
+﻿@model LOGI.Models.VacancyApplication
+@{
+    ViewBag.Title = LOGI.App_LocalResources.Join.ApplyPageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+
+    LOGI.Models.Vacancy vacancy = (LOGI.Models.Vacancy)(ViewBag.Vacancy);
+}
+
+<div class="apply">
+    <div class="apply__container" data-stellar-background-ratio="0.5">
+        <img class="apply__overlay" src="/Content/images/video-gradient.png">
+        <div class="container">
+            <div class="apply__info">
+                @LOGI.App_LocalResources.Join.JobNumber @vacancy.JobNumber / <span style="white-space:nowrap">@LOGI.App_LocalResources.Join.Deadline @vacancy.DeadLine.ToString("MMMM-dd-yyyy")</span>
+            </div>
+            <div class="apply__title sub-font">@(isArabic ? vacancy.TitleAr : vacancy.Title)</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-7">
+                @if ((!isArabic && vacancy.RoleSummary != null && vacancy.RoleSummary != "") || (isArabic && vacancy.RoleSummaryAr != null && vacancy.RoleSummaryAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.RoleSummary:</div>
+                        <div class="apply__vacancy-section-text">@Html.Raw(isArabic?vacancy.RoleSummaryAr : vacancy.RoleSummary)</div>
+                    </div>
+                }
+
+                @if ((!isArabic && vacancy.EssentialResponsibilities != null && vacancy.EssentialResponsibilities != "") || (isArabic && vacancy.EssentialResponsibilitiesAr != null && vacancy.EssentialResponsibilitiesAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.EssentialRes:</div>
+                        <div class="apply__vacancy-section-text">@Html.Raw(isArabic ? vacancy.EssentialResponsibilitiesAr : vacancy.EssentialResponsibilities)</div>
+                    </div>
+                }
+
+                @if ((!isArabic && vacancy.ProjectDeadline != null && vacancy.ProjectDeadline != "") || (isArabic && vacancy.ProjectDeadlineAr != null && vacancy.ProjectDeadlineAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.ProjectDeadline: <span class="apply__vacancy-section-text">@Html.Raw(isArabic ? vacancy.ProjectDeadlineAr : vacancy.ProjectDeadline)</span></div>
+
+                    </div>
+                }
+
+                @if ((!isArabic && vacancy.DesiredCharacteristics != null && vacancy.DesiredCharacteristics != "") || (isArabic && vacancy.DesiredCharacteristicsAr != null && vacancy.DesiredCharacteristicsAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.DesiredChar:</div>
+                        <div class="apply__vacancy-section-text">@Html.Raw(isArabic ? vacancy.DesiredCharacteristicsAr : vacancy.DesiredCharacteristics)</div>
+                    </div>
+                }
+
+                @if ((!isArabic && vacancy.Qualifications != null && vacancy.Qualifications != "") || (isArabic && vacancy.QualificationsAr != null && vacancy.QualificationsAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.Qualifications:</div>
+                        <div class="apply__vacancy-section-text">@Html.Raw(isArabic ? vacancy.QualificationsAr : vacancy.Qualifications)</div>
+                    </div>
+                }
+
+                @if ((!isArabic && vacancy.Salary != null && vacancy.Salary != "") || (isArabic && vacancy.SalaryAr != null && vacancy.SalaryAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.Salary: <span class="apply__vacancy-section-text">@Html.Raw(isArabic ? vacancy.SalaryAr : vacancy.Salary)</span></div>
+
+                    </div>
+                }
+
+                @if ((!isArabic && vacancy.Outcome != null && vacancy.Outcome != "") || (isArabic && vacancy.OutcomeAr != null && vacancy.OutcomeAr != ""))
+                {
+                    <div class="apply__vacancy-section">
+                        <div class="apply__vacancy-section-title">@LOGI.App_LocalResources.Join.Outcome:</div>
+                        <div class="apply__vacancy-section-text">@Html.Raw(isArabic ? vacancy.OutcomeAr : vacancy.Outcome)</div>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-12 col-md-5">
+                @if (TempData["Success"] != null && (bool)TempData["Success"] == true)
+                {
+                    <div class="apply__success-overlay" id="thankyou">
+                        @Html.Raw(LOGI.App_LocalResources.Join.Thankyou)
+                        <img src="~/Content/images/smiling@2x.png" />
+                    </div>
+                }
+                else
+                {
+                    using (Html.BeginForm("Apply", "JoinLOGI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="apply__form-title">@LOGI.App_LocalResources.Join.FillForm:</div>
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.FullName*
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                        </div>
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Email*
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                        </div>
+
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Country*
+                        </div>
+                        <div>
+                            <select name="Country">
+                                @Html.Partial("_Countries")
+                            </select>
+                        </div>
+
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Phone
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "logi-input", placeholder = "| " })
+                        </div>
+
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Message*
+                        </div>
+                        <div>
+                            @Html.TextAreaFor(m => m.Message, new { @class = "logi-input", placeholder = @LOGI.App_LocalResources.Join.MessagePlaceholder, required = "required" })
+                        </div>
+
+                        <div class="apply__upload-wrapper">
+                            <div style="height:0px;overflow:hidden">
+                                <input type="file" id="resume" name="resume" />
+                            </div>
+                            <button type="button" class="log-btn--small" onclick="chooseFile();">@LOGI.App_LocalResources.Join.UploadResume *</button>
+                            <span id="FileName"></span>
+                        </div>
+
+                        <div class="apply__submit-wrapper">
+                            <input type="submit" class="logi-btn apply__btn" value="@LOGI.App_LocalResources.Join.Send" />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script src="~/Scripts/stellar/stellar.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if (!isMobile)
+                $(window).stellar();
+        })
+    </script>
+
+    <script>
+        function chooseFile() {
+            $("#resume").click();
+        }
+
+
+        $("#resume").on('change', function (e) {
+            var fileName = '';
+            if (this.files && this.files.length > 1)
+                fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+            else
+                fileName = e.target.value.split('\\').pop();
+
+            if (fileName)
+                $("#FileName").html(fileName);
+            else
+                $("#FileName").html("");
+
+        });
+    </script>
+}

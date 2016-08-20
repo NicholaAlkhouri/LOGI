@@ -1,0 +1,576 @@
+﻿@using LOGI.Models.ViewModels;
+@{
+    Layout = "~/Views/Shared/_Layout_landing.cshtml";
+    ViewData["Title"] = LOGI.App_LocalResources.Home.PageTitle;
+    ViewData["MetaDescription"] = LOGI.App_LocalResources.About.Quote.Replace("<br />", "");
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+@section styles
+{
+    <link href="~/Content/plugins/owl.carousel.css" rel="stylesheet" />
+    <link href="~/Content/plugins/smoothDivScroll.css" rel="stylesheet" />
+}
+<style>
+    .navbar {
+        display: none;
+    }
+</style>
+@Html.Partial("_Navigation")
+<div class="logi-home-page" id="fullpage">
+    <div class="section" id="group-landing" data-stellar-background-ratio="0.5">
+        <span class="fa fa-navicon landing-menu-large" onclick="toggleMenu()"></span>
+        <div class="center-section">
+            <img src="~/Content/images/logo-logi-white@2x.png" class="landing-logo" />
+            <div class="landing-slogan sub-font">@LOGI.App_LocalResources.Home.LandingTitle</div>
+            <div class="landing-container">
+                <div class="col-xs-4">
+                    <a href="@Url.Action("Index", "Basics")">
+                        <div id="landing-icon-1" class="animated-icon"></div>
+                        <div class="landing-info">
+                            <div class="title">@LOGI.App_LocalResources.Home.Basics</div>
+                            <div class="subtitle">@LOGI.App_LocalResources.Home.BasicsDesc</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a href="@Url.Action("Index", "KeyIssues")">
+                        <div id="landing-icon-2" class="animated-icon"></div>
+                        <div class="landing-info">
+                            <div class="title">@LOGI.App_LocalResources.Home.KeyIssues</div>
+                            <div class="subtitle">@LOGI.App_LocalResources.Home.KeyIssuesDesc</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a href="@Url.Action("Index", "JoinLOGI")">
+                        <div id="landing-icon-3" class="animated-icon"></div>
+                        <div class="landing-info">
+                            <div class="title">@LOGI.App_LocalResources.Home.JoinLogi</div>
+                            <div class="subtitle">@LOGI.App_LocalResources.Home.JoinLogiDesc</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="landing-scroll">
+                <span class="icon-arrow-down" onclick="scrollToElement('#group-video', 400);">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-video">
+
+        <div class="col-xs-12 col-sm-6 l-section">
+            <div class="wrapper" style="cursor:pointer" data-toggle="modal" data-target="#videoModal">
+                <img class="overlay-gradient" src="~/Content/images/video-gradient.png" />
+                <div class="overlay-text sub-font">@Html.Raw(LOGI.App_LocalResources.Home.VideoOverlay)</div>
+                <img class="play-btn" src="~/Content/images/play-button@2x.png " />
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 r-section">
+            <div class="quote">
+                <div class="quote-inner sub-font">
+                    <span class="icon-open-quotations"></span>@LOGI.App_LocalResources.Home.Quote<span class="icon-closed-quotations"></span>
+                </div>
+                <div class="overlay-more">
+                    <div class="background"></div>
+                    <a href="@Url.Action("about","Home")" class="more-about-logi logi-btn">@LOGI.App_LocalResources.Home.MoreAboutLogi</a>
+                </div>
+            </div>
+            <div class="whitepaper">
+                <img src="~/Content/images/white_paper.png" class="whitepaper-img" /><br />
+                <a class="logi-btn download-btn" href="@(ViewBag.whitePaper)">@LOGI.App_LocalResources.About.DownloadPaper</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="" id="group-key-issues">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-key-issues-icon-01"></i>
+                <a href="@Url.Action("Index", "KeyIssues")" class="title">@LOGI.App_LocalResources.Home.KeyIssues</a>
+                <span>@LOGI.App_LocalResources.Home.KeyIssuesDesc2</span>
+            </div>
+        </div>
+
+        @Html.Action("_KeyIssueSlider", "KeyIssues", new { language = isArabic ? "ar" : "en" })
+    </div>
+
+    <div class="" id="group-timeline">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-icon-calendar"></i>
+                <a href="@Url.Action("Index", "Timeline")" class="title">@LOGI.App_LocalResources.Timeline.TimeLine</a>
+                <span>@LOGI.App_LocalResources.Timeline.ForOilAndGas</span>
+            </div>
+        </div>
+        @Html.Partial("_Timeline")
+        <div class="container text-center" style="clear:both;">
+            <a class="logi-btn download-btn" href="@Url.Action("Index", "Timeline")">@LOGI.App_LocalResources.Timeline.FullTimeLine</a>
+        </div>
+
+    </div>
+    @if (ViewBag.FeaturedVideo != null)
+    {
+        <div id="group-featured-video" data-toggle="modal" data-target="#videoModal2" style="cursor:pointer">
+            <div class="keyissue__header keyissue__header--with-image" style="background-image: url('@(((KeyIssueLink)ViewBag.FeaturedVideo).ImageURL)');background-size: cover;">
+                <img class="apply__overlay" src="/Content/images/video-gradient.png">
+                <div class="container">
+                    <div class="keyissue__topic">
+                        @(((KeyIssueLink)ViewBag.FeaturedVideo).SourceName)
+                    </div>
+                    <div class="keyissue__title sub-font">@(((KeyIssueLink)ViewBag.FeaturedVideo).Title)</div>
+                </div>
+                <div class="keyissue__video-play">
+                    <a><img src="/Content/images/play-button@2x.png "></a>
+                </div>
+            </div>
+        </div>
+    <div class="modal fade" id="videoModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog video-popup" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <div id="player"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    }
+
+    <div class="section" id="group-questions">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-basics-icon-01"></i>
+                <a href="@Url.Action("Index", "Basics")" class="title" >@LOGI.App_LocalResources.Home.Basics</a>
+                <span>@LOGI.App_LocalResources.Home.BasicsDesc2</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="questions">
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index","Basics",new{id = 1})">
+                            <span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("1") : "1")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Basics",new{id = 2})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("2") : "2")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question2</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Timeline")"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("3") : "3")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question3</span></a>
+                    </li>
+                    <li><a href="@Url.Action("Index","Basics",new{id = 4})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("4") : "4")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question4</span></a></li>
+                    <li>
+                        <a href="@Url.Action("Index","Basics",new{id = 5})">
+                            <span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("5") : "5")</span>
+                            <span class="question">@LOGI.App_LocalResources.Basics.Question5</span>
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("Index","Basics",new{id = 6})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("6") : "6")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question6</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="landing-icon-5" class="station"></div>
+        <div id="landing-icon-4" class="waves"></div>
+    </div>
+
+
+
+    <div id="group-about">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-learn-more-01"></i><span class="title">@LOGI.App_LocalResources.Home.LearnMore</span> <span> @LOGI.App_LocalResources.Home.AboutLOGI</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="l-section">
+                <div class="caption sub-font">@Html.Raw(LOGI.App_LocalResources.Home.AboutDesc1)</div>
+                <div class="small-caption">@LOGI.App_LocalResources.Home.AboutDesc2</div>
+                <img src="~/Content/images/apps@2x.png" class="app-image" />
+                <div style="text-align:center">
+                    <a href="https://play.google.com/store/apps/details?id=co.mindfield.logandlearn.com&hl=en"><img src="~/Content/images/googleplay-button@2x.png" class="android-image" style="float:none;"/></a>
+                   <!-- <img src="~/Content/images/app-store-button@2x.png" class="ios-image" />-->
+                </div>
+                <div class="app-info">
+                    @LOGI.App_LocalResources.Home.AboutDesc3
+                </div>
+            </div>
+            <div class="r-section">
+                <div class="caption sub-font">
+                    @LOGI.App_LocalResources.Home.Explore
+                    <div class="explore-desc">@LOGI.App_LocalResources.Home.OilAndGas</div>
+                </div>
+                <div class="vendors">
+
+                    <div class="vendors-inner">
+                        <a href="@Url.Action("AdvancedSearch", "KeyIssues")" class="logi-btn">@LOGI.App_LocalResources.Home.AdvancedSearch</a>
+                        <div class="advanced-desc explore-desc">
+                            @LOGI.App_LocalResources.Home.MoreThan
+
+                        </div>
+                        <div class="images-wrapper">
+                            <img src="~/Content/images/logos-on-homepage.png" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="group-footer">
+        @Html.Partial("_Footer")
+    </div>
+</div>
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog video-popup" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <div id="player0"></div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/animations_codes.js?v=1.1"></script>
+
+    <script>
+        var is_start = true;
+        var is_toggled = false;
+        $(window).scroll(function (e) {
+            if (is_start)
+            {
+                is_start = false;
+            }
+            else {
+                var st = $(this).scrollTop();
+                if (st > 100) {
+                    is_toggled = false;
+                    if ($('.navbar').css('display') == 'none')
+                        $('.navbar').fadeIn();
+                }
+                else {
+                    if (!is_toggled)
+                    {
+                        $('.navbar').fadeOut();
+                        $("#group-landing").removeClass("group-landing--gray");
+                    }
+                }
+            }
+            
+        });
+
+        function scrollToElement(el, ms) {
+            var speed = (ms) ? ms : 600;
+            $('html,body').animate({
+                scrollTop: $(el).offset().top
+            }, speed);
+        }
+
+        function toggleMenu() {
+            is_toggled = true;
+            $('.navbar').fadeIn();
+            $("#group-landing").addClass("group-landing--gray");
+            if ($(".navbar-collapse").hasClass("collapse")) {
+                $(".navbar-collapse").addClass("in");
+                $(".navbar-collapse").removeClass("collapse");
+            } else {
+                $(".navbar-collapse").addClass("collapse");
+                $(".navbar-collapse").removeClass("in");
+            }
+        }
+
+
+
+        $(window).load(function () {
+            $(".slider-wrapper").mCustomScrollbar(
+                {
+                    axis: "x",
+                    autoExpandScrollbar: true,
+                    theme: "dark",
+                    scrollbarPosition: "outside",
+                    mouseWheel: { enable: false },
+                    callbacks: {
+                        onTotalScroll: function () {
+                            $(".slider-next").hide();
+                        },
+                        onScrollStart: function () {
+                            $(".slider-next").show(); $(".slider-prev").show();
+                        },
+                        onTotalScrollBack: function () {
+                            $(".slider-prev").hide();
+                        }
+                    }
+                });
+        });
+
+        function srollNext() {
+            $(".slider-wrapper").mCustomScrollbar('scrollTo', '-=260', {scrollInertia: 300});
+        }
+        function srollPrev() {
+            $(".slider-wrapper").mCustomScrollbar('scrollTo', '+=260', { scrollInertia: 300 });
+        }
+
+        $(document).ready(function () {
+
+            $(".timeline__wrapper--big").smoothDivScroll({
+            });
+
+            //$('#fullpage').fullpage({ scrollBar: true });
+            if(!isMobile)
+                $(window).stellar();
+            landingIcon1 = Landing_1;
+            var stage1 = new swiffy.Stage(document.getElementById('landing-icon-1'),
+                landingIcon1, {});
+            stage1.setBackground(null);
+            stage1.start();
+
+            landingIcon2 = Landing_2;
+            var stage2 = new swiffy.Stage(document.getElementById('landing-icon-2'),
+                landingIcon2, {});
+            stage2.setBackground(null);
+            stage2.start();
+
+            landingIcon3 = Landing_3;
+            var stage3 = new swiffy.Stage(document.getElementById('landing-icon-3'),
+                landingIcon3, {});
+            stage3.setBackground(null);
+            stage3.start();
+
+            landingIcon4 = Landing_4;
+            var stage4 = new swiffy.Stage(document.getElementById('landing-icon-4'),
+                landingIcon4, {});
+            stage4.setBackground(null);
+            stage4.start();
+
+            landingIcon5 = Landing_5;
+            var stage5 = new swiffy.Stage(document.getElementById('landing-icon-5'),
+                landingIcon5, {});
+            stage5.setBackground(null);
+            stage5.start();
+
+
+            //timelineicons
+            timelineIcon1 = Ani_ED;
+            var time1 = new swiffy.Stage(document.getElementById('timeline-icon-1'),
+                timelineIcon1, {});
+            time1.setBackground(null);
+            time1.start();
+            var time11 = new swiffy.Stage(document.getElementById('timeline-icon-11'),
+                timelineIcon1, {});
+            time11.setBackground(null);
+            time11.start();
+
+            timelineIcon2 = Ani_ED2;
+            var time2 = new swiffy.Stage(document.getElementById('timeline-icon-2'),
+                timelineIcon2, {});
+            time2.setBackground(null);
+            time2.start();
+            var time22 = new swiffy.Stage(document.getElementById('timeline-icon-22'),
+                timelineIcon2, {});
+            time22.setBackground(null);
+            time22.start();
+
+            timelineIcon3 = Ani_MBD;
+            var time3 = new swiffy.Stage(document.getElementById('timeline-icon-3'),
+                timelineIcon3, {});
+            time3.setBackground(null);
+            time3.start();
+            var time33 = new swiffy.Stage(document.getElementById('timeline-icon-33'),
+                timelineIcon3, {});
+            time33.setBackground(null);
+            time33.start();
+
+            timelineIcon4 = Ani_RD;
+            var time4 = new swiffy.Stage(document.getElementById('timeline-icon-4'),
+                timelineIcon4, {});
+            time4.setBackground(null);
+            time4.start();
+            var time44 = new swiffy.Stage(document.getElementById('timeline-icon-44'),
+                timelineIcon4, {});
+            time44.setBackground(null);
+            time44.start();
+
+            timelineIcon5 = Ani_LE;
+            var time5 = new swiffy.Stage(document.getElementById('timeline-icon-5'),
+                timelineIcon5, {});
+            time5.setBackground(null);
+            time5.start();
+            var time55 = new swiffy.Stage(document.getElementById('timeline-icon-55'),
+                timelineIcon5, {});
+            time55.setBackground(null);
+            time55.start();
+
+            timelineIcon6 = Ani_RD;
+            var time6 = new swiffy.Stage(document.getElementById('timeline-icon-6'),
+                timelineIcon6, {});
+            time6.setBackground(null);
+            time6.start();
+            var time66 = new swiffy.Stage(document.getElementById('timeline-icon-66'),
+                timelineIcon6, {});
+            time66.setBackground(null);
+            time66.start();
+
+            timelineIcon7 = Ani_RD;
+            var time7 = new swiffy.Stage(document.getElementById('timeline-icon-7'),
+                timelineIcon7, {});
+            time7.setBackground(null);
+            time7.start();
+            var time77 = new swiffy.Stage(document.getElementById('timeline-icon-77'),
+                timelineIcon7, {});
+            time77.setBackground(null);
+            time77.start();
+
+            timelineIcon8 = Ani_LE;
+            var time8 = new swiffy.Stage(document.getElementById('timeline-icon-8'),
+                timelineIcon8, {});
+            time8.setBackground(null);
+            time8.start();
+            var time88 = new swiffy.Stage(document.getElementById('timeline-icon-88'),
+                timelineIcon8, {});
+            time88.setBackground(null);
+            time88.start();
+
+            timelineIcon9 = Ani_LI;
+            var time9 = new swiffy.Stage(document.getElementById('timeline-icon-9'),
+                timelineIcon9, {});
+            time9.setBackground(null);
+            time9.start();
+            var time99 = new swiffy.Stage(document.getElementById('timeline-icon-99'),
+                timelineIcon9, {});
+            time99.setBackground(null);
+            time99.start();
+
+            timelineIcon10 = Ani_GS;
+            var time10 = new swiffy.Stage(document.getElementById('timeline-icon-10'),
+                timelineIcon10, {});
+            time10.setBackground(null);
+            time10.start();
+            var time101 = new swiffy.Stage(document.getElementById('timeline-icon-101'),
+                timelineIcon10, {});
+            time101.setBackground(null);
+            time101.start();
+        });
+    </script>
+
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+
+    <script type="text/javascript">
+        $('.timeline__slider').owlCarousel({
+            center: true,
+            items: 2,
+            loop: false,
+            margin: 10,
+            autoWidth: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+
+    </script>
+
+@if (ViewBag.FeaturedVideo != null)
+{
+    <script>
+    function youtube_parser(url) {
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+        var match = url.match(regExp);
+        return (match && match[7].length == 11) ? match[7] : false;
+    }
+
+
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    var player0;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
+            videoId: youtube_parser("@(((KeyIssueLink)ViewBag.FeaturedVideo).VideoUrl)"),
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+
+        player0 = new YT.Player('player0', {
+            playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
+            videoId: 'PJdQ2ntPb2Y',
+            events: {
+                'onReady': onPlayerReady2,
+                'onStateChange': onPlayerStateChange2
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        // event.target.playVideo();
+    }
+    function onPlayerReady2(event) {
+        // event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    function onPlayerStateChange(event) {
+        console.log(event.data);
+        if (event.data == YT.PlayerState.PLAYING) {
+            //hide title
+            $('#video-title').hide();
+            $('.apply__overlay').hide();
+        }
+        else if (event.data == 2) {
+            $('#video-title').show();
+            $('.apply__overlay').show();
+        }
+    }
+    function onPlayerStateChange2(event) {
+       
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+    function stopVideo0()
+    {
+        player0.stopVideo();
+    }
+
+    $('#videoModal2').on('hidden.bs.modal', function (e) {
+        player.stopVideo();
+    })
+    $('#videoModal').on('hidden.bs.modal', function (e) {
+        player0.stopVideo();
+    })
+    </script>
+}
+}

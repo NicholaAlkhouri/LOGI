@@ -1,0 +1,73 @@
+﻿@using LOGI.Models.ViewModels
+@model SearchViewModel
+@{
+    ViewBag.Title = LOGI.App_LocalResources.InTheNews.AllPressReleases;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+@section styles
+{
+    <link href="~/Content/plugins/owl.carousel.css" rel="stylesheet" />
+}
+<div class="news">
+    <div class="container">
+        <div class="home-section-title ">
+            <i class="icon-news-icon_v"></i><span class="title">@LOGI.App_LocalResources.InTheNews.AllPressReleases</span>
+        </div>
+
+       
+        <div class="news__search-result" style="border-top:0">
+            <div class="search-result__displaying">@LOGI.App_LocalResources.InTheNews.Displaying @(Model.DisplayFrom + "-" + Model.DisplayTo) @LOGI.App_LocalResources.InTheNews.Of @Model.TotalCount</div>
+            <div class="search-result__list-wrapper">
+
+                @foreach (SearchItemViewModel keyissue in Model.KeyIssues)
+                {
+                    <div class="search-result__item">
+                        <div class="search-result__item-img">
+                            <img src="@keyissue.ImageURL" />
+                        </div>
+                        <div class="search-result__item-details">
+                            <div>@Html.ActionLink(@keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, new { @class = "search-result__item-title" })</div>
+                            <div class="search-result__item-more-info">
+                                by
+                                @if (keyissue.Author != null)
+                                {
+                                    @Html.ActionLink(keyissue.Author, "Search", "KeyIssues", new { authorId = keyissue.AuthorId }, new { @class = "search-result__item-author" })
+                                }
+                                @if (keyissue.Source != null)
+                                {
+                                    if (keyissue.Author != null)
+                                    {
+                                        <text>,</text>
+                                    }
+                                    @Html.ActionLink(keyissue.Source, "Search", "News", new { sourceId = keyissue.SourceID }, new { @class = "search-result__item-author" })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="search-result__pagination">
+                    @if (Model.ShowPrev)
+                    {
+                        <a href="@Url.Action("Search", "News", new
+                {
+                    page = Model.Page - 1,
+                    keyword = Model.keyword,
+                    sourceId = Model.sourceId
+                })"><span class="fa fa-angle-left"></span>@LOGI.App_LocalResources.InTheNews.Previous</a>
+                    }
+                    @if (Model.ShowNext)
+                    {
+                        <a href="@Url.Action("Search", "News", new
+                    {
+                        page = Model.Page + 1,
+                        keyword = Model.keyword,
+                        sourceId = Model.sourceId
+                    })">@LOGI.App_LocalResources.InTheNews.Next<span class="fa fa-angle-right"></span></a>
+                    }
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

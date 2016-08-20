@@ -1,0 +1,125 @@
+﻿@model LOGI.Models.ViewModels.DonateViewModel
+@{
+    ViewBag.Title = LOGI.App_LocalResources.Donate.PageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+
+<div class="donate">
+    <div class="donate__container" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-donate-icon_vv"></i><span class="title">@LOGI.App_LocalResources.Donate.DonateTitle</span>
+            </div>
+            <div class="donate__form-wrapper">
+                <div class="donate__form-big">@LOGI.App_LocalResources.Donate.Desc1</div>
+                <div class="donate__form-small">@LOGI.App_LocalResources.Donate.Desc2</div>
+                <div class="donate__form">
+                   
+                    <form id="payment_confirmation" action="https://secureacceptance.cybersource.com/pay" method="post"></form>
+                    
+                        @using (Ajax.BeginForm("Donate", "Donate", null,
+                        new AjaxOptions() { OnSuccess = "donate_success", LoadingElementId = "loading-img-donate" },
+                        new { }))
+                        {
+                            <input type="hidden" name="access_key" value="62c4d805a41b356e8911de961a374721">
+                            <input type="hidden" name="profile_id" value="FC450522-1C75-44FC-B813-C2D2E1D0B492">
+                            <input type="hidden" name="transaction_uuid" value="@System.Guid.NewGuid().ToString()">
+                            <input type="hidden" name="signed_field_names" value="access_key,profile_id,transaction_uuid,signed_field_names,unsigned_field_names,signed_date_time,locale,transaction_type,reference_number,amount,currency">
+                            <input type="hidden" name="unsigned_field_names">
+                            <input type="hidden" name="signed_date_time" value="@DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss'Z'")">
+                            <input type="hidden" name="locale" value="en-us">
+                            <input type="hidden" name="transaction_type" value="sale">
+
+                            <input class="logi-input" type="number" name="amount" size="25" placeholder="@LOGI.App_LocalResources.Donate.EnterAmount" />
+                            <select name="currency">
+                                <option value="USD">USD</option>
+                            </select>
+                            <input type="submit" class="logi-btn" value="@LOGI.App_LocalResources.Donate.DonateTitle" />
+                            <img src="~/Content/images/ajax-loader.gif" id="loading-img-donate" style="display:none;" />
+                        }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container--gray">
+        <div class="container donate_help">
+            <div class="donate__big-title text-center sub-font">@LOGI.App_LocalResources.Donate.HelpTitle:</div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="donate__list-item">
+                        <span class="icon-navigation-icon"></span>
+                        <span class="donate__list-text">@LOGI.App_LocalResources.Donate.Help1</span>
+                    </div>
+                    <div class="donate__list-item">
+                        <span class="icon-navigation-icon"></span>
+                        <span class="donate__list-text">@LOGI.App_LocalResources.Donate.Help2</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="donate__list-item">
+                        <span class="icon-navigation-icon"></span>
+                        <span class="donate__list-text">@LOGI.App_LocalResources.Donate.Help3</span>
+                    </div>
+                    <div class="donate__list-item">
+                        <span class="icon-navigation-icon"></span>
+                        <span class="donate__list-text">@LOGI.App_LocalResources.Donate.Help4</span>
+                    </div>
+                    <div class="donate__list-item">
+                        <span class="icon-navigation-icon"></span>
+                        <span class="donate__list-text">@LOGI.App_LocalResources.Donate.Help5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="home-section-title ">
+            <i class="icon-gift-icon-01"></i><span class="title">@LOGI.App_LocalResources.Donate.GiftPolicy </span>
+        </div>
+        <div class="row donate__policy">
+            <div class="col-sm-6 col-xs-12">
+                @Html.Raw(@LOGI.App_LocalResources.Donate.GiftPolicyDesc) <a href="mailto:info@logi-lebanon.org">info@logi-lebanon.org</a>
+            </div>
+            <div class="col-sm-6 col-xs-12 donate__download">
+                @if (Model.PdfURL != null && Model.PdfURL != "")
+                {
+                    <a class="logi-btn download-btn" target="_blank" href="@Model.PdfURL">@LOGI.App_LocalResources.Donate.DownloadPDF</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/stellar/stellar.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if (!isMobile)
+                $(window).stellar();
+        })
+    </script>
+    <script>
+        function donate_success(data) {
+            if(data.success)
+            {
+                $("#payment_confirmation").append("<input type='hidden' name='access_key' value='" + data.access_key + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='profile_id' value='" + data.profile_id + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='transaction_uuid' value='" + data.transaction_uuid + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='signed_field_names' value='" + data.signed_field_names + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='unsigned_field_names' value='" + data.unsigned_field_names + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='signed_date_time' value='" + data.signed_date_time + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='locale' value='" + data.locale + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='transaction_type' value='" + data.transaction_type + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='reference_number' value='" + data.reference_number + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='amount' value='" + data.amount + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='currency' value='" + data.currency + "'/>");
+                $("#payment_confirmation").append("<input type='hidden' name='signature' value='" + data.signature + "'/>");
+                $("#payment_confirmation").submit();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,225 @@
+﻿@using LOGI.Models.ViewModels;
+@model TimelinesViewModel
+@{
+    ViewBag.Title = LOGI.App_LocalResources.Timeline.Pagetitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+<script src="~/Scripts/swiffy/runtime.js"></script>
+<script src="~/Scripts/animations_codes.js"></script>
+
+<div class="timeline-in">
+    <div class="container">
+        <div class="home-section-title ">
+            <i class="icon-icon-calendar"></i>
+            <div>
+                <span class="title"><span class="number">03 </span>@LOGI.App_LocalResources.Basics.Question3 </span>
+                <br /><span class="sub-title">@LOGI.App_LocalResources.Timeline.TimelineTitle @LOGI.App_LocalResources.Timeline.ForOilAndGas</span>
+            </div>
+            <div class="timeline-in__filter-by">
+                @LOGI.App_LocalResources.Timeline.FilterBy
+                <span class="timeline-in__filter-section">
+                    <span class="search-result__sort-by-value dropdown-toggle" data-target="DDM1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        @if (Model.countryId == null)
+                        {
+                            <text>@LOGI.App_LocalResources.Timeline.AllCountries</text>
+                        }
+                        else
+                        {
+                            foreach (LOGI.Models.Country country in Model.Countries)
+                            {
+                                if (Model.countryId == country.ID)
+                                {
+                                    <text>@(isArabic ? country.NameAr : country.Name)</text>
+                                }
+                            }
+                        } <i class="fa fa-angle-down"></i>
+                    </span>
+                    <ul class="dropdown-menu" id="DDM1" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <a href="@Url.Action("Index", "Timeline", new {category = Model.category })">@LOGI.App_LocalResources.Timeline.AllCountries</a>
+                        </li>
+                        @foreach (LOGI.Models.Country country in Model.Countries)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Timeline", new { countryId = country.ID, category = Model.category })">@(isArabic ? country.NameAr : country.Name)</a>
+                            </li>
+                        }
+
+                    </ul>
+                </span>
+
+
+
+                <span class="timeline-in__filter-section">
+                    <span class="search-result__sort-by-value dropdown-toggle" data-target="DDM2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        @{
+                            switch (Model.category)
+                            {
+                                case "":
+                                    <text>@LOGI.App_LocalResources.Timeline.AllCategories</text>
+                                    break;
+                                case "ED":
+                                <text>@LOGI.App_LocalResources.Timeline.ExploratoryDrilling</text>
+                                    break;
+                                case "MBD":
+                                <text>@LOGI.App_LocalResources.Timeline.MaritimeBoundaryDispute</text>
+                                    break;
+                                case "RD":
+                                <text>@LOGI.App_LocalResources.Timeline.RegionalDiscoveries</text>
+                                    break;
+                                case "LE":
+                                <text>@LOGI.App_LocalResources.Timeline.Legislation</text>
+                                    break;
+                                case "LI":
+                                <text>@LOGI.App_LocalResources.Timeline.Licensing</text>
+                                    break;
+                                case "GS":
+                                <text>@LOGI.App_LocalResources.Timeline.GeophysicalSurveying</text>
+                                    break;
+                                case "BA":
+                                <text>@LOGI.App_LocalResources.Timeline.BilateralAgreements</text>
+                                    break;
+                                case "EN":
+                                <text>@LOGI.App_LocalResources.Timeline.Environmental</text>
+                                    break;
+                            }
+                        } <i class="fa fa-angle-down"></i>
+                    </span>
+                    <ul class="dropdown-menu" id="DDM2" aria-labelledby="dropdownMenu2">
+                        <li>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "" })">@LOGI.App_LocalResources.Timeline.AllCategories</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "ED" })">@LOGI.App_LocalResources.Timeline.ExploratoryDrilling</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "MBD" })">@LOGI.App_LocalResources.Timeline.MaritimeBoundaryDispute</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "RD" })">@LOGI.App_LocalResources.Timeline.RegionalDiscoveries</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "LE" })">@LOGI.App_LocalResources.Timeline.Legislation</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "LI" })">@LOGI.App_LocalResources.Timeline.Licensing</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "GS" })">@LOGI.App_LocalResources.Timeline.GeophysicalSurveying</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "BA" })">@LOGI.App_LocalResources.Timeline.BilateralAgreements</a>
+                            <a href="@Url.Action("Index", "Timeline", new { countryId = Model.countryId, category = "EN" })">@LOGI.App_LocalResources.Timeline.Environmental</a>
+                        </li>
+                    </ul>
+                </span>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container timeline-in__wrapper">
+        @foreach (TimelineViewModel timeline in Model.Timelines)
+        {
+            <div class="timeline-in__item timeline-in__item--@(timeline.Type)" onclick="selectTimelineItem(this)">
+                <div class="timeline-in__item-icon">
+                    <div id="timeline_icon_@timeline.ID" class="timeline-in__item-icon--animation"></div>
+                </div>
+                <div class="timeline-in__item-period">@(isArabic ? timeline.PeriodAr : timeline.Period)</div>
+                <div class="timeline-in__item-title">
+                    @(isArabic ? timeline.TitleAr : timeline.Title)
+                    <div class="timeline-in__item-text">
+                        @Html.Raw(isArabic ? timeline.DescriptionAr : timeline.Description)
+                        @if (timeline.ImageURL != null && timeline.ImageURL != "")
+                        {
+                            <img src="@timeline.ImageURL " class="timeline-in__item-image" />
+                        }
+                    </div>
+                </div>
+                <div class="timeline-in__item-category timeline-in__item-category--@timeline.Type">
+                    @{
+            switch (timeline.Type)
+            {
+                case "ED":
+                    <text>@LOGI.App_LocalResources.Timeline.ExploratoryDrilling</text>
+                    break;  // Always break each case
+                case "MBD":
+                <text>@LOGI.App_LocalResources.Timeline.MaritimeBoundaryDispute</text>
+                    break;
+                case "RD":
+                <text>@LOGI.App_LocalResources.Timeline.RegionalDiscoveries</text>
+                    break;
+                case "LE":
+                <text>@LOGI.App_LocalResources.Timeline.Legislation</text>
+                    break;
+                case "LI":
+                <text>@LOGI.App_LocalResources.Timeline.Licensing</text>
+                    break;
+                case "GS":
+                <text>@LOGI.App_LocalResources.Timeline.GeophysicalSurveying</text>
+                    break;
+                case "BA":
+                <text>@LOGI.App_LocalResources.Timeline.BilateralAgreements</text>
+                    break;
+                case "EN":
+                <text>@LOGI.App_LocalResources.Timeline.Environmental</text>
+                    break;
+            }
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+
+    @Html.Action("_Infographics", "Basics", new { language = isArabic ? "ar" : "en", selected = 3, order = 0 })
+</div>
+
+<script type="text/javascript">
+    function selectTimelineItem(item) {
+        if($(item).hasClass("timeline-in__item--selected"))
+        {
+        }
+        else{
+            $(".timeline-in__item").removeClass("timeline-in__item--selected");
+            $(item).addClass("timeline-in__item--selected");
+            $(".timeline-in__item-text").slideUp("fast");
+            $(item).find(".timeline-in__item-text").slideDown("fast");
+        }
+    }
+</script>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            @foreach (TimelineViewModel timeline in Model.Timelines)
+        {
+            var animation = "";
+            switch (timeline.Type)
+            {
+                case "ED":
+                    animation = "Ani_ED_Gray";
+                    break;  // Always break each case
+                case "MBD":
+                    animation = "Ani_MBD_Gray";
+                    break;
+                case "RD":
+                    animation = "Ani_RD_Gray";
+                    break;
+                case "LE":
+                    animation = "Ani_LE_Gray";
+                    break;
+                case "LI":
+                    animation = "Ani_LI_Gray";
+                    break;
+                case "GS":
+                    animation = "Ani_GS_Gray";
+                    break;
+                case "BA":
+                    animation = "Ani_BA_Gray";
+                    break;
+                case "EN":
+                    animation = "Ani_EN_Gray";
+                    break;
+            }
+            <text>
+            var timeline_@(timeline.ID) = @animation;
+            var timeline_s_@(timeline.ID) = new swiffy.Stage(document.getElementById('timeline_icon_@timeline.ID'),
+                timeline_@(timeline.ID), {});
+            timeline_s_@(timeline.ID).setBackground(null);
+            timeline_s_@(timeline.ID).start();
+            </text>
+        }
+
+
+        });
+
+    </script>
+}

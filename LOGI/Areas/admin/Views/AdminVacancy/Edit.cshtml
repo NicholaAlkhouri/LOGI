@@ -1,0 +1,266 @@
+﻿@model LOGI.Models.Vacancy
+
+@{
+    ViewBag.Title = "Edit Vacancy";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section styles {
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/plugins/dataTables.bootstrap.css")" rel="stylesheet" />
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Edit Vacancy @using (Html.BeginForm("Delete", "AdminVacancy", FormMethod.Post, new { id = "deleteForm", onsubmit = "setFormSubmitting()" }))
+            {
+                <input type="submit" onclick="return confirm('are you sure you want to delete this vacancy?')" class="btn btn-danger" value="Delete" />
+                @Html.HiddenFor(m => m.ID)
+            }
+        </h1>
+
+    </div>
+</div>
+@using (Html.BeginForm("Edit", "AdminVacancy", FormMethod.Post, new {onsubmit = "setFormSubmitting()" }))
+{
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Vacancy Information English
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title)
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.RoleSummary)
+                        @Html.TextAreaFor(m => m.RoleSummary, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EssentialResponsibilities)
+                        @Html.TextAreaFor(m => m.EssentialResponsibilities, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ProjectDeadline)
+                        @Html.TextBoxFor(m => m.ProjectDeadline, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DesiredCharacteristics)
+                        @Html.TextAreaFor(m => m.DesiredCharacteristics, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Qualifications)
+                        @Html.TextAreaFor(m => m.Qualifications, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Salary)
+                        @Html.TextBoxFor(m => m.Salary, new { @class = "form-control" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Outcome)
+                        @Html.TextAreaFor(m => m.Outcome, new { @class = "form-control" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Vacancy Information Arabic
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TitleAr)
+                        @Html.TextBoxFor(m => m.TitleAr, new { @class = "form-control ar-input", required = "required" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.RoleSummaryAr)
+                        @Html.TextAreaFor(m => m.RoleSummaryAr, new { @class = "form-control ar-input" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EssentialResponsibilitiesAr)
+                        @Html.TextAreaFor(m => m.EssentialResponsibilitiesAr, new { @class = "form-control ar-input" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ProjectDeadlineAr)
+                        @Html.TextBoxFor(m => m.ProjectDeadlineAr, new { @class = "form-control ar-input" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DesiredCharacteristicsAr)
+                        @Html.TextAreaFor(m => m.DesiredCharacteristicsAr, new { @class = "form-control ar-input" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.QualificationsAr)
+                        @Html.TextAreaFor(m => m.QualificationsAr, new { @class = "form-control ar-input" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.SalaryAr)
+                        @Html.TextBoxFor(m => m.SalaryAr, new { @class = "form-control ar-input" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.OutcomeAr)
+                        @Html.TextAreaFor(m => m.OutcomeAr, new { @class = "form-control ar-input" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Publish
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div>Job Number: @Model.JobNumber</div>
+
+                        @Html.LabelFor(m => m.DeadLine)
+                        <div class='input-group date' id='datetimepicker1'>
+                            @Html.TextBoxFor(m => m.DeadLine, new { @class = "form-control", required = "required" })
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Save Changes" />
+                    <a class="btn btn-default" href="/JoinLOGI/Preview/@Model.ID" target="_blank">Preview</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-application">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Country</th>
+                                <th>Phone</th>
+                                <th>Message</th>
+                                <th>Apply Date</th>
+                                <th>Resume</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section scripts {
+    <!--Rich Text Editor -->
+   <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script src="@Url.Content("~/Scripts/plugins/dataTables/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/dataTables/dataTables.bootstrap.js")"></script>
+    <script>
+
+
+        var formSubmitting = true;
+        var setFormSubmitting = function () { formSubmitting = true; };
+
+        window.onload = function () {
+            window.addEventListener("beforeunload", function (e) {
+                var confirmationMessage = 'It looks like you have been editing something. ';
+                confirmationMessage += 'If you leave before saving, your changes will be lost.';
+
+                if (formSubmitting) {
+                    return undefined;
+                }
+
+                (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+            });
+
+            $("input").change(function () {
+                formSubmitting = false;
+            });
+        };
+
+        $(document).ready(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+
+        CKEDITOR.replace('RoleSummary');
+        CKEDITOR.replace('EssentialResponsibilities');
+        CKEDITOR.replace('DesiredCharacteristics');
+        CKEDITOR.replace('Qualifications');
+        CKEDITOR.replace('Outcome');
+
+        CKEDITOR.replace('RoleSummaryAr' ,{contentsLangDirection :'rtl'});
+        CKEDITOR.replace('EssentialResponsibilitiesAr', { contentsLangDirection: 'rtl' });
+        CKEDITOR.replace('DesiredCharacteristicsAr', { contentsLangDirection: 'rtl' });
+        CKEDITOR.replace('QualificationsAr', { contentsLangDirection: 'rtl' });
+        CKEDITOR.replace('OutcomeAr', { contentsLangDirection: 'rtl' });
+
+
+    </script>
+
+<script>
+    $(document).ready(function () {
+        var cat_table = $('#dataTables-application').DataTable({
+            serverSide: true,
+            "ajax":
+            {
+                url: "/Admin/AdminVacancy/_ApplicationList",
+                type: 'POST',
+                'data': {
+                    VacancyId : @(Model.ID)
+                    }
+            },
+            "columns": [
+                         { "data": "FullName" },
+                         { "data": "Email"},
+                         { "data": "Country"},
+                         { "data": "Phone"},
+                         { "data": "Message"},
+                         { "data": "ApplyDate"},
+                         
+                           {
+                               "data": "ResumeURL",
+                               "render": function (data, type, full, meta) {
+                                   if(data != '' && data != null)
+                                       return '<a href="' + data + '" target="_blank">Read</a>';
+                                   else return '';
+                               },
+                               "sortable": false
+                           }
+            ],
+            "lengthMenu": [[10, 20, 50], [10, 25, 50]]
+
+        });
+
+
+    });
+
+
+</script>
+
+}

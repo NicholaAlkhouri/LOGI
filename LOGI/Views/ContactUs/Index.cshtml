@@ -1,0 +1,114 @@
+﻿@model LOGI.Models.ContactMessage
+@{
+    ViewBag.Title = LOGI.App_LocalResources.Contact.PageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+
+<div class="contact-us">
+    <div class="contact-us__container" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="home-section-title ">
+                <i class="icon-contact-icon_v"></i><span class="title">@LOGI.App_LocalResources.Contact.ContactLogi</span>
+            </div>
+            <div class="contact-us__form-wrapper">
+                @if (TempData["success"] != null && (bool)TempData["success"])
+                {
+                    <div class="row">
+                        <div class="col-xs-12 text-center contact-us__field-label"> @LOGI.App_LocalResources.Contact.MessageReceived</div>
+                    </div>
+                }
+                @using (Html.BeginForm("Index", "Contactus", new { Area = "" }, FormMethod.Post, new { id = "ContactForm", style = "display:inline" }))
+                {
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="contact-us__field-label">@LOGI.App_LocalResources.Contact.FullName*</div>
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "logi-input", placeholder = "|", required = "required" })
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="contact-us__field-label">@LOGI.App_LocalResources.Contact.Email*</div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "logi-input", placeholder = "|", required = "required" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="contact-us__field-label">@LOGI.App_LocalResources.Contact.Phone</div>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "logi-input", placeholder = "|" })
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="contact-us__field-label">@LOGI.App_LocalResources.Contact.Country</div>
+                            <select name="Country">
+                                @Html.Partial("_Countries")
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="contact-us__field-label">@LOGI.App_LocalResources.Contact.Message*</div>
+                            @Html.TextAreaFor(m => m.Message, new { @class = "logi-input", placeholder = "Your message goes here", required = "required" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <input type="submit" class="logi-btn" value="@LOGI.App_LocalResources.Contact.Send " />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="contact-us__footer">
+            <div class="col-xs-12 col-sm-6 contact-us__left sub-font">
+                <div class="contact-us__left--inside">
+                    @LOGI.App_LocalResources.Contact.FollowLogi
+                    <div class="contact-us__socials">
+                        <a class="fa fa-facebook-f social-link" target="_blank" href="https://www.facebook.com/logilebanon/"></a>
+                        <a class="fa fa fa-twitter social-link" target="_blank" href="https://twitter.com/LOGI_Lebanon"></a>
+                        <a class="fa fa-linkedin social-link" target="_blank" href="https://www.linkedin.com/company/lebanese-oil-&-gas-initiative/"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 contact-us__right sub-font">
+                <div class="contact-us__overlay"></div>
+                <div class="contact-us__right--inside">
+                    @LOGI.App_LocalResources.Contact.SubscribeLogi
+                    @using (Ajax.BeginForm("Subscribe", "Subscriber", null,
+                        new AjaxOptions() { OnSuccess = "subscribe_success", LoadingElementId = "loading-img-newsletter-s" },
+                        new { }))
+                    {
+                        <input type="email" placeholder="@LOGI.App_LocalResources.Contact.Email" class="logi-input" name="email" required />
+                        <input type="submit" class="logi-btn" value="@LOGI.App_LocalResources.Contact.Subscribe" />
+                        <img src="~/Content/images/ajax-loader.gif" id="loading-img-newsletter-s" style="display:none;" />
+                        <div style="display:none" class="subscribe-result">@LOGI.App_LocalResources.Contact.SubscribeSuccess</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/stellar/stellar.min.js"></script>
+    <script>
+        function subscribe_success(data) {
+            $('.subscribe-result').show();
+            if (data.success == true) {
+                $('.subscribe-result').html("Subscribtion Success");
+                $('.subscribe-result').addClass("green");
+                $('.subscribe-result').removeClass("red");
+            }
+            else {
+                $('.subscribe-result').html("Subscribtion Failedd");
+                $('.subscribe-result').addClass("red");
+                $('.subscribe-result').removeClass("green");
+            }
+        }
+        $(document).ready(function () {
+            if (!isMobile)
+                $(window).stellar();
+        })
+    </script>
+}

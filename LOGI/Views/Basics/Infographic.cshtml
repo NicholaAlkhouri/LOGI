@@ -1,0 +1,116 @@
+﻿@using LOGI.Models.ViewModels
+@model InfographicViewModel
+@{
+    ViewBag.Title = Model.Name;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+    string thumb_image = "";
+    if (Model.ThumbURL != null && Model.ThumbURL != "")
+    {
+        thumb_image = Model.ThumbURL;
+    }
+    else { 
+        thumb_image = Model.ImageURL;
+    }
+}
+@section MetaData{
+    <!-- Schema.org markup for Google+ -->
+    @*  <meta itemprop="name" content="@Model.MetaTitle">
+        <meta itemprop="description" content="@Model.MetaDescription">
+        <meta itemprop="image" content="@Html.AbsoluteArabicURL(Url.Content("~/" + Model.ImageURL))">*@
+
+    <!-- Open Graph data -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="logi-lebanon.org" />
+    <meta property="og:url" content="@Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL }))" />
+    <meta property="og:title" content="@Model.Name" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:description" content="@Model.MetaDescription" />
+    <meta property="og:image" content="@Html.AbsoluteURL(Url.Content("~/" + Server.UrlEncode(thumb_image)))" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@("@LOGI")">
+    <meta name="twitter:creator" content="@("@LOGI")">
+    <meta name="twitter:title" content="@Model.Name">
+    <meta name="twitter:description" content="@Model.MetaDescription">
+    <meta name="twitter:image" content="@Html.AbsoluteURL(Url.Content("~/" + Server.UrlEncode(thumb_image)))">
+
+
+
+
+    @*<link rel="canonical" href="@Html.AbsoluteArabicURL(Url.Action("Article","Article", new { id = Model.URL }))" />*@
+    <link rel="canonical" href="@Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL }))" />
+}
+<div class="basics">
+    <div class="basics__top">
+       <img src="@Model.ImageURL" width="100%" />
+    </div>
+
+   <div class="container" style="margin-top:15px;">
+        <div class="keyissue__sharing">
+            <div class="keyissue__big-title">@LOGI.App_LocalResources.Basics.ShareThisPage</div>
+            <div class="keyissue__sharing-socials">
+                <a class="social-box twitter-box"
+                    href="https://twitter.com/intent/tweet?text=@Model.Name+@Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL }))"
+                    target="_blank">
+                    <span class="icon-twitter-01"></span>
+                    <span>@LOGI.App_LocalResources.KeyIssues.Twitter</span>
+                </a>
+                <a class="social-box facebook-box"
+                    target="_blank"
+                    href="http://www.facebook.com/sharer/sharer.php?u=@(Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL })))&title=@Model.Name">
+                    <span class="icon-facebook"></span>
+                    <span>@LOGI.App_LocalResources.KeyIssues.Facebook</span>
+                </a>
+                <a class="social-box linkedin-box"
+                    target="_blank"
+                    href="http://www.linkedin.com/shareArticle?mini=true&url=@(Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL })))&title=@Model.Name">
+                    <span class="icon-linkedin-01"></span>
+                    <span>@LOGI.App_LocalResources.KeyIssues.Linkedin</span>
+                </a>
+                <a class="social-box pinterest-box" target="_blank"
+                    href="http://pinterest.com/pin/create/bookmarklet/?media=@Html.AbsoluteURL(Url.Content("~" + thumb_image))&url=@(Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL })))&is_video=false&description=@Model.Name">
+                    <span class="icon-pinterest_viv"></span>
+                    <span>@LOGI.App_LocalResources.KeyIssues.Pinterest</span>
+                </a>
+
+                <a class="social-box mail-box"
+                    target="_blank"
+                    href="mailto:?subject=look at this website&body=Hi,I found this website and thought you might like it @(Html.AbsoluteURL(Url.Action("Infographic", "Basics", new { id = Model.FriendlyURL })))">
+                    <span class="icon-mail_viv"></span>
+                    <span>@LOGI.App_LocalResources.KeyIssues.Email</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="keyissue__comments">
+            <div class="keyissue__big-title">@LOGI.App_LocalResources.KeyIssues.LeaveComment</div>
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+
+                var disqus_config = function () {
+                    this.page.url = "@(Html.AbsoluteURL(Url.Action("Index", "Basics", new {id=Model})))"; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = "LOGIBasics@Model"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+
+                (function () { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+
+                    s.src = '//logi-lebanon.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </div>
+        </div>
+
+    @Html.Action("_Infographics", "Basics", new { language = isArabic ? "ar" : "en", selected = Model.ID, order = 0  })
+
+
+</div>

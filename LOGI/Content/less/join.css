@@ -1,0 +1,187 @@
+﻿.join__container {
+  background-image: url('/Content/images/join-logi-cover.jpg');
+  background-size: cover;
+  height: 720px;
+  position: relative;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__container {
+    height: 370px;
+    background-size: 230%;
+  }
+}
+.join__container__overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.join__container .home-section-title {
+  color: #fff;
+  border-color: #fff;
+}
+.join__container .home-section-title .title {
+  color: #fff;
+}
+.join__container .home-section-title i {
+  color: #fff;
+  font-size: 24px;
+}
+.join__container .icon-join-team-01,
+.join__container .icon-join-expert-01 {
+  font-size: 150px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__container .icon-join-team-01,
+  .join__container .icon-join-expert-01 {
+    font-size: 90px;
+  }
+}
+.join__bit-actions {
+  margin-top: 80px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__bit-actions {
+    margin-top: 20px;
+  }
+}
+.join__action-l {
+  border-right: 1px solid #fff;
+  color: #fff;
+  text-align: center;
+  padding: 40px 0 80px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__action-l {
+    padding: 20px 0 20px;
+  }
+}
+.join__action-r {
+  color: #fff;
+  text-align: center;
+  padding: 40px 0 80px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__action-r {
+    padding: 20px 0 20px;
+  }
+}
+.join__big-title {
+  color: #fff;
+  font-size: 30px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__big-title {
+    width: 100%;
+    font-size: 16px;
+    margin: 5px 0;
+  }
+}
+.join__small-title {
+  color: #fff;
+  font-size: 18px;
+  width: 280px;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__small-title {
+    font-size: 13px;
+    width: 100%;
+    padding: 0 10px;
+    min-height: 54px;
+  }
+}
+.join__big-action {
+  margin-top: 50px !important;
+  padding: 14px 80px !important;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__big-action {
+    margin-top: 20px !important;
+    padding: 8px 15px !important;
+    font-size: 16px !important;
+  }
+}
+.join__big-action:hover {
+  color: #fff;
+}
+.join__vacancies {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  float: left;
+  width: 100%;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__vacancies {
+    margin-top: 10px;
+  }
+}
+.join__vacancy {
+  width: 50%;
+  float: left;
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 767px) and (min-width: 0px) {
+  .join__vacancy {
+    width: 100%;
+  }
+}
+.join__vacancy-info {
+  font-style: italic;
+}
+.join__vacancy-title {
+  font-size: 21px;
+}
+.join__vacancy-more a {
+  font-size: 13px;
+  color: #00a88f;
+}
+.join__expert-sub-title {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+.join__expert-title {
+  text-align: center;
+  font-family: 'Roboto Slab', serif;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.join__expert-conditions {
+  text-align: center;
+  margin: 20px 0;
+  line-height: 30px;
+  font-size: 18px;
+  color: #fff;
+}
+.join__expert--bg {
+  background-image: url('/Content/images/expert-outside.jpg');
+  background-size: cover;
+  background-position: 0 -222px;
+}
+@media only screen and (max-width: 1199px) and (min-width: 0px) {
+  .join__expert--bg {
+    background-position: center center;
+  }
+}
+.join__expert-condition-title {
+  font-style: italic;
+  font-size: 13px;
+}
+.join__expert-download-desc {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #00a88f;
+}
+.join__expert-apply-wrapper {
+  text-align: center;
+  margin-bottom: 45px;
+  margin-top: 35px;
+}
+.join__expert-apply-wrapper .logi-btn {
+  padding: 14px 50px;
+}
+/*# sourceMappingURL=join.css.map */

@@ -1,0 +1,198 @@
+﻿@using LOGI.Models.ViewModels
+@model NewsViewModel
+@{
+    ViewBag.Title = LOGI.App_LocalResources.InTheNews.PageTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+@section styles
+{
+    <link href="~/Content/plugins/owl.carousel.css" rel="stylesheet" />
+}
+<div class="news">
+    <div class="container">
+        <div class="home-section-title ">
+            <i class="icon-news-icon_v"></i><span class="title">@LOGI.App_LocalResources.InTheNews.LogiInTheNews</span><span> @LOGI.App_LocalResources.InTheNews.Slogan</span>
+        </div>
+
+        <div class="row news__content">
+            <div class="col-xs-12 col-sm-6">
+                @if (Model.FeatureVideo != null)
+                {
+                <div class="news__feature-video">
+                    <div class="img-wrapper">
+                        <a href="@Url.Action("KeyIssue", "KeyIssues", new { id = Model.FeatureVideo.FriendlyURL})">
+                            <img src="@Model.FeatureVideo.ImageURL" />
+                            <img class="play-btn" src="/Content/images/play-button@2x.png " />
+                        </a>
+                    </div>
+                    <div class="news__feature-video__title">
+                        <a href="@Url.Action("KeyIssue", "KeyIssues", new { id = Model.FeatureVideo.FriendlyURL})">@Model.FeatureVideo.Title</a>
+                    </div>
+                </div>
+                }
+                @if (Model.PressRelease != null && Model.PressRelease != "")
+                {
+                    <div class="news__release">
+                        <span class=" sub-font">@LOGI.App_LocalResources.InTheNews.PressRelease </span><br/>
+                        <a target="_blank" href="@Model.PressRelease" class="logi-btn">@LOGI.App_LocalResources.InTheNews.Download</a> <br/>
+                        <div class="text-center" style="font-size:14px;margin-top:5px"><a href="@Url.Action("PressReleases","News")">@LOGI.App_LocalResources.InTheNews.AllPressReleases</a></div>
+                    </div>
+    
+                }
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                @if (Model.LatestNews != null && Model.LatestNews.Count > 0)
+                {
+                    foreach (KeyIssueLink news in Model.LatestNews)
+                    {
+                <div class="news__article">
+                    <div class="news__date">
+                        <span class="news__day sub-font">@(isArabic ? FrontHelpers.ChangeToArabic(news.PublishDate.Day.ToString()) : news.PublishDate.Day.ToString())</span>
+                        <span class="news__month-year">@(isArabic ? FrontHelpers.ChangeToArabic(news.PublishDate.ToString("MMMM yyyy")) : news.PublishDate.ToString("MMMM yyyy"))</span>
+                    </div>
+                    <div class="news__title">@Html.ActionLink(news.Title, "KeyIssue", "KeyIssues", new { id = news.FriendlyURL }, null)</div>
+                    @if (news.SourceId != null)
+                            {
+                            <div class="news__artile-source">
+                                by <a href="@Url.Action("Search", "News", new
+                                        {
+                                            keyword = "",
+                                            sourceId = news.SourceId
+                                        })">@news.SourceName</a>
+                                    </div>
+                            }
+                </div>
+                    }
+                }
+            </div>
+        </div>
+
+        
+        <div class="row news__sources">
+            <div class="col-xs-12">
+                <div class="media__carousel">
+                    @foreach (SourceViewModel s in Model.Sources)
+                    {
+                        <div class="news__source">
+                            <a href="@Url.Action("Search", "News", new
+                                        {
+                                            keyword = "",
+                                            sourceId = s.ID
+                                        })"><img src="@s.LogoURL" /></a>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+
+        <div class="home-section-title ">
+            <span class="title"> @(isArabic ? "مقالات عن LOGI" : "Articles about LOGI")</span>
+        </div>
+
+        <div class="row news__search" id="search_form">
+            @using (Html.BeginForm("Search", "News", new { Area = "" }, FormMethod.Get, new { id = "searcForm", }))
+            {
+                <input type="text" placeholder="@LOGI.App_LocalResources.InTheNews.SearchPlaceholder" class="search__search-field" name="keyword" />
+                <input type="submit" value="@LOGI.App_LocalResources.InTheNews.Search" class="search__search-btn" />
+                <span class="icon-search-icon"></span>
+            }
+        </div>
+        @if (Model.Search != null)
+        {
+            <div class="news__search-result">
+                <div class="search-result__displaying">@LOGI.App_LocalResources.InTheNews.Displaying @(Model.Search.DisplayFrom + "-" + Model.Search.DisplayTo) @LOGI.App_LocalResources.InTheNews.Of @Model.Search.TotalCount</div>
+                <div class="search-result__list-wrapper">
+
+                    @foreach (SearchItemViewModel keyissue in Model.Search.KeyIssues)
+                    {
+                        <div class="search-result__item">
+                            <div class="search-result__item-img">
+                                <img src="@keyissue.ImageURL" />
+                            </div>
+                            <div class="search-result__item-details">
+                                <div>@Html.ActionLink(@keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, new { @class = "search-result__item-title" })</div>
+                                <div class="search-result__item-more-info">
+                                    by
+                                    @if (keyissue.Author != null)
+                                    {
+                                        @Html.ActionLink(keyissue.Author, "Search", "KeyIssues", new { authorId = keyissue.AuthorId }, new { @class = "search-result__item-author" })
+                                    }
+                                    @if (keyissue.Source != null)
+                                    {
+                                        if (keyissue.Author != null)
+                                        {
+                                            <text>,</text>
+                                        }
+                                        @Html.ActionLink(keyissue.Source, "Search", "News", new { sourceId = keyissue.SourceID }, new { @class = "search-result__item-author" })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="search-result__pagination">
+                        @if (Model.Search.ShowPrev)
+                        {
+                            <a href="@Url.Action("Search", "News", new
+                    {
+                        page = Model.Search.Page - 1,
+                        keyword = Model.Search.keyword,
+                        sourceId = Model.Search.sourceId
+                    })"><span class="fa fa-angle-left"></span>@LOGI.App_LocalResources.InTheNews.Previous</a>
+                        }
+                        @if (Model.Search.ShowNext)
+                        {
+                            <a href="@Url.Action("Search", "News", new
+                        {
+                            page = Model.Search.Page + 1,
+                            keyword = Model.Search.keyword,
+                            sourceId = Model.Search.sourceId
+                        })">@LOGI.App_LocalResources.InTheNews.Next<span class="fa fa-angle-right"></span></a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script>
+        $('.media__carousel').owlCarousel({
+            items: 1,
+            loop: false,
+            margin: 10,
+            @(isArabic?"rtl:true,":"")
+            autoWidth: true,
+            nav: true,
+            navText: [],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+        $(document).ready(function () {
+
+            @if(((bool)ViewBag.isSearch))
+            {
+                <text>
+            $('html,body').animate({
+                scrollTop: $("#search_form").offset().top
+            }, 100);
+            </text>
+            }
+
+        });
+    </script>
+}

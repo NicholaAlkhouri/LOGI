@@ -1,0 +1,36 @@
+﻿@using LOGI.Models.ViewModels
+@model List<KeyIssueLink>
+@{
+    var counter = 0;
+    int[] numbers = new int[15] { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1,1, 0, 1, 0, 1 };
+}
+<div style="position:relative;">
+<div class="slider-wrapper">
+        @if (Model != null)
+        {
+            foreach (KeyIssueLink keyissue in Model)
+            {
+                if (counter == Model.Count / 2)
+                {
+                    <br />
+                }
+                <div class="item">
+                    <a href="@Url.Action("KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL })">
+                        @if (numbers[counter] == 0)
+                        {<img class="item-img" src="@keyissue.ImageURL" />}
+                        else
+                        {<img class="item-img" src="@keyissue.ImageURL2" />}
+                        <img class="item-gradient" src="~/Content/images/thumbnail-large-gradient.png" />
+                        <div class="item-title">
+                            @keyissue.Title
+                        </div>
+                    </a>
+                </div>
+
+                        { counter++; }
+            }
+        }
+    </div>
+    <div class="slider-next" onclick="srollNext()"></div>
+    <div class="slider-prev" onclick="srollPrev()"></div>
+</div>

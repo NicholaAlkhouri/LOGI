@@ -1,0 +1,27 @@
+﻿<div class="container">
+    <div class="home-section-title ">
+        <i class="icon-glasshour-01"></i><span class="big-number">@(CultureHelper.GetCurrentCulture().Contains("ar") ? FrontHelpers.ChangeToArabic("4") : "4")</span><span class="title"> @LOGI.App_LocalResources.Basics.WhenToBenefit</span>
+    </div>
+</div>
+
+<div class="container">
+    <div style="padding-top:10px;">
+        <div class="pull-left basics-small-text ">
+            <a href="/Basics/Index/4?page=1" class="basics-green-text"><span class="fa fa-angle-left basics-green-text"></span> @LOGI.App_LocalResources.Basics.Previous </a>
+        </div>
+        <div class="pull-right basics-small-text">
+            <a href="/Basics/Index/4?page=3" class="basics-green-text">@LOGI.App_LocalResources.Basics.Next <span class="fa fa-angle-right basics-green-text"></span></a>
+
+        </div>
+    </div>
+    <div class="p2_wrapper">
+        <div class="basics-small-text">@LOGI.App_LocalResources.Basics.MoreThan</div>
+        <div class="basics-big-text basics-green-text">@Html.Raw(LOGI.App_LocalResources.Basics.SevenYears)</div>
+        <div class="basics-big-text">@LOGI.App_LocalResources.Basics.UntilExtracted</div>
+        <div class="basics-small-text">@LOGI.App_LocalResources.Basics.WhyWait</div>
+        <a class="logi-btn" href="@Url.Action("Index", "Basics", new { page="3", id=4 })">@LOGI.App_LocalResources.Basics.LearnMore</a>
+        <div id="basics-animation2"></div>
+    </div>
+</div>
+
+

@@ -1,0 +1,206 @@
+﻿@import "variables.less";
+@import "responsive.less";
+
+.join {
+    &__container {
+        background-image: url('/Content/images/join-logi-cover.jpg');
+        background-size: cover;
+        height: 720px;
+        position:relative;
+        .xsmall( {
+                  height: 370px;
+                     background-size: 230%;
+            });
+        
+        &__overlay
+        {
+           background-color: rgba(0,0,0,.6);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .home-section-title {
+            color: #fff;
+            border-color: #fff;
+
+            .title {
+                color: #fff;
+            }
+
+            i {
+                color: #fff;
+                font-size: 24px;
+            }
+        }
+        .icon-join-team-01,.icon-join-expert-01
+        {
+            font-size:150px;
+            .xsmall( {
+                 font-size: 90px;
+            });
+        }
+
+
+    }
+
+    &__bit-actions
+    {
+        margin-top:80px;
+        .xsmall( {
+             margin-top:20px;
+        });
+    }
+
+    &__action-l
+    {
+        border-right:1px solid #fff;
+        color:#fff;
+        text-align:center;
+        padding: 40px 0 80px;
+        .xsmall( {
+            padding: 20px 0 20px;
+        });
+    }
+    &__action-r
+    {
+        color:#fff;
+        text-align:center;
+            padding: 40px 0 80px;
+            .xsmall( {
+            padding: 20px 0 20px;
+        });
+    }
+
+    &__big-title
+    {
+        color:#fff;
+        font-size:30px;
+        .xsmall( {
+             width:100%;
+             font-size:16px;
+             margin:5px 0;
+        });
+    }
+    &__small-title
+    {
+           color: #fff;
+        font-size: 18px;
+        width: 280px;
+        margin: 0 auto;
+        .xsmall( {
+            font-size: 13px;
+            width: 100%;
+            padding: 0 10px;
+            min-height: 54px;
+        });
+    }
+
+    &__big-action
+    {
+        margin-top:50px !important;
+        padding: 14px 80px !important;
+        .xsmall( {
+            margin-top: 20px !important;
+            padding: 8px 15px !important;
+            font-size: 16px !important;
+        });
+        &:hover
+        {
+            color:#fff;
+        }
+    }
+    &__vacancies
+    {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        float: left;
+        width: 100%;
+         .xsmall( {
+             margin-top: 10px;
+        });
+    }
+    &__vacancy
+    {
+        width:50%;
+        float:left;
+        margin-bottom:20px;
+        .xsmall( {
+             width:100%;
+        });
+    }
+    &__vacancy-info
+    {
+        font-style : italic;
+    }
+    &__vacancy-title
+    {
+        font-size:21px;
+    }
+    &__vacancy-more
+    {
+        a{
+            font-size:13px;
+            color:@primary-color;
+        }
+    }
+
+    &__expert-sub-title
+    {
+        margin-top: 20px;
+        text-align: center;
+        font-size:18px;
+    }
+
+    &__expert-title
+    {
+        text-align: center;
+        font-family:@sub-font;
+        font-size:30px;
+        margin-bottom: 20px;
+    }
+
+    &__expert-conditions
+    {
+        text-align: center;
+        margin: 20px 0;
+        line-height: 30px;
+        font-size: 18px;
+        color:#fff;
+    }
+    &__expert--bg
+    {
+        background-image: url('/Content/images/expert-outside.jpg');
+        background-size: cover;
+        background-position: 0 -222px;
+        .medium-down( {
+               background-position: center center;
+        });
+    }
+
+    &__expert-condition-title
+    {
+        font-style: italic;
+        font-size: 13px;
+    }
+
+    &__expert-download-desc
+    {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: @primary-color;
+    }
+
+    &__expert-apply-wrapper
+    {
+        text-align:center;
+        margin-bottom: 45px;
+        margin-top:35px;
+        .logi-btn
+        {
+                padding: 14px 50px;
+        }
+    }
+}

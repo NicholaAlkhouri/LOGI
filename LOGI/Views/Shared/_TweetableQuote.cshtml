@@ -1,0 +1,18 @@
+﻿@model LOGI.Models.ViewModels.KeyIssueLink
+
+<div class="quote quote__wrapper">
+    <div class="quote__text">
+        <span class="icon-open-quotations"></span>
+        <span class="quote__body sub-font">@Html.Raw(Model.Quote) </span>
+        <span class="icon-closed-quotations"></span>
+    </div>
+    <div>
+        <a class="twitter-button"
+           href="https://twitter.com/intent/tweet?text=@(Model.Quote)+@(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.FriendlyURL })))"
+           data-size="large">
+            <span class="icon-twitter"></span>
+            @LOGI.App_LocalResources.KeyIssues.TweetQuote 
+        </a>
+        <a class="quote__readmore" href="@Url.Action("KeyIssue", "KeyIssues", new { id=Model.FriendlyURL })">@LOGI.App_LocalResources.KeyIssues.ReadFullArticle</a>
+    </div>
+</div>

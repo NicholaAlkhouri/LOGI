@@ -1,0 +1,404 @@
+﻿@using LOGI.Models.ViewModels;
+@model KeyIssueViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = Model.KeyIssue.Title;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+}
+@section MetaData{
+    <!-- Schema.org markup for Google+ -->
+    @*  <meta itemprop="name" content="@Model.MetaTitle">
+        <meta itemprop="description" content="@Model.MetaDescription">
+        <meta itemprop="image" content="@Html.AbsoluteArabicURL(Url.Content("~/" + Model.ImageURL))">*@
+
+    <!-- Open Graph data -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="logi-lebanon.org" />
+    <meta property="og:url" content="@Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL }))" />
+    <meta property="og:title" content="@Model.KeyIssue.MetaTitle" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:description" content="@Model.KeyIssue.MetaDescription" />
+    <meta property="og:image" content="@Html.AbsoluteURL(Url.Content("~/" + Server.UrlEncode(Model.KeyIssue.FeatureImageURL)))" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@("@LOGI")">
+    <meta name="twitter:creator" content="@("@LOGI")">
+    <meta name="twitter:title" content="@Model.KeyIssue.MetaTitle">
+    <meta name="twitter:description" content="@Model.KeyIssue.MetaDescription">
+    <meta name="twitter:image" content="@Html.AbsoluteURL(Url.Content("~/" + Server.UrlEncode(Model.KeyIssue.FeatureImageURL)))">
+
+
+
+
+    @*<link rel="canonical" href="@Html.AbsoluteArabicURL(Url.Action("Article","Article", new { id = Model.URL }))" />*@
+    <link rel="canonical" href="@Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL }))" />
+}
+
+<section class="keyissue">
+
+    <div class="keyissue__header @((Model.KeyIssue.FeatureImageURL??"") == "" ? "" : "keyissue__header--with-image")"
+         data-stellar-background-ratio="0.5"
+         @(Model.KeyIssue.FeatureVideoLink != null && Model.KeyIssue.FeatureVideoLink != "" ? "data-toggle=modal data-target=#videoModal" : "")
+         style="background-image:url('@Model.KeyIssue.FeatureImageURL') ;cursor:pointer;">
+        @if ((Model.KeyIssue.FeatureImageURL ?? "") != "")
+        {
+            <img class="apply__overlay" src="/Content/images/video-gradient.png">
+        }
+        <div class="container">
+            <div class="keyissue__topic">
+                @if (Model.KeyIssue.IsInNews)
+                {
+                    <span>@LOGI.App_LocalResources.InTheNews.LogiInTheNews</span>
+                }
+                else
+                {
+                    @(isArabic ? Model.KeyIssue.Topic.NameAr : Model.KeyIssue.Topic.Name)
+                }
+            </div>
+            <div class="keyissue__title sub-font">@Model.KeyIssue.Title</div>
+        </div>
+        @if (Model.KeyIssue.FeatureVideoLink != null && Model.KeyIssue.FeatureVideoLink != "")
+        {
+            <div class="keyissue__video-play">
+                <a><img src="/Content/images/play-button@2x.png " /></a>
+            </div>
+        }
+    </div>
+    <div class="keyissue__body">
+        <div class="keyissue__side">
+            <div class="keyissue__info">
+                <div>
+                    @LOGI.App_LocalResources.KeyIssues.By
+                    <span class="keyissue__source">
+                        @if (Model.KeyIssue.Source != null)
+                        {
+                            <a href="@Url.Action("Search", "KeyIssues", new { sourceId = Model.KeyIssue.Source.ID})">@(isArabic ? Model.KeyIssue.Source.NameAr : Model.KeyIssue.Source.Name)</a>
+                        }
+                        @if (Model.KeyIssue.Author != null)
+                        {
+                            if (Model.KeyIssue.Source != null)
+                            {
+                                <text>, </text>
+                            }
+                            <a href="@Url.Action("Search", "KeyIssues", new { authorId = Model.KeyIssue.Author.ID})">
+                                @(isArabic ? Model.KeyIssue.Author.FullNameAr : Model.KeyIssue.Author.FullName)
+                            </a>
+                        }
+                    </span>
+                </div>
+                <div>@LOGI.App_LocalResources.KeyIssues.On <span class="keyissue__date">@Model.KeyIssue.PublishDate.ToShortDateString()</span></div>
+            </div>
+            <div class="hidden-xs">
+                @if (Model.Translation != null)
+                {
+                    <div class="keyissue__side-section">
+                        <div class="keyissue__side-title">
+                            @LOGI.App_LocalResources.KeyIssues.ReadTranslation
+                        </div>
+                        <div class="keyissue__side-item @(Model.KeyIssue.Language == "ar" ? "en-font" : "ar-font")">@Html.ActionLink(Model.Translation.Title, "KeyIssue", "KeyIssues", new { id = Model.Translation.FriendlyURL }, null) </div>
+                    </div>
+                }
+                @if (Model.KeyIssue.Tags != null && Model.KeyIssue.Tags.Count() > 0)
+                {
+                    <div class="keyissue__side-section">
+
+                        <div class="keyissue__side-title">
+                            @LOGI.App_LocalResources.KeyIssues.Tags
+                        </div>
+
+                        <div class="keyissue__side-tags">
+                            @foreach (LOGI.Models.Tag tag in Model.KeyIssue.Tags)
+                            {
+                                <a href="@Url.Action("Search", "KeyIssues", new { keyword = tag.Name })">
+                                    #@tag.Name
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+                @if (Model.RelatedReading.Count > 0)
+                {
+                    <div class="keyissue__side-section">
+                        <div class="keyissue__side-title">
+                            @LOGI.App_LocalResources.KeyIssues.RelatedReading
+                        </div>
+                        @foreach (KeyIssueLink keyissue in Model.RelatedReading)
+                        {
+                            <div class="keyissue__side-item">@Html.ActionLink(keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, null) </div>
+                        }
+                    </div>
+                }
+                @if (Model.RecommendedReading.Count > 0)
+                {
+                    <div class="keyissue__side-section">
+                        <div class="keyissue__side-title">
+                            @LOGI.App_LocalResources.KeyIssues.RecommendedReading
+                        </div>
+                        @foreach (KeyIssueLink keyissue in Model.RecommendedReading)
+                        {
+                            <div class="keyissue__side-item">@Html.ActionLink(keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, null) </div>
+                        }
+                    </div>
+                }
+                <div class="keyissue__side-section keyissue__subscribe">
+                    @using (Ajax.BeginForm("Subscribe", "AdminKeyIssue", null,
+                        new AjaxOptions() { OnSuccess = "subscribe_success", LoadingElementId = "loading-img-newsletter-s" },
+                        new { }))
+                    {
+                        <div>@LOGI.App_LocalResources.KeyIssues.SubscribeToNewsletter</div>
+                        <div><input type="email" placeholder="@LOGI.App_LocalResources.KeyIssues.YourEmail" class="logi-input" name="email" required /></div>
+                        <input type="submit" class="logi-btn" value="@LOGI.App_LocalResources.KeyIssues.Subscribe" />
+                        <img src="~/Content/images/ajax-loader.gif" id="loading-img-newsletter-s" style="display:none;" />
+                        <div style="display:none" class="subscribe-result">@LOGI.App_LocalResources.KeyIssues.SubscriptionSuccess</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="keyissue__content">
+            <div class="keyissue__socials">
+                <a class="social-circle mail-circle"
+                   href="mailto:?subject=look at this website&body=Hi,I found this website and thought you might like it @(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL })))"
+                   target="_blank">
+                    <span class="icon-mail_viv"></span>
+                </a>
+                <a class="social-circle facebook-circle"
+                   target="_blank"
+                   href="http://www.facebook.com/sharer/sharer.php?u=@(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL })))&title=@Model.KeyIssue.Title">
+                    <span class="icon-facebook"></span>
+                </a>
+                <a class="social-circle twitter-circle"
+                   target="_blank"
+                   href="https://twitter.com/intent/tweet?text=@Model.KeyIssue.Title+@Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL }))">
+                    <span class="icon-twitter-01"></span>
+                </a>
+            </div>
+            <div class="keyissue__description">
+                @Html.Raw(Html.QuotedDescription(Model.KeyIssue.Description, Model.KeyIssue.Title, Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL }))))
+            </div>
+            <div class="keyissue__download-wrapper">
+                @if (Model.KeyIssue.FileURL != null && Model.KeyIssue.FileURL != "")
+                {
+                    <a class="logi-btn download-btn" target="_blank" href="@Model.KeyIssue.FileURL">@LOGI.App_LocalResources.KeyIssues.DownloadPDF</a>
+                }
+            </div>
+            <div class="keyissue__sharing">
+                <div class="keyissue__big-title">@LOGI.App_LocalResources.KeyIssues.ShareArticleTitle</div>
+                <div class="keyissue__sharing-socials">
+                    <a class="social-box twitter-box"
+                       href="https://twitter.com/intent/tweet?text=@Model.KeyIssue.Title+@Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL }))"
+                       target="_blank">
+                        <span class="icon-twitter-01"></span>
+                        <span>@LOGI.App_LocalResources.KeyIssues.Twitter</span>
+                    </a>
+                    <a class="social-box facebook-box"
+                       target="_blank"
+                       href="http://www.facebook.com/sharer/sharer.php?u=@(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL })))&title=@Model.KeyIssue.Title">
+                        <span class="icon-facebook"></span>
+                        <span>@LOGI.App_LocalResources.KeyIssues.Facebook</span>
+                    </a>
+                    <a class="social-box linkedin-box"
+                       target="_blank"
+                       href="http://www.linkedin.com/shareArticle?mini=true&url=@(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL })))&title=@Model.KeyIssue.Title">
+                        <span class="icon-linkedin-01"></span>
+                        <span>@LOGI.App_LocalResources.KeyIssues.Linkedin</span>
+                    </a>
+                    <a class="social-box pinterest-box" target="_blank"
+                       href="http://pinterest.com/pin/create/bookmarklet/?media=@Html.AbsoluteURL(Url.Content("~/" + Server.UrlEncode(Model.KeyIssue.FeatureImageURL)))&url=@(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL })))&is_video=false&description=@Model.KeyIssue.Title">
+                        <span class="icon-pinterest_viv"></span>
+                        <span>@LOGI.App_LocalResources.KeyIssues.Pinterest</span>
+                    </a>
+
+                    <a class="social-box mail-box"
+                       target="_blank"
+                       href="mailto:?subject=look at this website&body=Hi,I found this website and thought you might like it @(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new { id = Model.KeyIssue.FriendlyURL })))">
+                        <span class="icon-mail_viv"></span>
+                        <span>@LOGI.App_LocalResources.KeyIssues.Email</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="keyissue__comments">
+                <div class="keyissue__big-title">@LOGI.App_LocalResources.KeyIssues.LeaveComment</div>
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                    */
+
+                    var disqus_config = function () {
+                        this.page.url = "@(Html.AbsoluteURL(Url.Action("KeyIssue", "KeyIssues", new {id=Model.KeyIssue.FriendlyURL })))"; // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = "@Model.KeyIssue.FriendlyURL"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+
+                    (function () { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+
+                        s.src = '//logi-lebanon.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+
+        <div class="keyissue__side-small">
+            @if (Model.KeyIssue.Tags != null && Model.KeyIssue.Tags.Count() > 0)
+            {
+                <div class="keyissue__side-section">
+                    <div class="keyissue__side-title">
+                        @LOGI.App_LocalResources.KeyIssues.Tags
+                    </div>
+                    <div class="keyissue__side-tags">
+                        @foreach (LOGI.Models.Tag tag in Model.KeyIssue.Tags)
+                        {
+                            <span>#@tag.Name </span>
+                        }
+                    </div>
+                </div>
+            }
+            @if (Model.RelatedReading.Count > 0)
+            {
+                <div class="keyissue__side-section">
+                    <div class="keyissue__side-title">
+                        @LOGI.App_LocalResources.KeyIssues.RelatedReading
+                    </div>
+                    @foreach (KeyIssueLink keyissue in Model.RelatedReading)
+                    {
+                        <div class="keyissue__side-item">@Html.ActionLink(keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, null) </div>
+                    }
+                </div>
+            }
+            @if (Model.RecommendedReading.Count > 0)
+            {
+                <div class="keyissue__side-section">
+                    <div class="keyissue__side-title">
+                        @LOGI.App_LocalResources.KeyIssues.RecommendedReading
+                    </div>
+                    @foreach (KeyIssueLink keyissue in Model.RecommendedReading)
+                    {
+                        <div class="keyissue__side-item">@Html.ActionLink(keyissue.Title, "KeyIssue", "KeyIssues", new { id = keyissue.FriendlyURL }, null) </div>
+                    }
+                </div>
+            }
+            <div class="keyissue__side-section keyissue__subscribe">
+                @using (Ajax.BeginForm("Subscribe", "Subscriber", null,
+                        new AjaxOptions() { OnSuccess = "subscribe_success", LoadingElementId = "loading-img-newsletter-s" },
+                        new { }))
+                {
+                    <div>@LOGI.App_LocalResources.KeyIssues.SubscribeToNewsletter</div>
+                    <div><input type="email" placeholder="@LOGI.App_LocalResources.KeyIssues.YourEmail" class="logi-input" name="email" required /></div>
+                    <input type="submit" class="logi-btn" value="@LOGI.App_LocalResources.KeyIssues.Subscribe" />
+                    <img src="~/Content/images/ajax-loader.gif" id="loading-img-newsletter-s" style="display:none;" />
+                    <div style="display:none" class="subscribe-result">@LOGI.App_LocalResources.KeyIssues.SubscriptionSuccess</div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog video-popup" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <div id="player"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/stellar/stellar.min.js"></script>
+
+    <script>
+        function subscribe_success(data) {
+            $('.subscribe-result').show();
+            if (data.success == true) {
+                $('.subscribe-result').html("Subscribtion Success");
+                $('.subscribe-result').addClass("green");
+                $('.subscribe-result').removeClass("red");
+            }
+            else {
+                $('.subscribe-result').html("Subscribtion Failedd");
+                $('.subscribe-result').addClass("red");
+                $('.subscribe-result').removeClass("green");
+            }
+        }
+        $(document).ready(function () {
+            if (!isMobile)
+                $(window).stellar();
+        });
+    </script>
+    @if (Model.KeyIssue.FeatureVideoLink != null && Model.KeyIssue.FeatureVideoLink != "")
+    {
+        <script>
+            function youtube_parser(url) {
+                var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                return (match && match[7].length == 11) ? match[7] : false;
+            }
+
+
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
+                    videoId: youtube_parser("@Model.KeyIssue.FeatureVideoLink"),
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                // event.target.playVideo();
+            }
+
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            function onPlayerStateChange(event) {
+                console.log(event.data);
+                if (event.data == YT.PlayerState.PLAYING) {
+                    //hide title
+                    $('#video-title').hide();
+                    $('.apply__overlay').hide();
+                }
+                else if (event.data == 2) {
+                    $('#video-title').show();
+                    $('.apply__overlay').show();
+                }
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+
+            $('#videoModal').on('hidden.bs.modal', function (e) {
+                player.stopVideo();
+            })
+        </script>
+    }
+}
+

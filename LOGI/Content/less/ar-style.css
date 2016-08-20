@@ -1,0 +1,70 @@
+﻿body {
+  font-family: 'Noto Naskh Arabic', 'Roboto', sans-serif;
+  font-size: 17px;
+}
+.sub-font {
+  font-family: 'Noto Naskh Arabic', 'Roboto', sans-serif !important;
+}
+.timeline__body-head {
+  font-family: 'Noto Naskh Arabic', 'Roboto', sans-serif !important;
+}
+.social-circle {
+  line-height: 38px;
+}
+.owl-prev:before {
+  content: "\e905" !important;
+}
+.owl-next:before {
+  content: "\e903" !important;
+}
+#group-questions .questions .q-number {
+  line-height: 66px;
+}
+.slider-next {
+  right: 0 !important;
+  left: auto !important;
+}
+.slider-prev {
+  left: 0 !important;
+  right: auto !important;
+}
+.timeline__title {
+  font-size: 18px;
+  min-height: 60px;
+}
+.timeline__item--selected .timeline__title {
+  min-height: initial;
+}
+.timeline__item--selected .timeline__body-head {
+  font-size: 24px;
+}
+.timeline__footer-text {
+  font-size: 15px;
+}
+.join__expert-condition-title {
+  font-size: 15px;
+}
+.keyissue__content {
+  font-size: 17px;
+}
+.keyissue__side-title,
+.keyissue__info {
+  font-size: 15px;
+}
+.basics-small-text,
+.basics-meduim-text,
+.basics-big-text {
+  font-family: 'Noto Naskh Arabic', 'Roboto', sans-serif !important;
+}
+.icon-open-quotations,
+.icon-closed-quotations {
+  -moz-transform: scale(-1, 1);
+  -ms-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+#group-landing .landing-info .subtitle {
+  font-size: 15px;
+}
+/*# sourceMappingURL=ar-style.css.map */

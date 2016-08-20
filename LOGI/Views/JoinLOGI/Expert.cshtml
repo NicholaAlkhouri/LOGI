@@ -1,0 +1,195 @@
+﻿@model LOGI.Models.Expert
+@{
+    ViewBag.Title = LOGI.App_LocalResources.Join.ApplyExpertTitle;
+    bool isArabic = CultureHelper.GetCurrentCulture().Contains("ar");
+
+}
+
+<div class="apply">
+    <div class="apply__container apply__container-expert" data-stellar-background-ratio="0.5">
+        <img class="apply__overlay" src="/Content/images/video-gradient.png">
+        <div class="container">
+            <div class="apply__info">
+                @LOGI.App_LocalResources.Join.AreYouExpert
+            </div>
+            <div class="apply__title sub-font">
+                @LOGI.App_LocalResources.Join.ExpertDesc1
+            </div>
+        </div>
+    </div>
+
+    <div class="container--gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="join__expert-conditions">
+                        <span class="join__expert-condition-title">@LOGI.App_LocalResources.Join.ConditionsTitle</span><br />
+                        @Html.Raw(LOGI.App_LocalResources.Join.Conditions)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="join__expert-download-desc">
+                        @LOGI.App_LocalResources.Join.DownloadDesc2
+                    </div>
+                    <div class="join__expert-apply-wrapper">
+                        @if (ViewBag.SelectionPolicy == null)
+                        {
+                            <a href="" class="logi-btn logi-btn--green download-btn" target="_blank">@LOGI.App_LocalResources.Join.Download</a>
+                        }
+                        else
+                        {
+                            <a href="@(((LOGI.Models.SectionVariable)ViewBag.SelectionPolicy).Value)" target="_blank" class="logi-btn logi-btn--green download-btn">@LOGI.App_LocalResources.Join.Download</a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container apply-exper-form" id="apply">
+        <div class="row">
+            @if (TempData["Success"] != null && (bool)TempData["Success"] == true)
+            {
+                <div class="apply__success-overlay" id="thankyou">
+                    @Html.Raw(LOGI.App_LocalResources.Join.Thankyou)
+                    <br />
+                    <img src="~/Content/images/smiling@2x.png" />
+                </div>
+            }
+            else
+            {
+                using (Html.BeginForm("Expert", "JoinLOGI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-xs-12">
+                        <div class="apply__form-title">@LOGI.App_LocalResources.Join.FillForm:</div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.FullName*
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Email*
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Phone
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "logi-input", placeholder = "| " })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Expertise*
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Expertise, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.Education*
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Education, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.PoliticalAffiliation*
+                        </div>
+                        <div>
+                            <div>
+                                @Html.TextBoxFor(m => m.PoliticalAffiliation, new { @class = "logi-input", placeholder = "| ", required = "required" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.WhyToJoin*
+                        </div>
+                        <div>
+                            @Html.TextAreaFor(m => m.WhyToJoin, new { @class = "logi-input", placeholder = @LOGI.App_LocalResources.Join.MessagePlaceholder, required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="apply__field-title">
+                            @LOGI.App_LocalResources.Join.HowToContribute*
+                        </div>
+                        <div>
+                            @Html.TextAreaFor(m => m.Message, new { @class = "logi-input", placeholder = @LOGI.App_LocalResources.Join.MessagePlaceholder, required = "required" })
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 text-center">
+                        <div class="apply__upload-wrapper">
+                            <div style="height:0px;overflow:hidden">
+                                <input type="file" id="resume" name="resume" />
+                            </div>
+                            <button type="button" class="log-btn--small" onclick="chooseFile();">@LOGI.App_LocalResources.Join.UploadResume *</button>
+                            <span id="FileName"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 text-center">
+                        <div class="apply__submit-wrapper">
+                            <input type="submit" class="logi-btn logi-btn--green" value="@LOGI.App_LocalResources.Join.Send" />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script src="~/Scripts/stellar/stellar.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if (!isMobile)
+                $(window).stellar();
+        })
+    </script>
+
+    <script>
+        function chooseFile() {
+            $("#resume").click();
+        }
+
+
+        $("#resume").on('change', function (e) {
+            var fileName = '';
+            if (this.files && this.files.length > 1)
+                fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+            else
+                fileName = e.target.value.split('\\').pop();
+
+            if (fileName)
+                $("#FileName").html(fileName);
+            else
+                $("#FileName").html("");
+
+        });
+    </script>
+}
