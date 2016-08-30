@@ -41,5 +41,6 @@ namespace LOGI.Models
         public DbSet<Log> Logs { get; set; }
         public DbSet<InfographicCategory> InfographicCategories { get; set; }
         public DbSet<Infographic> Infographics { get; set; }
+        public DbSet<Campaign> Campaigns { get; set; }
     }
 }

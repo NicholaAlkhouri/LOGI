@@ -120,6 +120,10 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <li @((Navigator.Main)ViewBag.MainNav == Navigator.Main.CAMPAIGN ? "class=active" : "")>
+                    <a href="@Url.Action("Index", "AdminCampaign")" @((Navigator.Main)ViewBag.MainNav == Navigator.Main.CAMPAIGN ? "class=active" : "")><i class="fa fa-globe"></i> Campaign<span class="fa arrow"></span></a>
+                </li>
+                
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

@@ -678,7 +678,9 @@ namespace LOGI.Services
                     FriendlyURL = k.FriendlyURL,
                     ImageURL = (k.FeatureImageURL == null || k.FeatureImageURL == "" ) ? (k.Source == null? "" : k.Source.ImageURL):k.FeatureImageURL,
                     IsVideo = (k.FeatureVideoLink != null && k.FeatureVideoLink != ""),
-                    Title = k.Title
+                    Title = k.Title,
+                    InScroller = k.InScroller,
+                    PublishDate = k.PublishDate
                 }).ToList();
 
             List<KeyIssueLink> chosen = DbContext.KeyIssues.Where(k => k.InScroller && langs.Contains(k.Language) && k.FeatureImageURL != null && k.FeatureImageURL != "" && k.IsOnline && (k.IsInNews == null || k.IsInNews == false)).
@@ -690,7 +692,9 @@ namespace LOGI.Services
                     FriendlyURL = k.FriendlyURL,
                     ImageURL = (k.FeatureImageURL == null || k.FeatureImageURL == "") ? (k.Source == null ? "" : k.Source.ImageURL) : k.FeatureImageURL,
                     IsVideo = (k.FeatureVideoLink != null && k.FeatureVideoLink != ""),
-                    Title = k.Title
+                    Title = k.Title,
+                    InScroller = k.InScroller,
+                    PublishDate = k.PublishDate
                 }).ToList();
 
             foreach (KeyIssueLink KI in latest)
@@ -701,6 +705,8 @@ namespace LOGI.Services
                 if (chosen.Count() == 15)
                     break;
             }
+
+            chosen = chosen.OrderByDescending(k => k.InScroller).ThenByDescending(k => k.PublishDate).ToList();
 
             int img_width = LogiConfig.KeyIssuesImageSizes.Where(a => a.Name == "BigThumb").FirstOrDefault().Width;
             int img_height = LogiConfig.KeyIssuesImageSizes.Where(a => a.Name == "BigThumb").FirstOrDefault().Height;
@@ -713,6 +719,7 @@ namespace LOGI.Services
                 KI.ImageURL = ImageService.GenerateImageFullPath(img, img_width.ToString(), img_height.ToString());
                 KI.ImageURL2 = ImageService.GenerateImageFullPath(img, img_width2.ToString(), img_height2.ToString());
             }
+
 
             return chosen;
         }

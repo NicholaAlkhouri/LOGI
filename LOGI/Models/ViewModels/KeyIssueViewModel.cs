@@ -40,5 +40,7 @@ namespace LOGI.Models.ViewModels
         public string  SourceName { get; set; }
 
         public string SourceNameAr { get; set; }
+
+        public bool InScroller { get; set; }
     }
 }

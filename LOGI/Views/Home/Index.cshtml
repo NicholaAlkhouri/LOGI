@@ -57,7 +57,13 @@
             </div>
         </div>
     </div>
-
+    @if (ViewBag.campaign != null && ((LOGI.Models.Campaign)(ViewBag.campaign)).Location == 1)
+    {
+        <div class="text-center">
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).ImageUrl)" class="hidden-xs hidden-sm" style="width: 100%;" />
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).MobileImageUrl)" class="hidden-md hidden-lg" style="width: 100%;" />
+        </div>
+    }
     <div id="group-video">
 
         <div class="col-xs-12 col-sm-6 l-section">
@@ -83,7 +89,13 @@
             </div>
         </div>
     </div>
-
+    @if (ViewBag.campaign != null && ((LOGI.Models.Campaign)(ViewBag.campaign)).Location == 2)
+    {
+        <div class="text-center">
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).ImageUrl)" class="hidden-xs hidden-sm" style="width: 100%;" />
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).MobileImageUrl)" class="hidden-md hidden-lg" style="width: 100%;" />
+        </div>
+    }
     <div class="" id="group-key-issues">
         <div class="container">
             <div class="home-section-title ">
@@ -95,7 +107,13 @@
 
         @Html.Action("_KeyIssueSlider", "KeyIssues", new { language = isArabic ? "ar" : "en" })
     </div>
-
+    @if (ViewBag.campaign != null && ((LOGI.Models.Campaign)(ViewBag.campaign)).Location == 3)
+    {
+        <div class="text-center">
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).ImageUrl)" class="hidden-xs hidden-sm" style="width: 100%;" />
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).MobileImageUrl)" class="hidden-md hidden-lg" style="width: 100%;" />
+        </div>
+    }
     <div class="" id="group-timeline">
         <div class="container">
             <div class="home-section-title ">
@@ -126,26 +144,26 @@
                 </div>
             </div>
         </div>
-    <div class="modal fade" id="videoModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog video-popup" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <div id="player"></div>
+        <div class="modal fade" id="videoModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog video-popup" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <div id="player"></div>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
     }
 
     <div class="section" id="group-questions">
         <div class="container">
             <div class="home-section-title ">
                 <i class="icon-basics-icon-01"></i>
-                <a href="@Url.Action("Index", "Basics")" class="title" >@LOGI.App_LocalResources.Home.Basics</a>
+                <a href="@Url.Action("Index", "Basics")" class="title">@LOGI.App_LocalResources.Home.Basics</a>
                 <span>@LOGI.App_LocalResources.Home.BasicsDesc2</span>
             </div>
         </div>
@@ -177,7 +195,13 @@
         <div id="landing-icon-5" class="station"></div>
         <div id="landing-icon-4" class="waves"></div>
     </div>
-
+    @if (ViewBag.campaign != null && ((LOGI.Models.Campaign)(ViewBag.campaign)).Location == 4)
+    {
+        <div class="text-center">
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).ImageUrl)" class="hidden-xs hidden-sm" style="width: 100%;" />
+            <img src="@(((LOGI.Models.Campaign)(ViewBag.campaign)).MobileImageUrl)" class="hidden-md hidden-lg" style="width: 100%;" />
+        </div>
+    }
 
 
     <div id="group-about">
@@ -192,8 +216,8 @@
                 <div class="small-caption">@LOGI.App_LocalResources.Home.AboutDesc2</div>
                 <img src="~/Content/images/apps@2x.png" class="app-image" />
                 <div style="text-align:center">
-                    <a href="https://play.google.com/store/apps/details?id=co.mindfield.logandlearn.com&hl=en"><img src="~/Content/images/googleplay-button@2x.png" class="android-image" style="float:none;"/></a>
-                   <!-- <img src="~/Content/images/app-store-button@2x.png" class="ios-image" />-->
+                    <a href="https://play.google.com/store/apps/details?id=co.mindfield.logandlearn.com&hl=en"><img src="~/Content/images/googleplay-button@2x.png" class="android-image" style="float:none;" /></a>
+                    <!-- <img src="~/Content/images/app-store-button@2x.png" class="ios-image" />-->
                 </div>
                 <div class="app-info">
                     @LOGI.App_LocalResources.Home.AboutDesc3
@@ -233,7 +257,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <div class="embed-responsive embed-responsive-16by9">
                     <div id="player0"></div>
-                    
+
                 </div>
             </div>
 
@@ -251,8 +275,7 @@
         var is_start = true;
         var is_toggled = false;
         $(window).scroll(function (e) {
-            if (is_start)
-            {
+            if (is_start) {
                 is_start = false;
             }
             else {
@@ -263,14 +286,13 @@
                         $('.navbar').fadeIn();
                 }
                 else {
-                    if (!is_toggled)
-                    {
+                    if (!is_toggled) {
                         $('.navbar').fadeOut();
                         $("#group-landing").removeClass("group-landing--gray");
                     }
                 }
             }
-            
+
         });
 
         function scrollToElement(el, ms) {
@@ -318,7 +340,7 @@
         });
 
         function srollNext() {
-            $(".slider-wrapper").mCustomScrollbar('scrollTo', '-=260', {scrollInertia: 300});
+            $(".slider-wrapper").mCustomScrollbar('scrollTo', '-=260', { scrollInertia: 300 });
         }
         function srollPrev() {
             $(".slider-wrapper").mCustomScrollbar('scrollTo', '+=260', { scrollInertia: 300 });
@@ -330,7 +352,7 @@
             });
 
             //$('#fullpage').fullpage({ scrollBar: true });
-            if(!isMobile)
+            if (!isMobile)
                 $(window).stellar();
             landingIcon1 = Landing_1;
             var stage1 = new swiffy.Stage(document.getElementById('landing-icon-1'),
@@ -490,87 +512,86 @@
 
     </script>
 
-@if (ViewBag.FeaturedVideo != null)
-{
-    <script>
-    function youtube_parser(url) {
-        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-        var match = url.match(regExp);
-        return (match && match[7].length == 11) ? match[7] : false;
-    }
-
-
-    // 2. This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
-
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
-    var player;
-    var player0;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
-            videoId: youtube_parser("@(((KeyIssueLink)ViewBag.FeaturedVideo).VideoUrl)"),
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-
-        player0 = new YT.Player('player0', {
-            playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
-            videoId: 'PJdQ2ntPb2Y',
-            events: {
-                'onReady': onPlayerReady2,
-                'onStateChange': onPlayerStateChange2
-            }
-        });
-    }
-
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-        // event.target.playVideo();
-    }
-    function onPlayerReady2(event) {
-        // event.target.playVideo();
-    }
-
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    function onPlayerStateChange(event) {
-        console.log(event.data);
-        if (event.data == YT.PlayerState.PLAYING) {
-            //hide title
-            $('#video-title').hide();
-            $('.apply__overlay').hide();
-        }
-        else if (event.data == 2) {
-            $('#video-title').show();
-            $('.apply__overlay').show();
-        }
-    }
-    function onPlayerStateChange2(event) {
-       
-    }
-    function stopVideo() {
-        player.stopVideo();
-    }
-    function stopVideo0()
+    @if (ViewBag.FeaturedVideo != null)
     {
-        player0.stopVideo();
-    }
+        <script>
+            function youtube_parser(url) {
+                var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+                var match = url.match(regExp);
+                return (match && match[7].length == 11) ? match[7] : false;
+            }
 
-    $('#videoModal2').on('hidden.bs.modal', function (e) {
-        player.stopVideo();
-    })
-    $('#videoModal').on('hidden.bs.modal', function (e) {
-        player0.stopVideo();
-    })
-    </script>
-}
+
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            var player0;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
+                    videoId: youtube_parser("@(((KeyIssueLink)ViewBag.FeaturedVideo).VideoUrl)"),
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+
+                player0 = new YT.Player('player0', {
+                    playerVars: { 'rel': 0, 'controls': 1, 'showinfo': 0 },
+                    videoId: 'PJdQ2ntPb2Y',
+                    events: {
+                        'onReady': onPlayerReady2,
+                        'onStateChange': onPlayerStateChange2
+                    }
+                });
+            }
+
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                // event.target.playVideo();
+            }
+            function onPlayerReady2(event) {
+                // event.target.playVideo();
+            }
+
+            // 5. The API calls this function when the player's state changes.
+            //    The function indicates that when playing a video (state=1),
+            //    the player should play for six seconds and then stop.
+            function onPlayerStateChange(event) {
+                console.log(event.data);
+                if (event.data == YT.PlayerState.PLAYING) {
+                    //hide title
+                    $('#video-title').hide();
+                    $('.apply__overlay').hide();
+                }
+                else if (event.data == 2) {
+                    $('#video-title').show();
+                    $('.apply__overlay').show();
+                }
+            }
+            function onPlayerStateChange2(event) {
+
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+            function stopVideo0() {
+                player0.stopVideo();
+            }
+
+            $('#videoModal2').on('hidden.bs.modal', function (e) {
+                player.stopVideo();
+            })
+            $('#videoModal').on('hidden.bs.modal', function (e) {
+                player0.stopVideo();
+            })
+        </script>
+    }
 }

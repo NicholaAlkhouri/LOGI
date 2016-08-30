@@ -291,6 +291,7 @@
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\admin\Controllers\AdminAboutController.cs" />
     <Compile Include="Areas\admin\Controllers\AdminAuthorController.cs" />
+    <Compile Include="Areas\admin\Controllers\AdminCampaignController.cs" />
     <Compile Include="Areas\admin\Controllers\AdminContactsController.cs" />
     <Compile Include="Areas\admin\Controllers\AdminDonateController.cs" />
     <Compile Include="Areas\admin\Controllers\AdminExpertController.cs" />
@@ -508,7 +509,12 @@
     <Compile Include="Migrations\201608181718503_AddMetaDescriptionToINfographic.Designer.cs">
       <DependentUpon>201608181718503_AddMetaDescriptionToINfographic.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608301713224_AddCampaign.cs" />
+    <Compile Include="Migrations\201608301713224_AddCampaign.Designer.cs">
+      <DependentUpon>201608301713224_AddCampaign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Campaign.cs" />
     <Compile Include="Models\Expert.cs" />
     <Compile Include="Models\Infographic.cs" />
     <Compile Include="Models\InfographicCategory.cs" />
@@ -560,6 +566,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AboutService.cs" />
     <Compile Include="Services\AuthorService.cs" />
+    <Compile Include="Services\CampaignService.cs" />
     <Compile Include="Services\ContactMessageService.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\DonateService.cs" />
@@ -1287,6 +1294,7 @@
     <Content Include="Content\site.rtl.css.map">
       <DependentUpon>site.rtl.css</DependentUpon>
     </Content>
+    <Content Include="Areas\admin\Views\AdminCampaign\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LOGI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap3-typeahead.min.js" />
@@ -1409,6 +1417,7 @@
     <Content Include="Views\Basics\_Infographics.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\admin\Views\Campaign\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
@@ -1638,6 +1647,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608181718503_AddMetaDescriptionToINfographic.resx">
       <DependentUpon>201608181718503_AddMetaDescriptionToINfographic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608301713224_AddCampaign.resx">
+      <DependentUpon>201608301713224_AddCampaign.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

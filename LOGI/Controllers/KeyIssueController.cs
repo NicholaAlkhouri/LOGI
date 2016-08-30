@@ -212,6 +212,30 @@ namespace LOGI.Controllers
         public ActionResult _KeyIssueSlider(string language = "en")
         {
             List<KeyIssueLink> view_model = keyIssueService.GetSliderKeyIssues(language);
+            //reorder the result so the latest are displayed in the left part of the slider
+            if(view_model.Count == 15)
+            {
+                List<KeyIssueLink> Final_list = new List<KeyIssueLink>();
+                Final_list.Add(view_model[0]);
+                Final_list.Add(view_model[2]);
+                Final_list.Add(view_model[4]);
+                Final_list.Add(view_model[6]);
+                Final_list.Add(view_model[8]);
+                Final_list.Add(view_model[10]);
+                Final_list.Add(view_model[12]);
+                Final_list.Add(view_model[1]);
+                Final_list.Add(view_model[3]);
+                Final_list.Add(view_model[5]);
+                Final_list.Add(view_model[7]);
+                Final_list.Add(view_model[9]);
+                Final_list.Add(view_model[11]);
+                Final_list.Add(view_model[13]);
+                Final_list.Add(view_model[14]);
+
+                view_model = Final_list;
+            }
+            
+
             return PartialView("_KeyIssuesSlider", view_model);
         }
 

@@ -37,7 +37,14 @@ namespace LOGI.Controllers
                 SectionVariable whitepaper = DBContext.SectionVariables.Where(v => v.Key == "WhitePaperPDF").FirstOrDefault();
                 ViewBag.whitePaper = whitepaper == null ? "" : whitepaper.Value;
             }
-            
+
+            CampaignService campaignService = new CampaignService(DBContext);
+            Campaign camp = campaignService.GetCampaign();
+            if(camp != null && camp.IsOnline)
+            {
+                ViewBag.campaign = camp;
+            }
+
             return View();
         }
 
