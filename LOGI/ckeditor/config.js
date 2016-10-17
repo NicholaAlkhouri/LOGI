@@ -33,11 +33,8 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'youtube';
+	config.extraPlugins = 'youtube,popup,filebrowser';
 	config.youtube_responsive = true;
-
-	config.extraPlugins = 'popup';
-	config.extraPlugins = 'filebrowser';
 
 	config.filebrowserBrowseUrl = '/admin/AdminKeyIssue/BrowseImages';
 	config.filebrowserUploadUrl = '/admin/AdminKeyIssue/UploadImage';

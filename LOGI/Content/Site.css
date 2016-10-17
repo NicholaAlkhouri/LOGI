@@ -1463,6 +1463,10 @@
 .keyissue__description h3 {
   font-size: 18px;
 }
+.keyissue__description img {
+  max-width: 100%;
+  height: auto !important;
+}
 .slider-prev {
   display: none;
   font-family: 'logi' !important;

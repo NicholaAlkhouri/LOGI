@@ -1291,10 +1291,10 @@
     <Content Include="Areas\admin\Views\AdminInfographic\NewInfographic.cshtml" />
     <Content Include="Areas\admin\Views\AdminInfographic\Infographics.cshtml" />
     <Content Include="Areas\admin\Views\AdminInfographic\EditInfographic.cshtml" />
+    <Content Include="Areas\admin\Views\AdminCampaign\Index.cshtml" />
     <Content Include="Content\site.rtl.css.map">
       <DependentUpon>site.rtl.css</DependentUpon>
     </Content>
-    <Content Include="Areas\admin\Views\AdminCampaign\Index.cshtml" />
     <None Include="Properties\PublishProfiles\LOGI.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap3-typeahead.min.js" />
