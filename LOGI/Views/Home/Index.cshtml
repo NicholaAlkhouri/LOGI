@@ -177,24 +177,24 @@
             <div class="questions">
                 <ul>
                     <li>
-                        <a href="@Url.Action("Index","Basics",new{id = 1})">
+                        <a href="@Url.Action("Infographic","Basics",new{id = (isArabic ? "هل-لدى-لبنان-ثروة-من-النفط-والغاز" : "Does-Lebanon-have-Oil-and-Gas") })">
                             <span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("1") : "1")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question1</span>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index","Basics",new{id = 2})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("2") : "2")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question2</span></a>
+                        <a href="@Url.Action("Infographic", "Basics",new{id = (isArabic ? "كم-حجم-الثروة-التي-يملكها-لبنان-من-النفط-والغاز" : "How-Much-Does-Lebanon-has-Oil-And-Gas")})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("2") : "2")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question2</span></a>
                     </li>
                     <li>
                         <a href="@Url.Action("Index","Timeline")"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("3") : "3")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question3</span></a>
                     </li>
                     <li><a href="@Url.Action("Index","Basics",new{id = 4})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("4") : "4")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question4</span></a></li>
                     <li>
-                        <a href="@Url.Action("Index","Basics",new{id = 5})">
+                        <a href="@Url.Action("Infographic","Basics",new{id = (isArabic ? "من-يتخذ-القرارات" : "Who-makes-the-decisions")})">
                             <span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("5") : "5")</span>
                             <span class="question">@LOGI.App_LocalResources.Basics.Question5</span>
                         </a>
                     </li>
-                    <li><a href="@Url.Action("Index","Basics",new{id = 6})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("6") : "6")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question6</span></a></li>
+                    <li><a href="@Url.Action("Infographic","Basics",new{id = (isArabic ? "ما-الخطوات-التي-اتخذها-جيران-لبنان" : "What-are-our-neighbors-doing")})"><span class="q-number sub-font">@(isArabic ? FrontHelpers.ChangeToArabic("6") : "6")</span> <span class="question">@LOGI.App_LocalResources.Basics.Question6</span></a></li>
                 </ul>
             </div>
         </div>
